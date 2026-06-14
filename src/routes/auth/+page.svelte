@@ -10,7 +10,7 @@
 <div class="min-h-screen flex items-center justify-center bg-gray-50">
 	<div class="w-full max-w-sm">
 		<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
-			<h1 class="text-xl font-semibold text-gray-900 mb-1">KoldOps Engine</h1>
+			<h1 class="text-xl font-semibold text-gray-900 mb-1">Incworx GTM Center</h1>
 			<p class="text-sm text-gray-500 mb-6">
 				{mode === 'login' ? 'Sign in to your account' : 'Create your account'}
 			</p>

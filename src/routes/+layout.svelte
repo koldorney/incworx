@@ -27,7 +27,7 @@
 	<div class="flex h-screen bg-gray-50">
 		<aside class="w-56 bg-gray-900 text-gray-100 flex flex-col">
 			<div class="px-4 py-5 border-b border-gray-700">
-				<h1 class="text-lg font-semibold tracking-tight">KoldOps Engine</h1>
+				<h1 class="text-lg font-semibold tracking-tight">Incworx GTM Center</h1>
 			</div>
 			<nav class="flex-1 px-2 py-4 space-y-1">
 				{#each nav as item}

@@ -21,8 +21,8 @@ export const GET: RequestHandler = async ({ params }) => {
 	const headers = ['Name', 'Title', 'Company', 'Domain', 'Email', 'Phone', 'Phone Type', 'Fit Score', 'Signal', 'Source'];
 	const rows = [headers.join(',')];
 
-	for (const item of list.list_items) {
-		const lead = item.leads as Record<string, unknown>;
+	for (const item of list.list_items as any[]) {
+		const lead = item.leads as Record<string, any> | null;
 		if (!lead) continue;
 		const account = lead.accounts as Record<string, string> | null;
 

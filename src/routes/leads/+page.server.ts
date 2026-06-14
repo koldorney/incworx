@@ -1,10 +1,11 @@
-import { getSupabase } from '$lib/server/supabase';
+import { getSupabase, isConfigured } from '$lib/server/supabase';
 import { getProvider, logJob, waterfallFindPhone, waterfallVerifyEmail, estimateCost } from '$lib/server/providers';
 import { qualifyBatch } from '$lib/server/qualify';
 import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url }) => {
+	if (!isConfigured()) return { leads: [], profiles: [], filter: 'all' };
 	const supabase = getSupabase();
 	const status = url.searchParams.get('status') || 'all';
 

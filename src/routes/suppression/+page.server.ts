@@ -1,8 +1,9 @@
-import { getSupabase } from '$lib/server/supabase';
+import { getSupabase, isConfigured } from '$lib/server/supabase';
 import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
+	if (!isConfigured()) return { entries: [] };
 	const supabase = getSupabase();
 	const { data: entries } = await supabase
 		.from('suppression')

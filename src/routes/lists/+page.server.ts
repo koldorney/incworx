@@ -1,9 +1,10 @@
-import { getSupabase } from '$lib/server/supabase';
+import { getSupabase, isConfigured } from '$lib/server/supabase';
 import { env } from '$env/dynamic/private';
 import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
+	if (!isConfigured()) return { lists: [], profiles: [] };
 	const supabase = getSupabase();
 	const { data: lists } = await supabase
 		.from('lists')

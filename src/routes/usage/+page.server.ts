@@ -1,7 +1,8 @@
-import { getSupabase } from '$lib/server/supabase';
+import { getSupabase, isConfigured } from '$lib/server/supabase';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url }) => {
+	if (!isConfigured()) return { totalCost: 0, byProvider: {}, byOperation: {}, byDay: {}, days: 30, jobCount: 0 };
 	const supabase = getSupabase();
 
 	const days = parseInt(url.searchParams.get('days') || '30');

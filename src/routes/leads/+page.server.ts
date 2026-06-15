@@ -5,7 +5,7 @@ import { fail } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url }) => {
-	if (!isConfigured()) return { leads: [], profiles: [], filter: 'all' };
+	if (!isConfigured()) return { leads: [], profiles: [], filter: 'all', stats: { total: 0, needsEnrichment: 0, needsQualification: 0, qualified: 0, withPhone: 0, withEmail: 0 } };
 	const supabase = getSupabase();
 	const status = url.searchParams.get('status') || 'all';
 
@@ -22,7 +22,17 @@ export const load: PageServerLoad = async ({ url }) => {
 	const { data: leads } = await query;
 	const { data: profiles } = await supabase.from('icp_profiles').select('id, name').order('created_at', { ascending: false });
 
-	return { leads: leads ?? [], profiles: profiles ?? [], filter: status };
+	const allLeads = leads ?? [];
+	const stats = {
+		total: allLeads.length,
+		needsEnrichment: allLeads.filter(l => l.email_status === 'unknown' || !l.phone).length,
+		needsQualification: allLeads.filter(l => l.qualification_status === 'pending').length,
+		qualified: allLeads.filter(l => l.qualification_status === 'qualified').length,
+		withPhone: allLeads.filter(l => l.phone && l.phone_status === 'valid').length,
+		withEmail: allLeads.filter(l => l.email_status === 'valid').length
+	};
+
+	return { leads: allLeads, profiles: profiles ?? [], filter: status, stats };
 };
 
 export const actions: Actions = {

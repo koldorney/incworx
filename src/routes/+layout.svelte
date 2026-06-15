@@ -9,8 +9,8 @@
 	const nav = [
 		{ href: '/', label: 'Chat', id: 'chat' },
 		{ href: '/leads', label: 'Leads', id: 'leads' },
-		{ href: '/lists', label: 'Lists', id: 'lists' },
-		{ href: '/profile', label: 'ICP Profile', id: 'profile' },
+		{ href: '/lists', label: 'Exports', id: 'lists' },
+		{ href: '/profile', label: 'Targeting', id: 'profile' },
 		{ href: '/suppression', label: 'Suppression', id: 'suppression' },
 		{ href: '/usage', label: 'Usage', id: 'usage' }
 	];

@@ -106,7 +106,7 @@ Respond in JSON only: {"fit_score": <0-100>, "signal_why": "<one line in the cli
 			'anthropic-version': '2023-06-01'
 		},
 		body: JSON.stringify({
-			model: 'claude-sonnet-4-6-20250514',
+			model: 'claude-sonnet-4-6',
 			max_tokens: 200,
 			messages: [{ role: 'user', content: prompt }]
 		})

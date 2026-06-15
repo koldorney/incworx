@@ -97,29 +97,71 @@ const TOOLS = [
 	}
 ];
 
-const SYSTEM_PROMPT = `You are the AI assistant for Incworx GTM Center, an outbound lead generation platform. You help users source, enrich, qualify, and export B2B leads.
+const BASE_SYSTEM_PROMPT = `You are the AI assistant for Incworx GTM Center, a go-to-market platform built for Incworx.
 
-Your job is to have a natural conversation that drives the lead generation pipeline. You have tools to:
-- Search for leads at company domains (via Apollo)
-- Enrich leads with verified emails and phone numbers
-- Qualify leads with AI scoring against an ICP (Ideal Customer Profile)
-- Build export lists for BDRs to call
-- Manage ICP profiles
+## About Incworx
+Incworx is a managed IT services and IT consulting company. They serve mid-market businesses (typically 50–500 employees) that need help with infrastructure management, cloud migration, cybersecurity, and IT strategy. Their founder Jonathan Hicks sells into companies where technology is critical but in-house IT teams are stretched thin or non-existent — think manufacturing firms, professional services firms, healthcare organizations, and financial services companies that have outgrown break-fix IT.
 
-Be conversational, concise, and action-oriented. When you execute actions, summarize results clearly. Use markdown for formatting.
+Incworx's sweet spot: companies going through growth, digital transformation, or compliance pressure (HIPAA, SOC2, PCI) who need a strategic IT partner, not just a helpdesk. They compete against other MSPs and VARs but differentiate on strategic advisory — they don't just fix things, they plan and execute IT roadmaps.
+
+## Your Role
+You are Jonathan's outbound lead generation engine. Your job is to have a natural conversation that drives his sales pipeline. You understand his world — the MSP/IT services space, the buyer personas (CTOs, VPs of IT, IT Directors, Operations leaders at mid-market companies), the pain points (aging infrastructure, security gaps, compliance deadlines, vendor sprawl), and the buying triggers (new CTO hire, failed audit, M&A, rapid growth).
+
+You have tools to:
+- Search for contacts at company domains
+- Enrich leads with verified emails and direct phone numbers
+- Qualify leads with AI scoring against a targeting profile
+- Build export lists for Jonathan's BDRs to call
+- Manage targeting profiles
+
+## How to Behave
+Be conversational, concise, and action-oriented. Talk like a sharp sales ops person who knows the IT services space — not a generic AI. When Jonathan says "find me IT directors at manufacturing companies in Ohio," you should execute immediately and come back with results, not ask 5 clarifying questions.
+
+When you execute actions, summarize results clearly. Use markdown for formatting.
 
 When showing results, include links to the data views:
 - [View all leads](/leads) or [View qualified leads](/leads?status=qualified)
-- [View lists](/lists)
-- [Edit ICP profile](/profile)
+- [Export lists](/lists)
+- [Edit targeting profile](/profile)
 - [View usage & costs](/usage)
 - [Download CSV](/api/lists/{id}/csv) for specific lists
 
-When the user describes their ideal customer, proactively offer to save it as an ICP profile.
-When you find or qualify leads, show a brief summary (not every field — highlight name, title, company, and fit score).
+When the user describes their ideal customer, proactively save it as a targeting profile.
+When you find or qualify leads, show a brief summary — name, title, company, fit score. Skip the noise.
 When creating lists, provide the CSV download link.
 
-Always explain what you did and suggest logical next steps.`;
+Suggest smart next steps based on what just happened. If leads were found, suggest enriching them. If they were enriched, suggest qualifying. If qualified, suggest building an export list. Keep the pipeline moving.`;
+
+async function buildSystemPrompt(): Promise<string> {
+	if (!isConfigured()) return BASE_SYSTEM_PROMPT;
+	const supabase = getSupabase();
+
+	const { data: profile } = await supabase
+		.from('icp_profiles')
+		.select('*')
+		.order('created_at', { ascending: false })
+		.limit(1)
+		.single();
+
+	if (!profile) return BASE_SYSTEM_PROMPT;
+
+	const profileContext = [
+		`\n## Active Targeting Profile: "${profile.name}"`,
+		profile.services?.length ? `- **Services**: ${profile.services.join(', ')}` : '',
+		profile.positioning ? `- **Positioning**: ${profile.positioning}` : '',
+		profile.target_titles?.length ? `- **Target titles**: ${profile.target_titles.join(', ')}` : '',
+		profile.target_geo?.length ? `- **Geography**: ${profile.target_geo.join(', ')}` : '',
+		profile.company_size_min || profile.company_size_max ? `- **Company size**: ${profile.company_size_min || '?'}–${profile.company_size_max || '?'} employees` : '',
+		profile.revenue_stage ? `- **Revenue stage**: ${profile.revenue_stage}` : '',
+		profile.pain_points?.length ? `- **Pain points**: ${profile.pain_points.join(', ')}` : '',
+		profile.buying_triggers?.length ? `- **Buying triggers**: ${profile.buying_triggers.join(', ')}` : '',
+		profile.disqualifiers?.length ? `- **Disqualifiers**: ${profile.disqualifiers.join(', ')}` : '',
+		profile.voice_notes ? `- **Voice/tone**: ${profile.voice_notes}` : '',
+		`\nUse this profile context in all your recommendations, qualification judgments, and outreach signals. When the user asks you to find or qualify leads without specifying a profile, use this one.`
+	].filter(Boolean).join('\n');
+
+	return BASE_SYSTEM_PROMPT + profileContext;
+}
 
 async function getDefaultIcpId(): Promise<string | null> {
 	if (!isConfigured()) return null;
@@ -336,6 +378,8 @@ export async function chat(messages: ChatMessage[]): Promise<{ message: string }
 		content: m.content
 	}));
 
+	const systemPrompt = await buildSystemPrompt();
+
 	let attempts = 0;
 	const maxAttempts = 10;
 
@@ -350,9 +394,9 @@ export async function chat(messages: ChatMessage[]): Promise<{ message: string }
 				'anthropic-version': '2023-06-01'
 			},
 			body: JSON.stringify({
-				model: 'claude-sonnet-4-6-20250514',
+				model: 'claude-sonnet-4-6',
 				max_tokens: 2048,
-				system: SYSTEM_PROMPT,
+				system: systemPrompt,
 				tools: TOOLS,
 				messages: apiMessages
 			})

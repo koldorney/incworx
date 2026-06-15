@@ -10,8 +10,8 @@ export class ApolloProvider implements EnrichmentProvider {
 		return key;
 	}
 
-	private async request(path: string, body: Record<string, unknown>) {
-		const res = await fetch(`https://api.apollo.io/v1/${path}`, {
+	private async post(path: string, body: Record<string, unknown>) {
+		const res = await fetch(`https://api.apollo.io/api/v1/${path}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -23,27 +23,68 @@ export class ApolloProvider implements EnrichmentProvider {
 		return res.json();
 	}
 
+	private async get(path: string, params: Record<string, string>) {
+		const url = new URL(`https://api.apollo.io/api/v1/${path}`);
+		for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
+		const res = await fetch(url.toString(), {
+			headers: { 'X-Api-Key': this.apiKey }
+		});
+		if (!res.ok) throw new Error(`Apollo ${path}: ${res.status} ${await res.text()}`);
+		return res.json();
+	}
+
 	async findContacts(account: Account, titles: string[]): Promise<RawLead[]> {
-		const data = await this.request('mixed_people/search', {
+		const searchBody: Record<string, unknown> = {
 			person_titles: titles,
-			q_organization_domains: account.domain ? [account.domain] : undefined,
-			q_organization_name: !account.domain ? account.company_name : undefined,
 			page: 1,
 			per_page: 25
-		});
+		};
+		if (account.domain) {
+			searchBody.q_organization_domains_list = [account.domain];
+		} else {
+			searchBody.q_organization_name = account.company_name;
+		}
 
-		return (data.people || []).map((p: Record<string, unknown>) => ({
-			full_name: `${p.first_name || ''} ${p.last_name || ''}`.trim(),
-			title: p.title as string | null,
-			email: p.email as string | null,
-			linkedin_url: p.linkedin_url as string | null,
-			location: [p.city, p.state, p.country].filter(Boolean).join(', ') || null
-		}));
+		const data = await this.post('mixed_people/api_search', searchBody);
+
+		const people: RawLead[] = [];
+		for (const p of data.people || []) {
+			const lead: RawLead = {
+				full_name: `${p.first_name || ''} ${p.last_name || ''}`.trim(),
+				title: (p.title as string) || null,
+				email: null,
+				linkedin_url: null,
+				location: null
+			};
+
+			// Search results may not include contact details — enrich by ID if available
+			if (p.id) {
+				try {
+					const enriched = await this.post('people/match', {
+						id: p.id,
+						reveal_personal_emails: false
+					});
+					const person = enriched.person;
+					if (person) {
+						lead.email = person.email || null;
+						lead.linkedin_url = person.linkedin_url || null;
+						lead.location = [person.city, person.state, person.country].filter(Boolean).join(', ') || null;
+					}
+				} catch {
+					// Enrichment failed for this person — keep what we have from search
+					lead.location = [p.city, p.state, p.country].filter(Boolean).join(', ') || null;
+				}
+			}
+
+			people.push(lead);
+		}
+
+		return people;
 	}
 
 	async verifyEmail(email: string): Promise<EmailStatus> {
 		try {
-			const data = await this.request('people/match', { email });
+			const data = await this.post('people/match', { email });
 			if (data.person?.email_status === 'verified') return 'valid';
 			if (data.person?.email_status === 'unverified') return 'unknown';
 			return 'unknown';
@@ -58,7 +99,7 @@ export class ApolloProvider implements EnrichmentProvider {
 	): Promise<PhoneResult[]> {
 		if (!lead.email) return [];
 		try {
-			const data = await this.request('people/match', { email: lead.email });
+			const data = await this.post('people/match', { email: lead.email });
 			const phones: PhoneResult[] = [];
 			if (data.person?.phone_numbers) {
 				for (const p of data.person.phone_numbers) {
@@ -77,9 +118,7 @@ export class ApolloProvider implements EnrichmentProvider {
 
 	async companyResearch(domain: string): Promise<string> {
 		try {
-			const data = await this.request('organizations/enrich', {
-				domain
-			});
+			const data = await this.get('organizations/enrich', { domain });
 			const org = data.organization;
 			if (!org) return '';
 			return [

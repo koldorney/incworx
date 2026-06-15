@@ -7,15 +7,19 @@
 	let { children, data } = $props();
 
 	const nav = [
-		{ href: '/profile', label: 'ICP Profile', id: 'profile' },
+		{ href: '/', label: 'Chat', id: 'chat' },
 		{ href: '/leads', label: 'Leads', id: 'leads' },
 		{ href: '/lists', label: 'Lists', id: 'lists' },
+		{ href: '/profile', label: 'ICP Profile', id: 'profile' },
 		{ href: '/suppression', label: 'Suppression', id: 'suppression' },
 		{ href: '/usage', label: 'Usage', id: 'usage' }
 	];
 
 	const isAuthPage = $derived($page.url.pathname.startsWith('/auth'));
-	const isActive = (href: string) => $page.url.pathname === href || ($page.url.pathname === '/' && href === '/');
+	const isActive = (href: string) => {
+		if (href === '/') return $page.url.pathname === '/';
+		return $page.url.pathname.startsWith(href);
+	};
 </script>
 
 <svelte:head>
@@ -40,14 +44,22 @@
 			</a>
 
 			<nav class="flex-1 px-3 py-4 space-y-0.5">
-				{#each nav as item}
+				{#each nav as item, i}
+					{#if i === 1}
+						<div class="!my-2 mx-3 border-t border-white/10"></div>
+						<p class="!mb-1 px-3 text-[10px] font-medium text-gray-500 uppercase tracking-wider">Data</p>
+					{/if}
 					{@const active = isActive(item.href)}
 					<a
 						href={item.href}
 						class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium transition-all
 							{active ? 'bg-brand-600/30 text-white' : 'text-gray-400 hover:bg-white/5 hover:text-gray-200'}"
 					>
-						{#if item.id === 'profile'}
+						{#if item.id === 'chat'}
+							<svg class="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+							</svg>
+						{:else if item.id === 'profile'}
 							<svg class="w-[18px] h-[18px] shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
 								<path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z" />
 							</svg>

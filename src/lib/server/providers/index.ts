@@ -1,13 +1,11 @@
 import { getSupabase } from '$lib/server/supabase';
 import { ApolloProvider } from './apollo';
-import { FirecrawlProvider } from './firecrawl';
 import { ProspeoProvider } from './prospeo';
 import type { Account, EmailStatus, EnrichmentJobLog, EnrichmentProvider, PhoneResult, PhoneType } from './types';
 
 const providers: Record<string, EnrichmentProvider> = {
 	apollo: new ApolloProvider(),
-	prospeo: new ProspeoProvider(),
-	firecrawl: new FirecrawlProvider()
+	prospeo: new ProspeoProvider()
 };
 
 export function getProvider(name: string): EnrichmentProvider {
@@ -125,8 +123,7 @@ function pickBestNumber(candidates: PhoneResult[]): { bestNumber: string | null;
 function estimateCost(provider: string, operation: string): number {
 	const costs: Record<string, Record<string, number>> = {
 		apollo: { find: 0.03, verify_email: 0.01, find_phone: 0.03, research: 0.01 },
-		prospeo: { verify_email: 0.01, find_phone: 0.05 },
-		firecrawl: { research: 0.01 }
+		prospeo: { verify_email: 0.01, find_phone: 0.05 }
 	};
 	return costs[provider]?.[operation] ?? 0;
 }

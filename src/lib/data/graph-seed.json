@@ -1,0 +1,3717 @@
+{
+  "nodes": [
+    {
+      "id": "incworx",
+      "label": "Incworx",
+      "cat": "incworx",
+      "sub": "AI & Microsoft consulting",
+      "detail": "KoldOps Engine | SvelteKit+Supabase | AI consulting for PE/finance"
+    },
+    {
+      "id": "abbott",
+      "label": "Abbott Capital",
+      "cat": "firm",
+      "sub": "76 emp | NYC | $50-100M",
+      "detail": "abbottcapital.com | Tech: WordPress/Apache/PHP/MySQL, Claude Enterprise | NON-MS stack. CISO identified. Pattern: {f}{last}@abbottcapital.com"
+    },
+    {
+      "id": "hf",
+      "label": "Hellman & Friedman",
+      "cat": "firm",
+      "sub": "209 emp | SF/NYC/London | $50-100M",
+      "detail": "hf.com | Tech: Custom web stack | $115B AUM. 55 portfolio cos. Software (14%) & finserv (14%) focus. Pattern: {f}{last}@hf.com. 51 contacts in Hunter."
+    },
+    {
+      "id": "virtus",
+      "label": "Virtus Investment Partners",
+      "cat": "firm",
+      "sub": "413 emp | Hartford | $250-500M",
+      "detail": "virtus.com | Tech: MS Dynamics CRM, M365, Azure, Salesforce, HubSpot, Marketo | Public (VRTS). Pattern: {first}.{last}@virtus.com. 101 contacts."
+    },
+    {
+      "id": "gryphon",
+      "label": "Gryphon Investors",
+      "cat": "firm",
+      "sub": "244 emp | SF | $250-500M",
+      "detail": "gryphoninvestors.com | Tech: MS stack, custom web | $9B AUM. 26 portfolio cos. Doing MS intranet with Incworx. Pattern: {last}@gryphoninvestors.com."
+    },
+    {
+      "id": "potomac",
+      "label": "Potomac Equity Partners",
+      "cat": "firm",
+      "sub": "4 emp | DC | $10-150M deals",
+      "detail": "potomacequitypartners.com | Tech: MS + Copilot AI readiness | Sectors: BizSvcs, Education, Healthcare, Info, Software. Pattern: {f}{last}@potomacequitypartners.com"
+    },
+    {
+      "id": "bowriver",
+      "label": "Bow River Capital",
+      "cat": "firm",
+      "sub": "107 emp | Denver | $10-50M",
+      "detail": "bowrivercapital.com | Tech: IIS/ASP.NET/Windows Server, Claude Enterprise | 19 portfolio cos. Pattern: {last}@bowrivercapital.com."
+    },
+    {
+      "id": "pritzker",
+      "label": "Pritzker Group",
+      "cat": "firm",
+      "sub": "70 emp | Chicago | $10-50M",
+      "detail": "pritzkergroup.com | Tech: Squarespace, MS stack | 31 platforms, 110+ add-ons, $10B+ deployed. Pattern: {f}{last}@pritzkergroup.com"
+    },
+    {
+      "id": "p_gimbel",
+      "label": "Christopher Gimbel",
+      "cat": "person",
+      "sub": "CISO & Sr Mgr Info Systems",
+      "detail": "Abbott Capital | cgimbel@abbottcapital.com | VERIFIED | Primary IT decision-maker"
+    },
+    {
+      "id": "p_reilly",
+      "label": "Connor Reilly",
+      "cat": "person",
+      "sub": "IT Associate",
+      "detail": "Abbott Capital | creilly@abbottcapital.com"
+    },
+    {
+      "id": "p_pangburn",
+      "label": "Leonard Pangburn",
+      "cat": "person",
+      "sub": "MD & President",
+      "detail": "Abbott Capital | lpangburn@abbottcapital.com"
+    },
+    {
+      "id": "p_matthias",
+      "label": "Jason Matthias",
+      "cat": "person",
+      "sub": "Technology Integration Manager",
+      "detail": "Hellman & Friedman | jmatthias@hf.com | VERIFIED | Key IT contact"
+    },
+    {
+      "id": "p_ping",
+      "label": "Whitney Ping",
+      "cat": "person",
+      "sub": "COO / Sr Operating Executive",
+      "detail": "Hellman & Friedman | wping@hf.com | VERIFIED"
+    },
+    {
+      "id": "p_motte",
+      "label": "Adrien Motte",
+      "cat": "person",
+      "sub": "Partner",
+      "detail": "Hellman & Friedman | amotte@hf.com | VERIFIED"
+    },
+    {
+      "id": "p_haynes",
+      "label": "Greg Haynes",
+      "cat": "person",
+      "sub": "AVP IT Infrastructure",
+      "detail": "Virtus Investment Partners | greg.haynes@virtus.com | VERIFIED"
+    },
+    {
+      "id": "p_ronan",
+      "label": "Jane Ronan",
+      "cat": "person",
+      "sub": "Sr Director Business Analytics",
+      "detail": "Virtus Investment Partners | jane.ronan@virtus.com | VERIFIED"
+    },
+    {
+      "id": "p_mandinach",
+      "label": "Barry Mandinach",
+      "cat": "person",
+      "sub": "EVP Head of Distribution",
+      "detail": "Virtus Investment Partners | barry.mandinach@virtus.com"
+    },
+    {
+      "id": "p_orum",
+      "label": "Nick Orum",
+      "cat": "person",
+      "sub": "Co-CEO / Co-CIO",
+      "detail": "Gryphon Investors | orum@gryphoninvestors.com"
+    },
+    {
+      "id": "p_bates",
+      "label": "John Bates",
+      "cat": "person",
+      "sub": "Founder & Partner",
+      "detail": "Potomac Equity Partners | jbates@potomacequitypartners.com | VERIFIED"
+    },
+    {
+      "id": "p_denis",
+      "label": "Pascal Denis",
+      "cat": "person",
+      "sub": "Partner, Private Equity",
+      "detail": "Potomac Equity Partners | pdenis@potomacequitypartners.com"
+    },
+    {
+      "id": "p_blythe",
+      "label": "Chris Blythe",
+      "cat": "person",
+      "sub": "Partner",
+      "detail": "Potomac Equity Partners | cblythe@potomacequitypartners.com"
+    },
+    {
+      "id": "p_richardson",
+      "label": "Blair Richardson",
+      "cat": "person",
+      "sub": "Managing Partner",
+      "detail": "Bow River Capital | richardson@bowrivercapital.com"
+    },
+    {
+      "id": "p_wangles",
+      "label": "Will Wangles",
+      "cat": "person",
+      "sub": "Quant Developer (IT)",
+      "detail": "Pritzker Group | wwangles@pritzkergroup.com"
+    },
+    {
+      "id": "p_nava",
+      "label": "Marco Nava",
+      "cat": "person",
+      "sub": "IT Support",
+      "detail": "Pritzker Group | mnava@pritzkergroup.com"
+    },
+    {
+      "id": "p_girgenti",
+      "label": "Chris Girgenti",
+      "cat": "person",
+      "sub": "Managing Partner",
+      "detail": "Pritzker Group | cgirgenti@pritzkergroup.com"
+    },
+    {
+      "id": "s_softtech",
+      "label": "Software & technology",
+      "cat": "sector",
+      "sub": "Shared investment sector",
+      "detail": "H&F and Potomac both invest here. Natural AI/ML consulting opportunity."
+    },
+    {
+      "id": "s_healthcare",
+      "label": "Healthcare",
+      "cat": "sector",
+      "sub": "Shared investment sector",
+      "detail": "H&F and Potomac both invest here."
+    },
+    {
+      "id": "s_finserv",
+      "label": "Financial services",
+      "cat": "sector",
+      "sub": "Operating / investment sector",
+      "detail": "H&F invests, Virtus and Abbott operate in this space."
+    },
+    {
+      "id": "s_bizserv",
+      "label": "Business services",
+      "cat": "sector",
+      "sub": "Shared investment sector",
+      "detail": "Gryphon and Potomac both invest here."
+    },
+    {
+      "id": "s_education",
+      "label": "Education & training",
+      "cat": "sector",
+      "sub": "Investment sector",
+      "detail": "Potomac invests here."
+    },
+    {
+      "id": "s_consumer",
+      "label": "Consumer & retail",
+      "cat": "sector",
+      "sub": "Investment sector",
+      "detail": "H&F invests here."
+    },
+    {
+      "id": "s_infoserv",
+      "label": "Information services",
+      "cat": "sector",
+      "sub": "Investment sector",
+      "detail": "Potomac invests here."
+    },
+    {
+      "id": "s_industrial",
+      "label": "Manufacturing & industrial",
+      "cat": "sector",
+      "sub": "Portfolio sector",
+      "detail": "ProAmpac, Kennedy, Buckman, Elementis, Flow Control, Camco."
+    },
+    {
+      "id": "s_food",
+      "label": "Food & beverage",
+      "cat": "sector",
+      "sub": "Portfolio sector",
+      "detail": "Subway, Dunkin, Arbys, Eat Happy, Shore F&B, City Kitch."
+    },
+    {
+      "id": "s_media",
+      "label": "Media & entertainment",
+      "cat": "sector",
+      "sub": "Portfolio sector",
+      "detail": "Lionsgate, Global Music Rights, On Target Media."
+    },
+    {
+      "id": "s_logistics",
+      "label": "Logistics & transport",
+      "cat": "sector",
+      "sub": "Portfolio sector",
+      "detail": "Capstone Logistics, ACERTUS, BrightView."
+    },
+    {
+      "id": "s_telecom",
+      "label": "Telecom & infrastructure",
+      "cat": "sector",
+      "sub": "Portfolio sector",
+      "detail": "Zayo, Telesat, FMC GlobalSat, Sagemcom."
+    },
+    {
+      "id": "s_security",
+      "label": "Security & safety",
+      "cat": "sector",
+      "sub": "Portfolio sector",
+      "detail": "Verisure, Blackline Safety, Fortreum."
+    },
+    {
+      "id": "s_realestate",
+      "label": "Real estate",
+      "cat": "sector",
+      "sub": "Portfolio sector",
+      "detail": "Red Hill RE, A-ROSA (hospitality)."
+    },
+    {
+      "id": "t_claude",
+      "label": "Claude Enterprise",
+      "cat": "tech",
+      "sub": "Anthropic AI platform",
+      "detail": "Used by Abbott Capital and Bow River Capital. Non-MS AI platform."
+    },
+    {
+      "id": "t_ms",
+      "label": "Microsoft stack",
+      "cat": "tech",
+      "sub": "M365 / Azure / Dynamics / IIS",
+      "detail": "Used by Bow River (heavy), Virtus (heavy), Pritzker (heavy), Gryphon. Core existing relationship platform."
+    },
+    {
+      "id": "t_copilot",
+      "label": "MS Copilot",
+      "cat": "tech",
+      "sub": "AI assistant",
+      "detail": "Potomac doing AI readiness. Virtus potential. Part of Microsoft ecosystem."
+    },
+    {
+      "id": "t_salesforce",
+      "label": "Salesforce + HubSpot",
+      "cat": "tech",
+      "sub": "CRM / marketing platforms",
+      "detail": "Used by Virtus alongside Microsoft stack. Non-MS CRM angle."
+    },
+    {
+      "id": "t_wordpress",
+      "label": "WordPress / PHP / Apache",
+      "cat": "tech",
+      "sub": "Non-MS web infrastructure",
+      "detail": "Abbott Capital runs on this stack. Confirms non-MS positioning."
+    },
+    {
+      "id": "t_aws",
+      "label": "AWS",
+      "cat": "tech",
+      "sub": "Amazon Web Services cloud",
+      "detail": "Used by Airbnb, Jamf, EFE, TrackVia, CloudShare. Major cloud platform across portfolio."
+    },
+    {
+      "id": "t_sap",
+      "label": "SAP / Oracle ERP",
+      "cat": "tech",
+      "sub": "Enterprise ERP systems",
+      "detail": "Used by ProAmpac, Buckman, Elementis, Subway (Oracle POS), WM Synergy (JD Edwards/Oracle)."
+    },
+    {
+      "id": "t_iot",
+      "label": "IoT / Connected Devices",
+      "cat": "tech",
+      "sub": "Internet of Things platforms",
+      "detail": "Used by Verisure, Blackline Safety, Buckman (Bulab), Veregy, Petromax, Sagemcom."
+    },
+    {
+      "id": "t_snowflake",
+      "label": "Snowflake / Databricks",
+      "cat": "tech",
+      "sub": "Cloud data platforms",
+      "detail": "Used by phData, Klaviyo (export), EFE. Modern data stack across portfolio companies."
+    },
+    {
+      "id": "t_react",
+      "label": "React / Modern Web",
+      "cat": "tech",
+      "sub": "Frontend frameworks",
+      "detail": "Used by Airbnb, Altruist, Bynder. Modern web application development."
+    },
+    {
+      "id": "t_mobile",
+      "label": "Mobile / App Platforms",
+      "cat": "tech",
+      "sub": "Mobile apps & ordering",
+      "detail": "Used by Subway, Dunkin, Arbys (mobile ordering), Tamigo, Checked In Care."
+    },
+    {
+      "id": "t_ai",
+      "label": "AI / ML Platforms",
+      "cat": "tech",
+      "sub": "Artificial intelligence & ML",
+      "detail": "Used by Waymo (TensorFlow), Verisure, Airbnb, Sightline, Klaviyo. Key consulting opportunity."
+    },
+    {
+      "id": "t_okta",
+      "label": "Okta / Identity",
+      "cat": "tech",
+      "sub": "Identity & access management",
+      "detail": "Used by Jamf, Baker Tilly, EFE. Enterprise identity management across portfolio."
+    },
+    {
+      "id": "g_sf",
+      "label": "San Francisco",
+      "cat": "geo",
+      "sub": "West coast hub",
+      "detail": "H&F HQ + Gryphon HQ. In-person meeting cluster."
+    },
+    {
+      "id": "g_nyc",
+      "label": "New York City",
+      "cat": "geo",
+      "sub": "East coast hub",
+      "detail": "Abbott HQ + H&F office. In-person meeting cluster."
+    },
+    {
+      "id": "g_dc",
+      "label": "Washington DC",
+      "cat": "geo",
+      "sub": "Capital region",
+      "detail": "Potomac Equity Partners HQ."
+    },
+    {
+      "id": "g_denver",
+      "label": "Denver",
+      "cat": "geo",
+      "sub": "Mountain west",
+      "detail": "Bow River Capital HQ."
+    },
+    {
+      "id": "g_chicago",
+      "label": "Chicago",
+      "cat": "geo",
+      "sub": "Midwest",
+      "detail": "Pritzker Group HQ."
+    },
+    {
+      "id": "g_hartford",
+      "label": "Hartford, CT",
+      "cat": "geo",
+      "sub": "New England",
+      "detail": "Virtus Investment Partners HQ."
+    },
+    {
+      "id": "g_london",
+      "label": "London",
+      "cat": "geo",
+      "sub": "International",
+      "detail": "H&F international office."
+    },
+    {
+      "id": "g_boston",
+      "label": "Boston",
+      "cat": "geo",
+      "sub": "Northeast hub",
+      "detail": "Audax, Charlesbank, THL, TA, Summit."
+    },
+    {
+      "id": "g_la",
+      "label": "Los Angeles",
+      "cat": "geo",
+      "sub": "West coast",
+      "detail": "Gores Group, Imperial Capital."
+    },
+    {
+      "id": "g_atlanta",
+      "label": "Atlanta",
+      "cat": "geo",
+      "sub": "Southeast",
+      "detail": "Roark Capital HQ."
+    },
+    {
+      "id": "g_menlo",
+      "label": "Menlo Park",
+      "cat": "geo",
+      "sub": "Silicon Valley",
+      "detail": "Silver Lake, Accel-KKR, Francisco Partners area."
+    },
+    {
+      "id": "pr_tjc",
+      "label": "TJC (Jordan Co)",
+      "cat": "prospect",
+      "sub": "194 emp | NYC | PE",
+      "detail": "tjclp.com | Tech: Custom web | Score: 92. $33B AUM. 29 portfolio cos. Consumer, industrials, healthcare, logistics, tech."
+    },
+    {
+      "id": "pr_onerock",
+      "label": "One Rock Capital",
+      "cat": "prospect",
+      "sub": "121 emp | NYC | PE",
+      "detail": "onerock.com | Tech: Custom web | Score: 90. $9B AUM. 30 portfolio cos. Industrials & services focus."
+    },
+    {
+      "id": "pr_gtcr",
+      "label": "GTCR",
+      "cat": "prospect",
+      "sub": "277 emp | Chicago | PE",
+      "detail": "gtcr.com | Tech: Custom web | Score: 88. $50B AUM. 290+ cos since 1980. Finserv, tech, healthcare, info services."
+    },
+    {
+      "id": "pr_francisco",
+      "label": "Francisco Partners",
+      "cat": "prospect",
+      "sub": "199 emp | SF | Tech PE",
+      "detail": "franciscopartners.com | Tech: Custom web | Score: 87. $50B raised. 104 portfolio cos. 500+ tech investments total."
+    },
+    {
+      "id": "pr_accelkkr",
+      "label": "Accel-KKR",
+      "cat": "prospect",
+      "sub": "297 emp | Menlo Park | Tech PE",
+      "detail": "accel-kkr.com | Tech: Custom web | Score: 86. $5.5B+ portfolio revenue. 127 cos. Software 46%, internet SW 32%."
+    },
+    {
+      "id": "pr_gores",
+      "label": "The Gores Group",
+      "cat": "prospect",
+      "sub": "54 emp | Beverly Hills | PE",
+      "detail": "gores.com | Tech: Custom web | Score: 85. 130+ companies invested. Tech, telecom, industrial, media, consumer."
+    },
+    {
+      "id": "pr_charlesbank",
+      "label": "Charlesbank",
+      "cat": "prospect",
+      "sub": "215 emp | Boston | PE",
+      "detail": "charlesbank.com | Tech: Custom web | Score: 84. $22B+ AUM. 60 portfolio cos. Services, healthcare, tech infra."
+    },
+    {
+      "id": "pr_thl",
+      "label": "THL Partners",
+      "cat": "prospect",
+      "sub": "206 emp | Boston | PE",
+      "detail": "thl.com | Tech: Custom web | Score: 83. $34B+ raised. 160+ cos. Fintech, services, healthcare, technology."
+    },
+    {
+      "id": "pr_adams",
+      "label": "Adams Street Partners",
+      "cat": "prospect",
+      "sub": "417 emp | Chicago | PE/FoF",
+      "detail": "adamsstreetpartners.com | Tech: Custom web | Score: 82. $65B AUM. 211 cos. 24 unicorns. FoF + co-invest + credit."
+    },
+    {
+      "id": "pr_alpine",
+      "label": "Alpine Investors",
+      "cat": "prospect",
+      "sub": "425 emp | SF | PE",
+      "detail": "alpineinvestors.com | Tech: Custom web | Score: 81. 70 portfolio cos. 710 investments. People-driven PE. Software & services."
+    },
+    {
+      "id": "pr_shore",
+      "label": "Shore Capital",
+      "cat": "prospect",
+      "sub": "424 emp | Chicago | PE",
+      "detail": "shorecp.com | Tech: Custom web | Score: 80. $14B+ AUM. 69 cos. Healthcare, F&B, biz services. 1000+ microcap deals."
+    },
+    {
+      "id": "pr_redhill",
+      "label": "Red Hill",
+      "cat": "prospect",
+      "sub": "58 emp | NYC | PE",
+      "detail": "redhillventures.com | Tech: Custom web | Score: 79. Tech & real estate investments. Direct equity to SMBs. Charlotte NC ops."
+    },
+    {
+      "id": "pr_tailwind",
+      "label": "Tailwind Capital",
+      "cat": "prospect",
+      "sub": "46 emp | NYC | PE",
+      "detail": "tailwind.com | Tech: Custom web | Score: 78. 49 portfolio cos. Infra services, supply chain, IT services focus."
+    },
+    {
+      "id": "pr_mhr",
+      "label": "MHR Fund Mgmt",
+      "cat": "prospect",
+      "sub": "36 emp | NYC | PE",
+      "detail": "mhrfund.com | Tech: Custom web | Score: 77. $658M AUM. Special situations & turnaround. Entertainment, comms, energy."
+    },
+    {
+      "id": "pr_roark",
+      "label": "Roark Capital",
+      "cat": "prospect",
+      "sub": "241 emp | Atlanta | PE",
+      "detail": "roarkcapital.com | Tech: Custom web | Score: 76. $37B AUM. 84 cos. $97B system revenue. 112K+ franchise locations."
+    },
+    {
+      "id": "pr_audax",
+      "label": "Audax Group",
+      "cat": "prospect",
+      "sub": "686 emp | Boston | PE",
+      "detail": "audaxgroup.com | Tech: Custom web | Score: 75. $42B AUM. 150+ platforms, 1050+ add-ons. Buy & build strategy."
+    },
+    {
+      "id": "pr_silverlake",
+      "label": "Silver Lake",
+      "cat": "prospect",
+      "sub": "921 emp | Menlo Park | Tech PE",
+      "detail": "silverlake.com | Tech: Custom web | Score: 74. $110B AUM. 152 cos. $243B portfolio revenue. Premier tech PE."
+    },
+    {
+      "id": "pr_waterland",
+      "label": "Waterland PE",
+      "cat": "prospect",
+      "sub": "264 emp | US/Europe | PE",
+      "detail": "waterlandpe.com | Tech: Custom web | Score: 73. €14B AUM. 61 cos. 1300+ investments. Mid-market B2B. Netherlands HQ."
+    },
+    {
+      "id": "pr_summit",
+      "label": "Summit Partners",
+      "cat": "prospect",
+      "sub": "584 emp | Boston | Growth",
+      "detail": "summitpartners.com | Tech: Custom web | Score: 72. 460+ cos. Growth equity + PE. Tech, healthcare, life sciences."
+    },
+    {
+      "id": "pr_seaport",
+      "label": "Seaport Capital",
+      "cat": "prospect",
+      "sub": "19 emp | NYC | PE",
+      "detail": "seaportcapital.com | Tech: Custom web | Score: 71. 68 investments. Comms infra, biz/info services, media. $10-40M equity."
+    },
+    {
+      "id": "h_verisure",
+      "label": "Verisure",
+      "cat": "holding",
+      "sub": "Security systems",
+      "detail": "verisure.com | Tech: AI/ML, IoT, cloud ERP/CRM, Marin Social | Global monitored security leader. H&F portfolio."
+    },
+    {
+      "id": "h_efe",
+      "label": "Edelman Financial Engines",
+      "cat": "holding",
+      "sub": "Financial planning",
+      "detail": "edelmanfinancialengines.com | Tech: Orion (replaced Envestnet), AWS, Drupal, Adobe, Atlassian | ~$300B AUM. H&F + Warburg."
+    },
+    {
+      "id": "h_bakertilly",
+      "label": "Baker Tilly",
+      "cat": "holding",
+      "sub": "Advisory / CPA",
+      "detail": "bakertilly.com | Tech: MS Dynamics CRM, Sage Intacct, Okta, C#, BambooHR, Expensify | Top 10 CPA. Merged Moss Adams."
+    },
+    {
+      "id": "h_belron",
+      "label": "Belron / Safelite",
+      "cat": "holding",
+      "sub": "Vehicle glass repair",
+      "detail": "belron.com / safelite.com | Tech: Salesforce, MuleSoft, TYPO3, MySQL, Informatica, Blue Yonder | Global glass repair."
+    },
+    {
+      "id": "h_gmr",
+      "label": "Global Music Rights",
+      "cat": "holding",
+      "sub": "Music licensing / PRO",
+      "detail": "globalmusicrights.com | Tech: Custom platform | PRO for top-tier songwriters. Founded 2013. H&F portfolio."
+    },
+    {
+      "id": "h_fortreum",
+      "label": "Fortreum",
+      "cat": "holding",
+      "sub": "Cybersecurity services",
+      "detail": "fortreum.com | Tech: Cloud security, GRC platforms | Leading cybersecurity services. Gryphon majority recap."
+    },
+    {
+      "id": "h_hrsoft",
+      "label": "HRSoft",
+      "cat": "holding",
+      "sub": "Compensation mgmt software",
+      "detail": "hrsoft.com | Tech: SaaS, cloud-native, API integrations | Enterprise comp management. Gryphon portfolio."
+    },
+    {
+      "id": "h_phdata",
+      "label": "phData",
+      "cat": "holding",
+      "sub": "Data & analytics services",
+      "detail": "phdata.io | Tech: Snowflake, Databricks, AWS, Azure, GCP, dbt | Cloud data & AI consulting. Gryphon (Dec 2024)."
+    },
+    {
+      "id": "h_3cloud",
+      "label": "3Cloud",
+      "cat": "holding",
+      "sub": "Azure services (exited)",
+      "detail": "3cloudsolutions.com | Tech: Microsoft Azure, Power Platform, Dynamics 365 | Sold to Cognizant. Was Gryphon."
+    },
+    {
+      "id": "h_smg",
+      "label": "Safety Mgmt Group",
+      "cat": "holding",
+      "sub": "Safety consulting",
+      "detail": "safetymanagementgroup.com | Tech: Custom web platform | Workplace safety & compliance. Gryphon (Jan 2026)."
+    },
+    {
+      "id": "h_trackvia",
+      "label": "TrackVia",
+      "cat": "holding",
+      "sub": "Workflow software",
+      "detail": "trackvia.com | Tech: Low-code SaaS, AWS, REST APIs, mobile-native | Workflow management. Bow River portfolio."
+    },
+    {
+      "id": "h_cloudshare",
+      "label": "CloudShare",
+      "cat": "holding",
+      "sub": "Cloud experience platform",
+      "detail": "cloudshare.com | Tech: AWS/Azure cloud, virtualization, Kubernetes | Virtual IT labs & PoCs. Bow River."
+    },
+    {
+      "id": "h_xima",
+      "label": "Xima Software",
+      "cat": "holding",
+      "sub": "Call center analytics",
+      "detail": "ximasoftware.com | Tech: SaaS, cloud contact center, API integrations | CC reporting. Bow River SGE."
+    },
+    {
+      "id": "h_veregy",
+      "label": "Veregy",
+      "cat": "holding",
+      "sub": "Energy services",
+      "detail": "veregy.com | Tech: IoT, building automation, energy mgmt systems | Energy efficiency. Bow River portfolio."
+    },
+    {
+      "id": "h_oceantomo",
+      "label": "Ocean Tomo",
+      "cat": "holding",
+      "sub": "IP services",
+      "detail": "oceantomo.com | Tech: Custom analytics, patent data platforms | IP merchant bank & advisory. Bow River."
+    },
+    {
+      "id": "h_proampac",
+      "label": "ProAmpac",
+      "cat": "holding",
+      "sub": "Flexible packaging",
+      "detail": "proampac.com | Tech: SAP, custom ERP, industrial automation | Leading flex packaging mfg. Pritzker platform."
+    },
+    {
+      "id": "h_kennedy",
+      "label": "Kennedy",
+      "cat": "holding",
+      "sub": "Labels & RFID",
+      "detail": "kennedylabel.com | Tech: RFID systems, digital printing, industrial automation | Labels/packaging. Pritzker."
+    },
+    {
+      "id": "h_petromax",
+      "label": "Petromax",
+      "cat": "holding",
+      "sub": "Environmental services",
+      "detail": "petromaxllc.com | Tech: Environmental monitoring, IoT sensors | Wastewater treatment. Pritzker portfolio."
+    },
+    {
+      "id": "h_buckman",
+      "label": "Buckman",
+      "cat": "holding",
+      "sub": "Specialty chemicals",
+      "detail": "buckman.com | Tech: IoT (Bulab), cloud analytics, SAP | Water treatment chemicals. Pritzker (Jul 2025)."
+    },
+    {
+      "id": "h_wmsynergy",
+      "label": "WM Synergy",
+      "cat": "holding",
+      "sub": "ERP consulting",
+      "detail": "wmsynergy.com | Tech: JD Edwards, Oracle ERP, cloud migration | IT consulting & ERP. Potomac portfolio."
+    },
+    {
+      "id": "h_watermark",
+      "label": "Watermark Solutions",
+      "cat": "holding",
+      "sub": "Business software",
+      "detail": "watermarksolutions.com | Tech: SaaS, cloud-native, API-first | Business productivity SW. Potomac portfolio."
+    },
+    {
+      "id": "h_orion",
+      "label": "Orion Systems",
+      "cat": "holding",
+      "sub": "IT consulting",
+      "detail": "orionsi.com | Tech: MS Azure, AWS, ServiceNow, Cisco | IT systems integrators. Potomac portfolio."
+    },
+    {
+      "id": "h_sitemed",
+      "label": "SiteMed",
+      "cat": "holding",
+      "sub": "Healthcare services",
+      "detail": "sitemed.com | Tech: EHR integration, telehealth platforms | Clinics & outpatient care. Potomac portfolio."
+    },
+    {
+      "id": "h_kar",
+      "label": "Kayne Anderson Rudnick",
+      "cat": "holding",
+      "sub": "Investment mgmt affiliate",
+      "detail": "kayne.com | Tech: Bloomberg, FactSet, custom analytics | Small/mid-cap equity. Virtus affiliate."
+    },
+    {
+      "id": "h_alphasimplex",
+      "label": "AlphaSimplex",
+      "cat": "holding",
+      "sub": "Quant strategies affiliate",
+      "detail": "alphasimplex.com | Tech: Python, R, quant models, cloud compute | Quant strategies. Virtus (from Natixis 2023)."
+    },
+    {
+      "id": "h_newfleet",
+      "label": "Newfleet",
+      "cat": "holding",
+      "sub": "Fixed income affiliate",
+      "detail": "newfleet.com | Tech: Bloomberg, fixed income analytics | Multi-sector fixed income. Virtus affiliate."
+    },
+    {
+      "id": "h_duffphelps",
+      "label": "Duff & Phelps",
+      "cat": "holding",
+      "sub": "Utility/infrastructure affiliate",
+      "detail": "dfrgroup.com | Tech: Bloomberg, custom research tools | Utility/infrastructure equity. Virtus affiliate."
+    },
+    {
+      "id": "h_abbottfund",
+      "label": "Abbott Fund V",
+      "cat": "holding",
+      "sub": "PE fund-of-funds vehicle",
+      "detail": "abbottcapital.com | Tech: WordPress/PHP stack | PE Fund V. $14B+ AUM. Small/mid buyout managers NA & Europe."
+    },
+    {
+      "id": "h_abbottco",
+      "label": "Abbott Co-Invest",
+      "cat": "holding",
+      "sub": "Direct co-investments",
+      "detail": "abbottcapital.com | Tech: WordPress/PHP stack | Direct co-investment program. Selective alongside managers."
+    },
+    {
+      "id": "h_capstone",
+      "label": "Capstone Logistics",
+      "cat": "holding",
+      "sub": "Supply chain services",
+      "detail": "capstonelogistics.com | Tech: WordPress, Power BI, MS, Boomi, ADP, Zoho SalesIQ | Outsourced supply chain. TJC."
+    },
+    {
+      "id": "h_camco",
+      "label": "Camco Manufacturing",
+      "cat": "holding",
+      "sub": "RV & outdoor accessories",
+      "detail": "camco.net | Tech: E-commerce platform, ERP | Aftermarket RV/marine/ATV accessories. TJC portfolio."
+    },
+    {
+      "id": "h_sightline",
+      "label": "Sightline Intelligence",
+      "cat": "holding",
+      "sub": "Data analytics",
+      "detail": "sightlineintelligence.com | Tech: Cloud analytics, AI/ML platform | Data intelligence. TJC latest (Apr 2026)."
+    },
+    {
+      "id": "h_elementis",
+      "label": "Elementis",
+      "cat": "holding",
+      "sub": "Specialty chemicals",
+      "detail": "elementis.com | Tech: SAP, custom ERP | Global specialty chemicals. One Rock portfolio."
+    },
+    {
+      "id": "h_brightview",
+      "label": "BrightView Landscape",
+      "cat": "holding",
+      "sub": "Landscape services",
+      "detail": "brightview.com | Tech: Salesforce, fleet mgmt, GPS tracking | #1 commercial landscaping. One Rock."
+    },
+    {
+      "id": "h_eathappy",
+      "label": "Eat Happy Group",
+      "cat": "holding",
+      "sub": "Food service",
+      "detail": "eathappy.de | Tech: POS systems, supply chain mgmt | Fresh sushi & Asian food. One Rock (Apr 2026)."
+    },
+    {
+      "id": "h_worldpay",
+      "label": "Worldpay",
+      "cat": "holding",
+      "sub": "Payment technology",
+      "detail": "worldpay.com | Tech: 171 web techs, GTM, APIs, low-code tools | Global payments. GTCR major deal."
+    },
+    {
+      "id": "h_paysafe",
+      "label": "Paysafe",
+      "cat": "holding",
+      "sub": "Payment solutions",
+      "detail": "paysafe.com | Tech: REST APIs, digital wallets, eCash, cloud-native | Global payments platform. GTCR."
+    },
+    {
+      "id": "h_maravai",
+      "label": "Maravai LifeSciences",
+      "cat": "holding",
+      "sub": "Nucleic acid products",
+      "detail": "maravai.com | Tech: Lab automation, LIMS, biotech platforms | Nucleic acid products. GTCR."
+    },
+    {
+      "id": "h_jamf",
+      "label": "Jamf",
+      "cat": "holding",
+      "sub": "Apple device management",
+      "detail": "jamf.com | Tech: Apache, Ubuntu, AWS, jQuery, Okta, Entra, Web Components | Apple MDM. Francisco (Jan 2026)."
+    },
+    {
+      "id": "h_blackline",
+      "label": "Blackline Safety",
+      "cat": "holding",
+      "sub": "Connected safety tech",
+      "detail": "blacklinesafety.com | Tech: IoT, cloud SaaS, GPS, cellular connectivity | Wearable safety. Francisco."
+    },
+    {
+      "id": "h_avalon",
+      "label": "Avalon Healthcare",
+      "cat": "holding",
+      "sub": "Healthcare solutions",
+      "detail": "avalonhcs.com | Tech: SaaS, data analytics, cloud platform | Healthcare benefit mgmt. Francisco."
+    },
+    {
+      "id": "h_tamigo",
+      "label": "Tamigo",
+      "cat": "holding",
+      "sub": "Workforce management SaaS",
+      "detail": "tamigo.com | Tech: Cloud SaaS, API integrations, mobile-first | Workforce mgmt. Accel-KKR (Mar 2026)."
+    },
+    {
+      "id": "h_accesspay",
+      "label": "AccessPay",
+      "cat": "holding",
+      "sub": "Payment automation",
+      "detail": "accesspay.com | Tech: Bank APIs, SWIFT, cloud SaaS, ERP integration | Payment auto. Accel-KKR (Mar 2026)."
+    },
+    {
+      "id": "h_checkedin",
+      "label": "Checked In Care",
+      "cat": "holding",
+      "sub": "Healthcare SaaS",
+      "detail": "checkedincare.com | Tech: Cloud SaaS, mobile app, EHR integration | Healthcare. Accel-KKR (Jun 2026)."
+    },
+    {
+      "id": "h_verifone",
+      "label": "Verifone",
+      "cat": "holding",
+      "sub": "Payment terminals",
+      "detail": "verifone.com | Tech: Android POS, cloud payments, REST APIs, encryption | Payment terminals. Gores."
+    },
+    {
+      "id": "h_sagemcom",
+      "label": "Sagemcom",
+      "cat": "holding",
+      "sub": "Telecom equipment",
+      "detail": "sagemcom.com | Tech: Embedded Linux, IoT, fiber/DSL, smart meters | French telecom equip. Gores."
+    },
+    {
+      "id": "h_learning",
+      "label": "The Learning Company",
+      "cat": "holding",
+      "sub": "EdTech (historical)",
+      "detail": "N/A (historical) | Tech: Desktop software | Educational software. Gores carve-out from Mattel."
+    },
+    {
+      "id": "h_accordion",
+      "label": "Accordion",
+      "cat": "holding",
+      "sub": "PE financial consulting",
+      "detail": "accordionpartners.com | Tech: Salesforce, NetSuite, BI tools | PE financial consulting. Charlesbank."
+    },
+    {
+      "id": "h_bridgepointe",
+      "label": "Bridgepointe Tech",
+      "cat": "holding",
+      "sub": "IT advisory",
+      "detail": "bridgepointetechnologies.com | Tech: Multi-vendor IT procurement, cloud advisory | IT advisory. Charlesbank."
+    },
+    {
+      "id": "h_zayo",
+      "label": "Zayo Group",
+      "cat": "holding",
+      "sub": "Fiber infrastructure",
+      "detail": "zayo.com | Tech: Dark fiber, wavelengths, Ethernet, cloud connect, SDN | Global fiber. Charlesbank."
+    },
+    {
+      "id": "h_celerion",
+      "label": "Celerion",
+      "cat": "holding",
+      "sub": "Clinical pharmacology",
+      "detail": "celerion.com | Tech: LIMS, clinical data mgmt, bioanalytical platforms | Clinical pharma. THL (Apr 2026)."
+    },
+    {
+      "id": "h_bynder",
+      "label": "Bynder",
+      "cat": "holding",
+      "sub": "Digital asset management",
+      "detail": "bynder.com | Tech: Cloud SaaS, AI auto-tagging, CDN, REST APIs, React | Global DAM. THL."
+    },
+    {
+      "id": "h_bahnsen",
+      "label": "The Bahnsen Group",
+      "cat": "holding",
+      "sub": "Wealth management",
+      "detail": "thebahnsengroup.com | Tech: Orion, Salesforce, financial planning tools | Wealth mgmt. THL (Apr 2026)."
+    },
+    {
+      "id": "h_turquoise",
+      "label": "Turquoise Health",
+      "cat": "holding",
+      "sub": "Healthcare pricing data",
+      "detail": "turquoise.health | Tech: Cloud SaaS, ML pricing models, data pipelines | Healthcare pricing. Adams Street."
+    },
+    {
+      "id": "h_altruist",
+      "label": "Altruist",
+      "cat": "holding",
+      "sub": "RIA platform",
+      "detail": "altruist.com | Tech: Cloud-native, React, APIs, custodial platform | Digital RIA brokerage. Adams Street."
+    },
+    {
+      "id": "h_highnote",
+      "label": "Highnote",
+      "cat": "holding",
+      "sub": "Card issuing fintech",
+      "detail": "highnote.com | Tech: Cloud-native APIs, card issuing infra, real-time processing | Fintech. Adams Street."
+    },
+    {
+      "id": "h_apex",
+      "label": "Apex Service Partners",
+      "cat": "holding",
+      "sub": "Home services",
+      "detail": "apexservicepartners.com | Tech: ServiceTitan, fleet mgmt, CRM | Home services platform. Alpine (May 2026)."
+    },
+    {
+      "id": "h_antelope",
+      "label": "Antelope",
+      "cat": "holding",
+      "sub": "Financial services",
+      "detail": "antelopeinc.com | Tech: Cloud platform, fintech APIs | Financial services. Alpine (Dec 2025)."
+    },
+    {
+      "id": "h_clarity",
+      "label": "Clarity Windows",
+      "cat": "holding",
+      "sub": "Windows & doors",
+      "detail": "claritywindows.com | Tech: CRM, quoting software, ERP | Residential windows & doors. Alpine."
+    },
+    {
+      "id": "h_togetherwh",
+      "label": "Together Womens Health",
+      "cat": "holding",
+      "sub": "Womens health platform",
+      "detail": "togetherwomenshealth.com | Tech: EHR, practice mgmt, patient portal, telehealth | OB/GYN platform. Shore."
+    },
+    {
+      "id": "h_shorerehab",
+      "label": "Shore Rehab Platform",
+      "cat": "holding",
+      "sub": "Outpatient rehab",
+      "detail": "shorecp.com/healthcare | Tech: EHR, rehab scheduling, outcomes tracking | Outpatient rehab. Shore."
+    },
+    {
+      "id": "h_shorefood",
+      "label": "Shore F&B Platform",
+      "cat": "holding",
+      "sub": "Food & beverage",
+      "detail": "shorecp.com/food-beverage | Tech: POS, supply chain, restaurant mgmt | F&B platform. Shore $450M Fund III."
+    },
+    {
+      "id": "h_citykitch",
+      "label": "City Kitch",
+      "cat": "holding",
+      "sub": "Commercial kitchens",
+      "detail": "citykitch.com | Tech: Booking platform, kitchen mgmt software | Commercial kitchens. Red Hill (NC)."
+    },
+    {
+      "id": "h_redhilltech",
+      "label": "Red Hill Tech Portfolio",
+      "cat": "holding",
+      "sub": "Tech investments",
+      "detail": "redhillventures.com | Tech: Various portfolio stacks | Technology SMB investments. Red Hill Capital."
+    },
+    {
+      "id": "h_redhillre",
+      "label": "Red Hill RE Portfolio",
+      "cat": "holding",
+      "sub": "Real estate",
+      "detail": "redhillventures.com | Tech: Property mgmt, RE analytics | Real estate portfolio. Red Hill Ventures."
+    },
+    {
+      "id": "h_cloudforgood",
+      "label": "Cloud for Good",
+      "cat": "holding",
+      "sub": "Salesforce consulting",
+      "detail": "cloud4good.com | Tech: Salesforce, MuleSoft, Tableau, Marketing Cloud | SF consulting. Tailwind."
+    },
+    {
+      "id": "h_acertus",
+      "label": "ACERTUS",
+      "cat": "holding",
+      "sub": "Vehicle logistics",
+      "detail": "acertusdelivers.com | Tech: Fleet mgmt, GPS tracking, logistics platform | Vehicle transport. Tailwind."
+    },
+    {
+      "id": "h_stratix",
+      "label": "Stratix",
+      "cat": "holding",
+      "sub": "Managed mobility",
+      "detail": "stratixsystems.com | Tech: MDM, mobile lifecycle, Samsung Knox, Apple DEP | Managed mobility. Tailwind."
+    },
+    {
+      "id": "h_lionsgate",
+      "label": "Lionsgate Studios",
+      "cat": "holding",
+      "sub": "Entertainment",
+      "detail": "lionsgate.com | Tech: Cloud rendering, streaming (Starz), Avid, Adobe | Film & TV studio. MHR."
+    },
+    {
+      "id": "h_telesat",
+      "label": "Telesat",
+      "cat": "holding",
+      "sub": "Satellite communications",
+      "detail": "telesat.com | Tech: LEO constellation (Lightspeed), Ka-band, SDN | Global sat operator. MHR."
+    },
+    {
+      "id": "h_iovance",
+      "label": "Iovance Biotherapeutics",
+      "cat": "holding",
+      "sub": "Cell therapy biotech",
+      "detail": "iovance.com | Tech: TIL cell therapy mfg, cGMP bioprocessing | Cancer T-cell therapy. MHR."
+    },
+    {
+      "id": "h_subway",
+      "label": "Subway",
+      "cat": "holding",
+      "sub": "Restaurant franchise",
+      "detail": "subway.com | Tech: Oracle POS, mobile app, loyalty platform, cloud ordering | #1 by locations. Roark."
+    },
+    {
+      "id": "h_dunkin",
+      "label": "Dunkin",
+      "cat": "holding",
+      "sub": "Coffee & donuts franchise",
+      "detail": "dunkindonuts.com | Tech: Mobile ordering, loyalty app, POS, drive-thru AI | QSR chain. Roark/Inspire."
+    },
+    {
+      "id": "h_arbys",
+      "label": "Arbys",
+      "cat": "holding",
+      "sub": "Restaurant franchise",
+      "detail": "arbys.com | Tech: POS, mobile app, drive-thru tech, cloud kitchen mgmt | QSR. Roark/Inspire Brands."
+    },
+    {
+      "id": "h_flowcontrol",
+      "label": "Flow Control Holdings",
+      "cat": "holding",
+      "sub": "Engineered components",
+      "detail": "flowcontrolgroup.com | Tech: CAD/CAM, ERP, industrial automation | Flow components F&B/pharma. Audax."
+    },
+    {
+      "id": "h_griffin",
+      "label": "GRIFFIN Global Tech",
+      "cat": "holding",
+      "sub": "Technology services",
+      "detail": "griffinglobaltech.com | Tech: Cloud services, managed IT, cybersecurity | Global tech services. Audax."
+    },
+    {
+      "id": "h_cumberland",
+      "label": "Cumberland Wealth",
+      "cat": "holding",
+      "sub": "Wealth management",
+      "detail": "cumberlandprivatewealth.com | Tech: Portfolio mgmt, financial planning tools | Wealth mgmt. Audax."
+    },
+    {
+      "id": "h_waymo",
+      "label": "Waymo",
+      "cat": "holding",
+      "sub": "Autonomous vehicles",
+      "detail": "waymo.com | Tech: LiDAR, ML/AI, TensorFlow, custom silicon, cloud compute | Autonomous. Silver Lake $16B."
+    },
+    {
+      "id": "h_airbnb",
+      "label": "Airbnb",
+      "cat": "holding",
+      "sub": "Travel marketplace",
+      "detail": "airbnb.com | Tech: AWS, Ruby on Rails, React, Nginx, Hadoop, Kafka, K8s | Global marketplace. Silver Lake."
+    },
+    {
+      "id": "h_dell",
+      "label": "Dell Technologies",
+      "cat": "holding",
+      "sub": "Enterprise tech",
+      "detail": "dell.com | Tech: VMware, Azure Stack, PowerEdge, APEX cloud, Salesforce | Enterprise tech. Silver Lake."
+    },
+    {
+      "id": "h_9altitudes",
+      "label": "9altitudes",
+      "cat": "holding",
+      "sub": "Business software",
+      "detail": "9altitudes.com | Tech: MS Dynamics 365, Power Platform, Azure, SAP | Business SW impl. Waterland."
+    },
+    {
+      "id": "h_arosa",
+      "label": "A-ROSA Cruises",
+      "cat": "holding",
+      "sub": "River cruises",
+      "detail": "a-rosa.de | Tech: Booking platform, CRM, revenue mgmt | Premium EU river cruises. Waterland."
+    },
+    {
+      "id": "h_medhold",
+      "label": "Medhold",
+      "cat": "holding",
+      "sub": "Clinical laboratory",
+      "detail": "medhold.co.za | Tech: LIMS, lab automation, diagnostic systems | Private clinical lab. Waterland."
+    },
+    {
+      "id": "h_klaviyo",
+      "label": "Klaviyo",
+      "cat": "holding",
+      "sub": "Marketing automation",
+      "detail": "klaviyo.com | Tech: 350+ integrations, REST APIs, Snowflake/BigQuery, AI/ML | Marketing auto. Summit. KVYO."
+    },
+    {
+      "id": "h_gresb",
+      "label": "GRESB",
+      "cat": "holding",
+      "sub": "ESG data platform",
+      "detail": "gresb.com | Tech: Cloud SaaS, ESG analytics, benchmarking engine, API | ESG data for RE. Summit."
+    },
+    {
+      "id": "h_fortislife",
+      "label": "Fortis Life Sciences",
+      "cat": "holding",
+      "sub": "Life sciences tools",
+      "detail": "fortislife.com | Tech: Lab automation, reagent platforms, LIMS integration | Life sci tools. Summit."
+    },
+    {
+      "id": "h_fmcglobal",
+      "label": "FMC GlobalSat",
+      "cat": "holding",
+      "sub": "Satellite communications",
+      "detail": "fmcglobalsat.com | Tech: VSAT, satellite networking, managed connectivity | Satellite comms. Seaport."
+    },
+    {
+      "id": "h_ontarget",
+      "label": "On Target Media",
+      "cat": "holding",
+      "sub": "Direct response marketing",
+      "detail": "ontargetmedia.com | Tech: DRTV platforms, lead gen analytics, digital marketing | Direct response. Seaport."
+    },
+    {
+      "id": "h_cyberlink",
+      "label": "Cyberlink ASP",
+      "cat": "holding",
+      "sub": "IT services",
+      "detail": "cyberlinkasp.com | Tech: Managed hosting, cloud services, app management | Managed IT. Seaport."
+    }
+  ],
+  "links": [
+    {
+      "source": "incworx",
+      "target": "gryphon",
+      "rel": "MS intranet client",
+      "etype": "client"
+    },
+    {
+      "source": "incworx",
+      "target": "potomac",
+      "rel": "Copilot AI readiness",
+      "etype": "client"
+    },
+    {
+      "source": "incworx",
+      "target": "abbott",
+      "rel": "#1 prospect",
+      "etype": "client"
+    },
+    {
+      "source": "incworx",
+      "target": "hf",
+      "rel": "#2 prospect",
+      "etype": "client"
+    },
+    {
+      "source": "incworx",
+      "target": "virtus",
+      "rel": "#3 prospect",
+      "etype": "client"
+    },
+    {
+      "source": "incworx",
+      "target": "bowriver",
+      "rel": "Prospect",
+      "etype": "client"
+    },
+    {
+      "source": "incworx",
+      "target": "pritzker",
+      "rel": "Prospect",
+      "etype": "client"
+    },
+    {
+      "source": "abbott",
+      "target": "p_gimbel",
+      "rel": "CISO",
+      "etype": "employs"
+    },
+    {
+      "source": "abbott",
+      "target": "p_reilly",
+      "rel": "IT",
+      "etype": "employs"
+    },
+    {
+      "source": "abbott",
+      "target": "p_pangburn",
+      "rel": "President",
+      "etype": "employs"
+    },
+    {
+      "source": "hf",
+      "target": "p_matthias",
+      "rel": "Tech integration",
+      "etype": "employs"
+    },
+    {
+      "source": "hf",
+      "target": "p_ping",
+      "rel": "COO",
+      "etype": "employs"
+    },
+    {
+      "source": "hf",
+      "target": "p_motte",
+      "rel": "Partner",
+      "etype": "employs"
+    },
+    {
+      "source": "virtus",
+      "target": "p_haynes",
+      "rel": "IT infra",
+      "etype": "employs"
+    },
+    {
+      "source": "virtus",
+      "target": "p_ronan",
+      "rel": "Analytics",
+      "etype": "employs"
+    },
+    {
+      "source": "virtus",
+      "target": "p_mandinach",
+      "rel": "Distribution",
+      "etype": "employs"
+    },
+    {
+      "source": "gryphon",
+      "target": "p_orum",
+      "rel": "Co-CEO",
+      "etype": "employs"
+    },
+    {
+      "source": "potomac",
+      "target": "p_bates",
+      "rel": "Founder",
+      "etype": "employs"
+    },
+    {
+      "source": "potomac",
+      "target": "p_denis",
+      "rel": "Partner",
+      "etype": "employs"
+    },
+    {
+      "source": "potomac",
+      "target": "p_blythe",
+      "rel": "Partner",
+      "etype": "employs"
+    },
+    {
+      "source": "bowriver",
+      "target": "p_richardson",
+      "rel": "Managing partner",
+      "etype": "employs"
+    },
+    {
+      "source": "pritzker",
+      "target": "p_wangles",
+      "rel": "IT / quant",
+      "etype": "employs"
+    },
+    {
+      "source": "pritzker",
+      "target": "p_nava",
+      "rel": "IT support",
+      "etype": "employs"
+    },
+    {
+      "source": "pritzker",
+      "target": "p_girgenti",
+      "rel": "Managing partner",
+      "etype": "employs"
+    },
+    {
+      "source": "hf",
+      "target": "s_softtech",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "potomac",
+      "target": "s_softtech",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "hf",
+      "target": "s_healthcare",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "potomac",
+      "target": "s_healthcare",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "hf",
+      "target": "s_finserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "virtus",
+      "target": "s_finserv",
+      "rel": "Operates in",
+      "etype": "sector"
+    },
+    {
+      "source": "abbott",
+      "target": "s_finserv",
+      "rel": "Operates in",
+      "etype": "sector"
+    },
+    {
+      "source": "gryphon",
+      "target": "s_bizserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "potomac",
+      "target": "s_bizserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "potomac",
+      "target": "s_education",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "hf",
+      "target": "s_consumer",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "potomac",
+      "target": "s_infoserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "abbott",
+      "target": "t_claude",
+      "rel": "Uses",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "bowriver",
+      "target": "t_claude",
+      "rel": "Uses",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "bowriver",
+      "target": "t_ms",
+      "rel": "Heavy user",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "virtus",
+      "target": "t_ms",
+      "rel": "Heavy user",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "pritzker",
+      "target": "t_ms",
+      "rel": "Heavy user",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "gryphon",
+      "target": "t_ms",
+      "rel": "Uses",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "potomac",
+      "target": "t_copilot",
+      "rel": "AI readiness",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "virtus",
+      "target": "t_salesforce",
+      "rel": "Uses",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "abbott",
+      "target": "t_wordpress",
+      "rel": "Runs on",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "t_ms",
+      "target": "t_copilot",
+      "rel": "Part of",
+      "etype": "tech_rel"
+    },
+    {
+      "source": "h_airbnb",
+      "target": "t_aws",
+      "rel": "Primary cloud",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_jamf",
+      "target": "t_aws",
+      "rel": "Hosting",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_efe",
+      "target": "t_aws",
+      "rel": "Cloud infra",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_trackvia",
+      "target": "t_aws",
+      "rel": "SaaS hosting",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_cloudshare",
+      "target": "t_aws",
+      "rel": "Cloud platform",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_turquoise",
+      "target": "t_aws",
+      "rel": "Cloud SaaS",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_proampac",
+      "target": "t_sap",
+      "rel": "ERP",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_buckman",
+      "target": "t_sap",
+      "rel": "ERP",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_elementis",
+      "target": "t_sap",
+      "rel": "ERP",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_subway",
+      "target": "t_sap",
+      "rel": "Oracle POS",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_wmsynergy",
+      "target": "t_sap",
+      "rel": "JD Edwards/Oracle",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_bakertilly",
+      "target": "t_sap",
+      "rel": "Sage Intacct",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_verisure",
+      "target": "t_iot",
+      "rel": "Connected security",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_blackline",
+      "target": "t_iot",
+      "rel": "Wearable sensors",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_buckman",
+      "target": "t_iot",
+      "rel": "Bulab IoT",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_veregy",
+      "target": "t_iot",
+      "rel": "Building auto",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_petromax",
+      "target": "t_iot",
+      "rel": "Env monitoring",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_sagemcom",
+      "target": "t_iot",
+      "rel": "Smart meters",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_phdata",
+      "target": "t_snowflake",
+      "rel": "Data consulting",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_klaviyo",
+      "target": "t_snowflake",
+      "rel": "Data export",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_efe",
+      "target": "t_snowflake",
+      "rel": "Analytics",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_sightline",
+      "target": "t_snowflake",
+      "rel": "Data platform",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_airbnb",
+      "target": "t_react",
+      "rel": "Frontend",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_altruist",
+      "target": "t_react",
+      "rel": "Cloud-native UI",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_bynder",
+      "target": "t_react",
+      "rel": "DAM frontend",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_highnote",
+      "target": "t_react",
+      "rel": "Cloud-native",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_subway",
+      "target": "t_mobile",
+      "rel": "Mobile ordering",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_dunkin",
+      "target": "t_mobile",
+      "rel": "Mobile ordering",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_arbys",
+      "target": "t_mobile",
+      "rel": "Mobile app",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_tamigo",
+      "target": "t_mobile",
+      "rel": "Mobile-first",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_checkedin",
+      "target": "t_mobile",
+      "rel": "Mobile app",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_waymo",
+      "target": "t_ai",
+      "rel": "TensorFlow/ML",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_verisure",
+      "target": "t_ai",
+      "rel": "AI/ML security",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_airbnb",
+      "target": "t_ai",
+      "rel": "Search/fraud ML",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_klaviyo",
+      "target": "t_ai",
+      "rel": "AI marketing",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_sightline",
+      "target": "t_ai",
+      "rel": "AI analytics",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_dunkin",
+      "target": "t_ai",
+      "rel": "Drive-thru AI",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_jamf",
+      "target": "t_okta",
+      "rel": "Identity mgmt",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_bakertilly",
+      "target": "t_okta",
+      "rel": "SSO/IAM",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_efe",
+      "target": "t_okta",
+      "rel": "Identity",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_belron",
+      "target": "t_salesforce",
+      "rel": "CRM",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_accordion",
+      "target": "t_salesforce",
+      "rel": "CRM consulting",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_bahnsen",
+      "target": "t_salesforce",
+      "rel": "CRM",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_brightview",
+      "target": "t_salesforce",
+      "rel": "CRM",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_cloudforgood",
+      "target": "t_salesforce",
+      "rel": "SF consulting",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_capstone",
+      "target": "t_salesforce",
+      "rel": "Zoho SalesIQ",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_3cloud",
+      "target": "t_ms",
+      "rel": "Azure services",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_orion",
+      "target": "t_ms",
+      "rel": "Azure/ServiceNow",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_9altitudes",
+      "target": "t_ms",
+      "rel": "Dynamics 365",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_dell",
+      "target": "t_ms",
+      "rel": "Azure Stack",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "h_stratix",
+      "target": "t_ms",
+      "rel": "MDM/Knox",
+      "etype": "uses_tech"
+    },
+    {
+      "source": "hf",
+      "target": "g_sf",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "gryphon",
+      "target": "g_sf",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "abbott",
+      "target": "g_nyc",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "hf",
+      "target": "g_nyc",
+      "rel": "Office",
+      "etype": "located"
+    },
+    {
+      "source": "hf",
+      "target": "g_london",
+      "rel": "Office",
+      "etype": "located"
+    },
+    {
+      "source": "potomac",
+      "target": "g_dc",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "bowriver",
+      "target": "g_denver",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pritzker",
+      "target": "g_chicago",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "virtus",
+      "target": "g_hartford",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_tjc",
+      "target": "g_nyc",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_onerock",
+      "target": "g_nyc",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_gtcr",
+      "target": "g_chicago",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_francisco",
+      "target": "g_sf",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_accelkkr",
+      "target": "g_menlo",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_gores",
+      "target": "g_la",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_charlesbank",
+      "target": "g_boston",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_thl",
+      "target": "g_boston",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_adams",
+      "target": "g_chicago",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_alpine",
+      "target": "g_sf",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_shore",
+      "target": "g_chicago",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_redhill",
+      "target": "g_nyc",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_tailwind",
+      "target": "g_nyc",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_mhr",
+      "target": "g_nyc",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_roark",
+      "target": "g_atlanta",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_audax",
+      "target": "g_boston",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_silverlake",
+      "target": "g_menlo",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_summit",
+      "target": "g_boston",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_seaport",
+      "target": "g_nyc",
+      "rel": "HQ",
+      "etype": "located"
+    },
+    {
+      "source": "pr_gtcr",
+      "target": "s_softtech",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_gtcr",
+      "target": "s_healthcare",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_gtcr",
+      "target": "s_finserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_francisco",
+      "target": "s_softtech",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_accelkkr",
+      "target": "s_softtech",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_charlesbank",
+      "target": "s_bizserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_charlesbank",
+      "target": "s_healthcare",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_thl",
+      "target": "s_finserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_thl",
+      "target": "s_healthcare",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_alpine",
+      "target": "s_softtech",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_alpine",
+      "target": "s_bizserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_shore",
+      "target": "s_healthcare",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_tailwind",
+      "target": "s_healthcare",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_tailwind",
+      "target": "s_bizserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_roark",
+      "target": "s_consumer",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_roark",
+      "target": "s_bizserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_silverlake",
+      "target": "s_softtech",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_summit",
+      "target": "s_softtech",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_summit",
+      "target": "s_healthcare",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_seaport",
+      "target": "s_bizserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_adams",
+      "target": "s_finserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_audax",
+      "target": "s_bizserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_tjc",
+      "target": "s_bizserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_onerock",
+      "target": "s_bizserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_gores",
+      "target": "s_consumer",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "pr_mhr",
+      "target": "s_finserv",
+      "rel": "Invests in",
+      "etype": "sector"
+    },
+    {
+      "source": "hf",
+      "target": "h_verisure",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "hf",
+      "target": "h_efe",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "hf",
+      "target": "h_bakertilly",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "hf",
+      "target": "h_belron",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "hf",
+      "target": "h_gmr",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "gryphon",
+      "target": "h_fortreum",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "gryphon",
+      "target": "h_hrsoft",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "gryphon",
+      "target": "h_phdata",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "gryphon",
+      "target": "h_3cloud",
+      "rel": "Exited to Cognizant",
+      "etype": "holds"
+    },
+    {
+      "source": "gryphon",
+      "target": "h_smg",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "bowriver",
+      "target": "h_trackvia",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "bowriver",
+      "target": "h_cloudshare",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "bowriver",
+      "target": "h_xima",
+      "rel": "SGE portfolio",
+      "etype": "holds"
+    },
+    {
+      "source": "bowriver",
+      "target": "h_veregy",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "bowriver",
+      "target": "h_oceantomo",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pritzker",
+      "target": "h_proampac",
+      "rel": "Platform co",
+      "etype": "holds"
+    },
+    {
+      "source": "pritzker",
+      "target": "h_kennedy",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pritzker",
+      "target": "h_petromax",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pritzker",
+      "target": "h_buckman",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "potomac",
+      "target": "h_wmsynergy",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "potomac",
+      "target": "h_watermark",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "potomac",
+      "target": "h_orion",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "potomac",
+      "target": "h_sitemed",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "virtus",
+      "target": "h_kar",
+      "rel": "Affiliate",
+      "etype": "holds"
+    },
+    {
+      "source": "virtus",
+      "target": "h_alphasimplex",
+      "rel": "Acquired affiliate",
+      "etype": "holds"
+    },
+    {
+      "source": "virtus",
+      "target": "h_newfleet",
+      "rel": "Affiliate",
+      "etype": "holds"
+    },
+    {
+      "source": "virtus",
+      "target": "h_duffphelps",
+      "rel": "Affiliate",
+      "etype": "holds"
+    },
+    {
+      "source": "abbott",
+      "target": "h_abbottfund",
+      "rel": "Fund vehicle",
+      "etype": "holds"
+    },
+    {
+      "source": "abbott",
+      "target": "h_abbottco",
+      "rel": "Co-invest program",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_tjc",
+      "target": "h_capstone",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_tjc",
+      "target": "h_camco",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_tjc",
+      "target": "h_sightline",
+      "rel": "Latest investment",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_onerock",
+      "target": "h_elementis",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_onerock",
+      "target": "h_brightview",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_onerock",
+      "target": "h_eathappy",
+      "rel": "Latest investment",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_gtcr",
+      "target": "h_worldpay",
+      "rel": "Major deal",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_gtcr",
+      "target": "h_paysafe",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_gtcr",
+      "target": "h_maravai",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_francisco",
+      "target": "h_jamf",
+      "rel": "Acquired",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_francisco",
+      "target": "h_blackline",
+      "rel": "Acquired",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_francisco",
+      "target": "h_avalon",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_accelkkr",
+      "target": "h_tamigo",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_accelkkr",
+      "target": "h_accesspay",
+      "rel": "Acquired",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_accelkkr",
+      "target": "h_checkedin",
+      "rel": "Latest investment",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_gores",
+      "target": "h_verifone",
+      "rel": "Carve-out",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_gores",
+      "target": "h_sagemcom",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_gores",
+      "target": "h_learning",
+      "rel": "Carve-out",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_charlesbank",
+      "target": "h_accordion",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_charlesbank",
+      "target": "h_bridgepointe",
+      "rel": "Latest investment",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_charlesbank",
+      "target": "h_zayo",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_thl",
+      "target": "h_celerion",
+      "rel": "Majority investment",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_thl",
+      "target": "h_bynder",
+      "rel": "Majority investment",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_thl",
+      "target": "h_bahnsen",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_adams",
+      "target": "h_turquoise",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_adams",
+      "target": "h_altruist",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_adams",
+      "target": "h_highnote",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_alpine",
+      "target": "h_apex",
+      "rel": "Latest investment",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_alpine",
+      "target": "h_antelope",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_alpine",
+      "target": "h_clarity",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_shore",
+      "target": "h_togetherwh",
+      "rel": "Platform co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_shore",
+      "target": "h_shorerehab",
+      "rel": "Platform co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_shore",
+      "target": "h_shorefood",
+      "rel": "F&B fund",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_redhill",
+      "target": "h_citykitch",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_redhill",
+      "target": "h_redhilltech",
+      "rel": "Direct equity",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_redhill",
+      "target": "h_redhillre",
+      "rel": "RE portfolio",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_tailwind",
+      "target": "h_cloudforgood",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_tailwind",
+      "target": "h_acertus",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_tailwind",
+      "target": "h_stratix",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_mhr",
+      "target": "h_lionsgate",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_mhr",
+      "target": "h_telesat",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_mhr",
+      "target": "h_iovance",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_roark",
+      "target": "h_subway",
+      "rel": "Acquired",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_roark",
+      "target": "h_dunkin",
+      "rel": "Inspire Brands",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_roark",
+      "target": "h_arbys",
+      "rel": "Inspire Brands",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_audax",
+      "target": "h_flowcontrol",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_audax",
+      "target": "h_griffin",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_audax",
+      "target": "h_cumberland",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_silverlake",
+      "target": "h_waymo",
+      "rel": "Led $16B round",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_silverlake",
+      "target": "h_airbnb",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_silverlake",
+      "target": "h_dell",
+      "rel": "Historic partnership",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_waterland",
+      "target": "h_9altitudes",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_waterland",
+      "target": "h_arosa",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_waterland",
+      "target": "h_medhold",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_summit",
+      "target": "h_klaviyo",
+      "rel": "Growth equity",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_summit",
+      "target": "h_gresb",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_summit",
+      "target": "h_fortislife",
+      "rel": "Platform co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_seaport",
+      "target": "h_fmcglobal",
+      "rel": "Latest investment",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_seaport",
+      "target": "h_ontarget",
+      "rel": "Portfolio co",
+      "etype": "holds"
+    },
+    {
+      "source": "pr_seaport",
+      "target": "h_cyberlink",
+      "rel": "Acquired",
+      "etype": "holds"
+    },
+    {
+      "source": "h_verisure",
+      "target": "s_security",
+      "rel": "Security",
+      "etype": "sector"
+    },
+    {
+      "source": "h_efe",
+      "target": "s_finserv",
+      "rel": "Fin planning",
+      "etype": "sector"
+    },
+    {
+      "source": "h_bakertilly",
+      "target": "s_bizserv",
+      "rel": "Advisory",
+      "etype": "sector"
+    },
+    {
+      "source": "h_belron",
+      "target": "s_bizserv",
+      "rel": "Auto services",
+      "etype": "sector"
+    },
+    {
+      "source": "h_gmr",
+      "target": "s_media",
+      "rel": "Music licensing",
+      "etype": "sector"
+    },
+    {
+      "source": "h_fortreum",
+      "target": "s_security",
+      "rel": "Cybersecurity",
+      "etype": "sector"
+    },
+    {
+      "source": "h_hrsoft",
+      "target": "s_softtech",
+      "rel": "HR SaaS",
+      "etype": "sector"
+    },
+    {
+      "source": "h_phdata",
+      "target": "s_softtech",
+      "rel": "Data/AI",
+      "etype": "sector"
+    },
+    {
+      "source": "h_3cloud",
+      "target": "s_softtech",
+      "rel": "Azure services",
+      "etype": "sector"
+    },
+    {
+      "source": "h_smg",
+      "target": "s_bizserv",
+      "rel": "Safety consulting",
+      "etype": "sector"
+    },
+    {
+      "source": "h_trackvia",
+      "target": "s_softtech",
+      "rel": "Workflow SaaS",
+      "etype": "sector"
+    },
+    {
+      "source": "h_cloudshare",
+      "target": "s_softtech",
+      "rel": "Cloud platform",
+      "etype": "sector"
+    },
+    {
+      "source": "h_xima",
+      "target": "s_softtech",
+      "rel": "Contact center",
+      "etype": "sector"
+    },
+    {
+      "source": "h_veregy",
+      "target": "s_industrial",
+      "rel": "Energy services",
+      "etype": "sector"
+    },
+    {
+      "source": "h_oceantomo",
+      "target": "s_bizserv",
+      "rel": "IP services",
+      "etype": "sector"
+    },
+    {
+      "source": "h_proampac",
+      "target": "s_industrial",
+      "rel": "Packaging mfg",
+      "etype": "sector"
+    },
+    {
+      "source": "h_kennedy",
+      "target": "s_industrial",
+      "rel": "Labels/RFID mfg",
+      "etype": "sector"
+    },
+    {
+      "source": "h_petromax",
+      "target": "s_industrial",
+      "rel": "Environmental",
+      "etype": "sector"
+    },
+    {
+      "source": "h_buckman",
+      "target": "s_industrial",
+      "rel": "Chemicals",
+      "etype": "sector"
+    },
+    {
+      "source": "h_wmsynergy",
+      "target": "s_softtech",
+      "rel": "ERP consulting",
+      "etype": "sector"
+    },
+    {
+      "source": "h_watermark",
+      "target": "s_softtech",
+      "rel": "Business SW",
+      "etype": "sector"
+    },
+    {
+      "source": "h_orion",
+      "target": "s_softtech",
+      "rel": "IT integrator",
+      "etype": "sector"
+    },
+    {
+      "source": "h_sitemed",
+      "target": "s_healthcare",
+      "rel": "Clinics",
+      "etype": "sector"
+    },
+    {
+      "source": "h_kar",
+      "target": "s_finserv",
+      "rel": "Asset mgmt",
+      "etype": "sector"
+    },
+    {
+      "source": "h_alphasimplex",
+      "target": "s_finserv",
+      "rel": "Quant investing",
+      "etype": "sector"
+    },
+    {
+      "source": "h_newfleet",
+      "target": "s_finserv",
+      "rel": "Fixed income",
+      "etype": "sector"
+    },
+    {
+      "source": "h_duffphelps",
+      "target": "s_finserv",
+      "rel": "Infrastructure eq",
+      "etype": "sector"
+    },
+    {
+      "source": "h_abbottfund",
+      "target": "s_finserv",
+      "rel": "PE fund",
+      "etype": "sector"
+    },
+    {
+      "source": "h_abbottco",
+      "target": "s_finserv",
+      "rel": "Co-invest",
+      "etype": "sector"
+    },
+    {
+      "source": "h_capstone",
+      "target": "s_logistics",
+      "rel": "Supply chain",
+      "etype": "sector"
+    },
+    {
+      "source": "h_camco",
+      "target": "s_industrial",
+      "rel": "Accessories mfg",
+      "etype": "sector"
+    },
+    {
+      "source": "h_sightline",
+      "target": "s_softtech",
+      "rel": "Data analytics",
+      "etype": "sector"
+    },
+    {
+      "source": "h_elementis",
+      "target": "s_industrial",
+      "rel": "Chemicals",
+      "etype": "sector"
+    },
+    {
+      "source": "h_brightview",
+      "target": "s_bizserv",
+      "rel": "Landscape svc",
+      "etype": "sector"
+    },
+    {
+      "source": "h_eathappy",
+      "target": "s_food",
+      "rel": "Food service",
+      "etype": "sector"
+    },
+    {
+      "source": "h_worldpay",
+      "target": "s_finserv",
+      "rel": "Payments",
+      "etype": "sector"
+    },
+    {
+      "source": "h_paysafe",
+      "target": "s_finserv",
+      "rel": "Payments",
+      "etype": "sector"
+    },
+    {
+      "source": "h_maravai",
+      "target": "s_healthcare",
+      "rel": "Life sciences",
+      "etype": "sector"
+    },
+    {
+      "source": "h_jamf",
+      "target": "s_softtech",
+      "rel": "Device mgmt",
+      "etype": "sector"
+    },
+    {
+      "source": "h_blackline",
+      "target": "s_security",
+      "rel": "Safety tech",
+      "etype": "sector"
+    },
+    {
+      "source": "h_avalon",
+      "target": "s_healthcare",
+      "rel": "Health mgmt",
+      "etype": "sector"
+    },
+    {
+      "source": "h_tamigo",
+      "target": "s_softtech",
+      "rel": "Workforce SaaS",
+      "etype": "sector"
+    },
+    {
+      "source": "h_accesspay",
+      "target": "s_finserv",
+      "rel": "Payment auto",
+      "etype": "sector"
+    },
+    {
+      "source": "h_checkedin",
+      "target": "s_healthcare",
+      "rel": "Health SaaS",
+      "etype": "sector"
+    },
+    {
+      "source": "h_verifone",
+      "target": "s_finserv",
+      "rel": "Payment HW",
+      "etype": "sector"
+    },
+    {
+      "source": "h_sagemcom",
+      "target": "s_telecom",
+      "rel": "Telecom equip",
+      "etype": "sector"
+    },
+    {
+      "source": "h_learning",
+      "target": "s_education",
+      "rel": "EdTech",
+      "etype": "sector"
+    },
+    {
+      "source": "h_accordion",
+      "target": "s_finserv",
+      "rel": "PE consulting",
+      "etype": "sector"
+    },
+    {
+      "source": "h_bridgepointe",
+      "target": "s_softtech",
+      "rel": "IT advisory",
+      "etype": "sector"
+    },
+    {
+      "source": "h_zayo",
+      "target": "s_telecom",
+      "rel": "Fiber network",
+      "etype": "sector"
+    },
+    {
+      "source": "h_celerion",
+      "target": "s_healthcare",
+      "rel": "Clinical pharma",
+      "etype": "sector"
+    },
+    {
+      "source": "h_bynder",
+      "target": "s_softtech",
+      "rel": "DAM platform",
+      "etype": "sector"
+    },
+    {
+      "source": "h_bahnsen",
+      "target": "s_finserv",
+      "rel": "Wealth mgmt",
+      "etype": "sector"
+    },
+    {
+      "source": "h_turquoise",
+      "target": "s_healthcare",
+      "rel": "Health pricing",
+      "etype": "sector"
+    },
+    {
+      "source": "h_altruist",
+      "target": "s_finserv",
+      "rel": "RIA platform",
+      "etype": "sector"
+    },
+    {
+      "source": "h_highnote",
+      "target": "s_finserv",
+      "rel": "Card issuing",
+      "etype": "sector"
+    },
+    {
+      "source": "h_apex",
+      "target": "s_bizserv",
+      "rel": "Home services",
+      "etype": "sector"
+    },
+    {
+      "source": "h_antelope",
+      "target": "s_finserv",
+      "rel": "Fin services",
+      "etype": "sector"
+    },
+    {
+      "source": "h_clarity",
+      "target": "s_consumer",
+      "rel": "Home improve",
+      "etype": "sector"
+    },
+    {
+      "source": "h_togetherwh",
+      "target": "s_healthcare",
+      "rel": "Womens health",
+      "etype": "sector"
+    },
+    {
+      "source": "h_shorerehab",
+      "target": "s_healthcare",
+      "rel": "Rehab therapy",
+      "etype": "sector"
+    },
+    {
+      "source": "h_shorefood",
+      "target": "s_food",
+      "rel": "F&B platform",
+      "etype": "sector"
+    },
+    {
+      "source": "h_citykitch",
+      "target": "s_food",
+      "rel": "Commercial kitchen",
+      "etype": "sector"
+    },
+    {
+      "source": "h_redhilltech",
+      "target": "s_softtech",
+      "rel": "Tech invest",
+      "etype": "sector"
+    },
+    {
+      "source": "h_redhillre",
+      "target": "s_realestate",
+      "rel": "RE invest",
+      "etype": "sector"
+    },
+    {
+      "source": "h_cloudforgood",
+      "target": "s_softtech",
+      "rel": "Salesforce svc",
+      "etype": "sector"
+    },
+    {
+      "source": "h_acertus",
+      "target": "s_logistics",
+      "rel": "Vehicle transport",
+      "etype": "sector"
+    },
+    {
+      "source": "h_stratix",
+      "target": "s_softtech",
+      "rel": "Managed mobility",
+      "etype": "sector"
+    },
+    {
+      "source": "h_lionsgate",
+      "target": "s_media",
+      "rel": "Film/TV",
+      "etype": "sector"
+    },
+    {
+      "source": "h_telesat",
+      "target": "s_telecom",
+      "rel": "Satellite",
+      "etype": "sector"
+    },
+    {
+      "source": "h_iovance",
+      "target": "s_healthcare",
+      "rel": "Cell therapy",
+      "etype": "sector"
+    },
+    {
+      "source": "h_subway",
+      "target": "s_food",
+      "rel": "QSR",
+      "etype": "sector"
+    },
+    {
+      "source": "h_dunkin",
+      "target": "s_food",
+      "rel": "QSR",
+      "etype": "sector"
+    },
+    {
+      "source": "h_arbys",
+      "target": "s_food",
+      "rel": "QSR",
+      "etype": "sector"
+    },
+    {
+      "source": "h_flowcontrol",
+      "target": "s_industrial",
+      "rel": "Flow components",
+      "etype": "sector"
+    },
+    {
+      "source": "h_griffin",
+      "target": "s_softtech",
+      "rel": "Tech services",
+      "etype": "sector"
+    },
+    {
+      "source": "h_cumberland",
+      "target": "s_finserv",
+      "rel": "Wealth mgmt",
+      "etype": "sector"
+    },
+    {
+      "source": "h_waymo",
+      "target": "s_softtech",
+      "rel": "Autonomous tech",
+      "etype": "sector"
+    },
+    {
+      "source": "h_airbnb",
+      "target": "s_consumer",
+      "rel": "Travel marketplace",
+      "etype": "sector"
+    },
+    {
+      "source": "h_dell",
+      "target": "s_softtech",
+      "rel": "Enterprise tech",
+      "etype": "sector"
+    },
+    {
+      "source": "h_9altitudes",
+      "target": "s_softtech",
+      "rel": "Business SW impl",
+      "etype": "sector"
+    },
+    {
+      "source": "h_arosa",
+      "target": "s_consumer",
+      "rel": "Travel/hospitality",
+      "etype": "sector"
+    },
+    {
+      "source": "h_medhold",
+      "target": "s_healthcare",
+      "rel": "Clinical lab",
+      "etype": "sector"
+    },
+    {
+      "source": "h_klaviyo",
+      "target": "s_softtech",
+      "rel": "Marketing auto",
+      "etype": "sector"
+    },
+    {
+      "source": "h_gresb",
+      "target": "s_finserv",
+      "rel": "ESG data",
+      "etype": "sector"
+    },
+    {
+      "source": "h_fortislife",
+      "target": "s_healthcare",
+      "rel": "Life sci tools",
+      "etype": "sector"
+    },
+    {
+      "source": "h_fmcglobal",
+      "target": "s_telecom",
+      "rel": "Satellite comms",
+      "etype": "sector"
+    },
+    {
+      "source": "h_ontarget",
+      "target": "s_media",
+      "rel": "Direct response",
+      "etype": "sector"
+    },
+    {
+      "source": "h_cyberlink",
+      "target": "s_softtech",
+      "rel": "Managed IT",
+      "etype": "sector"
+    }
+  ],
+  "scripts": {
+    "pr_tjc": {
+      "score": 92,
+      "similarClient": "Potomac Equity Partners",
+      "holdings": [
+        "Capstone Logistics — Power BI, MS, Boomi, ADP, Zoho",
+        "Camco Mfg — E-commerce, ERP",
+        "Sightline Intelligence — Cloud analytics, AI/ML"
+      ],
+      "techStack": [
+        "Power BI",
+        "Microsoft",
+        "Boomi",
+        "AI/ML",
+        "Cloud analytics"
+      ],
+      "sectors": [
+        "Logistics",
+        "Consumer & retail",
+        "Software & technology"
+      ],
+      "similarWhy": "Potomac's WM Synergy does Oracle/JD Edwards ERP consulting — similar mid-market operational tech. We help Potomac with Copilot AI readiness across their portfolio.",
+      "insight": "Highest score (92) in our pipeline. Capstone Logistics already runs Power BI and Microsoft stack — natural Copilot deployment. Sightline Intelligence (acquired Apr 2026) is literally an AI/ML analytics platform. The Microsoft footprint across their portfolio is substantial.",
+      "emailSubject": "Capstone's Power BI + Sightline's AI — connecting the dots",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nTJC's portfolio caught my attention: Capstone Logistics already runs Power BI and Microsoft stack with Boomi integration, and you just brought in Sightline Intelligence — a cloud AI/ML analytics platform — in April.\n\nThere's a natural connection: Copilot for Microsoft 365 deployed at Capstone could unlock operational intelligence from the same data Sightline is already processing. Instead of two separate analytics stacks, you get one AI-augmented workflow.\n\nWe build exactly these kinds of cross-portfolio AI integrations for PE firms. Potomac Equity Partners is a good example — we helped them with Copilot readiness assessments across their tech services portfolio and found 30%+ efficiency gains in the first quarter.\n\nGiven that Capstone is already on Microsoft and Sightline is AI-native, the integration path is unusually clean. Worth 15 minutes to walk through how it works?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, this is Jonathan from Incworx — we do AI and Microsoft consulting specifically for PE firms. TJC scored highest in our PE research — Capstone Logistics is already on Power BI and Microsoft, and you just brought Sightline Intelligence in as an AI/ML analytics platform. There's a natural Copilot integration play between the two. We do this for firms like Potomac. Worth 15 minutes?"
+    },
+    "pr_onerock": {
+      "score": 90,
+      "similarClient": "Pritzker Group",
+      "holdings": [
+        "Elementis — SAP, custom ERP, specialty chemicals",
+        "BrightView Landscape — Salesforce, fleet mgmt, GPS",
+        "Eat Happy Group — POS, supply chain mgmt"
+      ],
+      "techStack": [
+        "SAP",
+        "Salesforce",
+        "Fleet mgmt",
+        "GPS tracking",
+        "POS"
+      ],
+      "sectors": [
+        "Industrial",
+        "Business services",
+        "Food & beverage"
+      ],
+      "similarWhy": "Pritzker has nearly identical portfolio profile — ProAmpac runs SAP in manufacturing, Buckman does chemicals with IoT. We help Pritzker integrate Microsoft AI with SAP-based operations.",
+      "insight": "Elementis runs SAP in specialty chemicals (almost identical to Pritzker's Buckman). BrightView is #1 commercial landscaping with Salesforce + fleet management — ripe for AI-powered route optimization. High score (90) because the portfolio maps directly to our Pritzker playbook.",
+      "emailSubject": "Elementis + SAP — same playbook as another PE firm we work with",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nOne Rock's Elementis caught my eye — specialty chemicals company running SAP for ERP. We work with a PE firm that owns Buckman, a nearly identical profile (specialty chemicals, SAP-based, industrial operations). The AI integration work we did there — Microsoft Copilot layered onto SAP data for supply chain forecasting and quality control — generated measurable efficiency gains in the first quarter.\n\nBrightView is a different but equally interesting opportunity. #1 commercial landscaping with Salesforce and fleet management — the route optimization and predictive scheduling AI use case is high-ROI and deploys quickly.\n\nWould it be useful to see the SAP + Microsoft AI framework we built for a comparable chemicals company? It's directly transferable to Elementis, and I can speak to the BrightView field services angle as well. 15 minutes — happy to share the actual results.\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. One Rock's Elementis is almost identical to a portfolio company we work with at another PE firm — specialty chemicals on SAP. The AI integration work we did there generated measurable results in the first quarter. BrightView is equally interesting from a field services AI angle. Worth 15 minutes to share the playbook?"
+    },
+    "pr_gtcr": {
+      "score": 88,
+      "similarClient": "Hellman & Friedman",
+      "holdings": [
+        "Worldpay — 171 web techs, APIs, low-code tools",
+        "Paysafe — REST APIs, digital wallets, cloud-native",
+        "Maravai LifeSciences — Lab automation, LIMS"
+      ],
+      "techStack": [
+        "APIs",
+        "Cloud-native",
+        "Low-code",
+        "Digital wallets",
+        "LIMS"
+      ],
+      "sectors": [
+        "Financial services",
+        "Software & technology",
+        "Healthcare"
+      ],
+      "similarWhy": "H&F has major fintech portfolio plays (Edelman Financial Engines runs Orion + AWS). We work with H&F on tech assessment and AI readiness for their financial services holdings.",
+      "insight": "GTCR's Worldpay deal ($18.5B) is one of the largest PE-backed fintech plays ever. Worldpay runs 171 different web technologies — that's a consolidation goldmine. Paysafe is similarly complex with REST APIs + digital wallets. Both need API standardization and cloud infrastructure optimization.",
+      "emailSubject": "Worldpay's 171-tech stack — consolidation opportunity",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nDoing some research on GTCR's portfolio and something jumped out: Worldpay is running 171 different web technologies according to their public tech profile. Paysafe is similarly complex with a mix of REST APIs, digital wallets, and cloud-native services.\n\nThat level of tech sprawl in fintech is common post-carve-out, but it's also where the margin improvement lives.\n\nWe work with Hellman & Friedman on tech assessment for their financial services holdings — Edelman Financial Engines went through a similar stack rationalization. The playbook we built identifies 20-30% infra cost reduction in the first 6 months.\n\nWould it be useful to see how that framework applies to payment platforms specifically? Happy to walk through what we learned — 15 minutes, no commitment.\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. I was looking at GTCR's portfolio and Worldpay caught my eye. They're running 171 different web technologies, which for a payments company of that scale is a huge consolidation opportunity. We work with H&F on similar tech rationalization for their fintech holdings. Curious if that's on your radar — worth a 15-minute call?"
+    },
+    "pr_francisco": {
+      "score": 87,
+      "similarClient": "Gryphon Investors",
+      "holdings": [
+        "Jamf — Apple MDM, Apache/Ubuntu/AWS/Okta/Entra",
+        "Blackline Safety — IoT wearable sensors, cloud SaaS",
+        "Avalon Healthcare — SaaS data analytics"
+      ],
+      "techStack": [
+        "AWS",
+        "Okta",
+        "IoT",
+        "Cloud SaaS",
+        "Apple MDM"
+      ],
+      "sectors": [
+        "Software & technology",
+        "Healthcare",
+        "Security & safety"
+      ],
+      "similarWhy": "Gryphon has similar tech-services holdings (Fortreum cybersecurity, 3Cloud Azure, phData Snowflake). We helped Gryphon build their MS intranet and portfolio tech assessment.",
+      "insight": "Jamf just went private with Francisco (Jan 2026) for $5.7B. Post-take-private is prime time for IT transformation — new identity stack (they use Okta + Entra), cloud migration, and portfolio-wide standardization. Blackline Safety runs IoT + cloud SaaS, which screams Azure integration opportunity.",
+      "emailSubject": "Jamf post-acquisition — portfolio tech stack question",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nNoticed Francisco closed the Jamf take-private in January — congrats on that one. $5.7B for the Apple MDM leader is a strong thesis.\n\nQuick observation: Jamf runs Okta + Entra ID alongside their Apple stack, and Blackline Safety is doing IoT-to-cloud in the safety space. Across your portfolio, there's a pattern of companies sitting on hybrid identity and cloud infrastructure that could benefit from rationalization.\n\nWe work with Gryphon Investors on exactly this — helped them assess tech stacks across Fortreum, 3Cloud, and phData, then built a standardized Microsoft intranet and Copilot readiness framework for their portfolio.\n\nWould a 15-minute call to share what we learned from the Gryphon portfolio assessment make sense? Happy to share the framework we used — no pitch, just pattern-matching.\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, this is Jonathan from Incworx — we do AI and Microsoft consulting specifically for PE firms. Calling because I noticed Francisco just closed the Jamf deal, and across your portfolio you've got companies running hybrid identity stacks — Okta, Entra, AWS — that usually present a rationalization opportunity post-acquisition. We helped Gryphon Investors do exactly that across their tech portfolio. Worth a 15-minute conversation?"
+    },
+    "pr_accelkkr": {
+      "score": 86,
+      "similarClient": "Potomac Equity Partners",
+      "holdings": [
+        "Tamigo — Cloud SaaS, mobile-first workforce mgmt",
+        "AccessPay — Bank APIs, SWIFT, ERP integration",
+        "Checked In Care — Cloud SaaS, mobile, EHR integration"
+      ],
+      "techStack": [
+        "Cloud SaaS",
+        "Mobile-first",
+        "Bank APIs",
+        "SWIFT",
+        "ERP integration"
+      ],
+      "sectors": [
+        "Software & technology",
+        "Financial services",
+        "Healthcare"
+      ],
+      "similarWhy": "Potomac has similar mid-market tech services holdings (WM Synergy does ERP consulting, Orion Systems does Azure/ServiceNow). We help Potomac with MS Copilot AI readiness assessments.",
+      "insight": "Accel-KKR just acquired Tamigo (Mar 2026), AccessPay (Mar 2026), and Checked In Care (Jun 2026) — three deals in four months signals acceleration. All are cloud SaaS with API-heavy architectures that need integration standardization.",
+      "emailSubject": "3 acquisitions in 4 months — integration stack question",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nNoticed Accel-KKR closed Tamigo, AccessPay, and Checked In Care all within the last few months — that's an impressive pace. All three are cloud SaaS platforms with API-heavy architectures, which creates a natural integration standardization opportunity.\n\nTamigo is mobile-first workforce management, AccessPay runs SWIFT and bank API integrations, and Checked In Care does EHR integration in healthcare. Different verticals, but the underlying cloud infrastructure and API patterns are remarkably similar.\n\nWe work with Potomac Equity Partners on exactly this kind of portfolio tech integration — their holdings include WM Synergy (ERP consulting) and Orion Systems (Azure/ServiceNow), and we help them standardize on Microsoft cloud + Copilot AI across the portfolio.\n\nWould 15 minutes to compare notes on portfolio-wide SaaS standardization make sense? Especially relevant given the acquisition pace.\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. Calling because I noticed Accel-KKR just closed three SaaS deals in four months — Tamigo, AccessPay, Checked In Care — all API-heavy cloud platforms. That acquisition pace usually creates an integration backlog that benefits from standardization. We help Potomac Equity Partners do exactly that across their portfolio. Worth 15 minutes to compare approaches?"
+    },
+    "pr_gores": {
+      "score": 85,
+      "similarClient": "Hellman & Friedman",
+      "holdings": [
+        "Verifone — Android POS, cloud payments, REST APIs, encryption",
+        "Sagemcom — Embedded Linux, IoT, smart meters",
+        "The Learning Company — Educational software (historical)"
+      ],
+      "techStack": [
+        "Android POS",
+        "Cloud payments",
+        "REST APIs",
+        "IoT",
+        "Embedded Linux",
+        "Smart meters"
+      ],
+      "sectors": [
+        "Financial services",
+        "Telecom",
+        "Software & technology"
+      ],
+      "similarWhy": "H&F owns Verisure (connected security, IoT) — similar IoT + cloud platform pattern to Gores' Sagemcom. We help H&F assess tech transformation opportunities across portfolio.",
+      "insight": "Verifone is transitioning from legacy payment terminals to Android-based cloud POS — a fundamental platform shift that needs modernized cloud infrastructure. Sagemcom does IoT smart meters and telecom equipment. Both are hardware companies going through software-defined transformations.",
+      "emailSubject": "Verifone's Android POS shift — the cloud infrastructure behind it",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nVerifone's transition from legacy payment terminals to Android-based cloud POS is one of the more interesting platform shifts in fintech right now. Moving from closed hardware to an open, cloud-connected platform fundamentally changes the infrastructure requirements — API management, cloud scalability, security architecture all need to evolve.\n\nSagemcom is going through a similar hardware-to-software transformation with IoT smart meters and telecom equipment.\n\nWe see this pattern in H&F's portfolio — Verisure is doing connected security with IoT and cloud platforms, and we helped assess the Azure infrastructure opportunities there. The hardware-to-cloud transformation playbook is consistent: Azure IoT Hub for device management, cloud-native API layer, and Microsoft security stack for compliance.\n\nWould 15 minutes to walk through how the hardware-to-cloud playbook works for payment and IoT platforms be useful?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. Verifone's shift from legacy terminals to Android cloud POS is a major platform transformation — similar to what we see with H&F's Verisure in IoT security. The cloud infrastructure behind that shift is exactly where we help PE firms. Worth 15 minutes?"
+    },
+    "pr_charlesbank": {
+      "score": 84,
+      "similarClient": "Gryphon Investors",
+      "holdings": [
+        "Accordion — Salesforce, NetSuite, BI tools, PE financial consulting",
+        "Bridgepointe Tech — Multi-vendor IT procurement, cloud advisory",
+        "Zayo Group — Dark fiber, wavelengths, Ethernet, SDN"
+      ],
+      "techStack": [
+        "Salesforce",
+        "NetSuite",
+        "BI tools",
+        "Dark fiber",
+        "SDN",
+        "Cloud advisory"
+      ],
+      "sectors": [
+        "Financial services",
+        "Software & technology",
+        "Telecom"
+      ],
+      "similarWhy": "Gryphon has a similar mix of tech services holdings. We helped Gryphon build their Microsoft intranet and run Copilot readiness assessments across the portfolio.",
+      "insight": "Charlesbank owns Bridgepointe Tech — literally a multi-vendor IT procurement advisory firm. And Accordion is a PE-focused financial consulting firm running Salesforce + NetSuite. There's a meta-opportunity: help the tech advisory firm itself modernize with AI, while using Accordion's PE lens to quantify the ROI.",
+      "emailSubject": "Bridgepointe advises on IT — but who advises Bridgepointe?",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nHere's an observation I found interesting: Charlesbank owns Bridgepointe Technologies, which advises companies on IT procurement and cloud strategy. You also own Accordion, which does PE-focused financial consulting on Salesforce and NetSuite.\n\nThe meta-question: who's helping Bridgepointe itself leverage AI to improve their advisory delivery? And who's helping Accordion quantify the AI ROI story for your other portfolio companies?\n\nWe work with PE firms like Gryphon Investors on this exact intersection — Microsoft AI and Copilot deployment for portfolio companies that are themselves in the tech services space. The value creation isn't just operational efficiency; it's enabling your service companies to sell AI-augmented services to their own clients.\n\nWould a 15-minute call to explore this angle make sense?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. I had an interesting observation about Charlesbank's portfolio — you own Bridgepointe, which advises on IT procurement, and Accordion, which does PE financial consulting. The question I had: who's helping those service companies themselves adopt AI to improve their delivery? We do exactly this for Gryphon's portfolio. Worth 15 minutes to explore?"
+    },
+    "pr_thl": {
+      "score": 83,
+      "similarClient": "Hellman & Friedman",
+      "holdings": [
+        "Celerion — LIMS, clinical data mgmt, bioanalytical platforms",
+        "Bynder — Cloud SaaS, AI auto-tagging, CDN, React",
+        "The Bahnsen Group — Orion, Salesforce, financial planning"
+      ],
+      "techStack": [
+        "LIMS",
+        "AI auto-tagging",
+        "CDN",
+        "React",
+        "Orion",
+        "Salesforce"
+      ],
+      "sectors": [
+        "Healthcare",
+        "Software & technology",
+        "Financial services"
+      ],
+      "similarWhy": "H&F's Edelman Financial Engines uses the same Orion platform as THL's Bahnsen Group. We helped H&F with tech assessment and AI readiness across financial services holdings.",
+      "insight": "Bynder already has AI auto-tagging in their DAM platform — they're AI-forward and could benefit from Microsoft Copilot integration. The Bahnsen Group runs Orion (same platform as H&F's Edelman Financial Engines), which we know inside and out. Natural warm intro opportunity.",
+      "emailSubject": "Bahnsen Group runs Orion — we know that platform well",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nQuick observation: THL's Bahnsen Group runs on the Orion platform for portfolio management. We know that platform intimately — Hellman & Friedman's Edelman Financial Engines recently migrated to Orion (replacing Envestnet), and we helped with the AI readiness assessment around that transition.\n\nSeparately, Bynder is doing interesting work with AI auto-tagging in their DAM platform. There's a natural Microsoft Copilot integration play there that could accelerate their product differentiation.\n\nBoth represent different AI opportunities: Bahnsen is about augmenting wealth advisors with AI, and Bynder is about embedding AI deeper into the product itself.\n\nWould 15 minutes to share what we learned from the Orion/AI assessment at Edelman Financial Engines make sense?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. THL's Bahnsen Group runs the same Orion platform as H&F's Edelman Financial Engines, which we just helped with an AI readiness assessment. And Bynder already has AI auto-tagging that could benefit from Copilot integration. Two different AI plays in your portfolio — worth 15 minutes to compare notes?"
+    },
+    "pr_adams": {
+      "score": 82,
+      "similarClient": "Abbott Capital",
+      "holdings": [
+        "Turquoise Health — Cloud SaaS, ML pricing models",
+        "Altruist — Cloud-native, React, custodial platform",
+        "Highnote — Cloud-native APIs, card issuing, real-time processing"
+      ],
+      "techStack": [
+        "Cloud SaaS",
+        "ML",
+        "React",
+        "Cloud-native APIs",
+        "Real-time processing"
+      ],
+      "sectors": [
+        "Healthcare",
+        "Financial services",
+        "Software & technology"
+      ],
+      "similarWhy": "Abbott Capital is also a fund-of-funds / co-invest model with $14B+ AUM. We work with Abbott on Claude Enterprise adoption and tech infrastructure. Adams Street at $65B is the scaled-up version.",
+      "insight": "Adams Street has 24 unicorns in portfolio — massive tech footprint. Turquoise Health uses ML pricing models, Altruist is cloud-native React (fintech), Highnote does real-time card issuing APIs. All cloud-native companies that could benefit from Azure + AI integration.",
+      "emailSubject": "24 unicorns — portfolio-wide AI strategy question",
+      "emailBody": "Hi {{FIRST_NAME}},\n\n$65B AUM across 211 companies with 24 unicorns is a remarkable portfolio. Looking at your direct investments, I noticed a pattern: Turquoise Health runs ML pricing models, Altruist is cloud-native React, and Highnote does real-time API processing — all data-intensive, all prime candidates for AI augmentation.\n\nThe question I'd pose: does Adams Street have a portfolio-wide AI strategy, or are individual companies making independent AI decisions?\n\nWe work with Abbott Capital — similar FoF + co-invest model at $14B — on this exact question. They adopted Claude Enterprise and we're helping them build a framework that gives portfolio companies AI guidance without dictating architecture choices.\n\nWould a 15-minute call to share the framework we built for Abbott make sense? It's specifically designed for the FoF/co-invest model where you influence but don't control.\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. Adams Street has 24 unicorns in portfolio — all making independent AI decisions. We help Abbott Capital, which has a similar FoF model, build portfolio-wide AI frameworks. At your scale with $65B and 211 companies, the coordination opportunity is significant. Worth 15 minutes?"
+    },
+    "pr_alpine": {
+      "score": 81,
+      "similarClient": "Pritzker Group",
+      "holdings": [
+        "Apex Service Partners — ServiceTitan, fleet mgmt, CRM",
+        "Antelope — Cloud platform, fintech APIs",
+        "Clarity Windows — CRM, quoting software, ERP"
+      ],
+      "techStack": [
+        "ServiceTitan",
+        "Fleet mgmt",
+        "CRM",
+        "Cloud platform",
+        "Quoting software"
+      ],
+      "sectors": [
+        "Business services",
+        "Financial services",
+        "Consumer & retail"
+      ],
+      "similarWhy": "Pritzker has a similar people-and-operations focus with portfolio companies like ProAmpac and Kennedy. We help Pritzker with Microsoft AI integration for operational efficiency.",
+      "insight": "Alpine's 'people-driven PE' model is unique — they have a CEO-in-Training program. Apex runs ServiceTitan for home services with natural Microsoft integration paths. Clarity Windows does quoting + CRM + ERP, which is exactly where Copilot shines.",
+      "emailSubject": "People-driven PE + AI — Apex & Clarity opportunity",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nAlpine's people-driven model is unique in PE, and I think AI amplifies that thesis rather than replacing it.\n\nApex Service Partners runs ServiceTitan with fleet management and CRM — the field service operations hardest to optimize with traditional tools. Microsoft Copilot integrated with ServiceTitan data can give field managers AI-powered scheduling, predictive maintenance alerts, and automated customer communications. It makes people more effective, not less relevant.\n\nClarity Windows has CRM + quoting + ERP — a perfect Copilot deployment for automated proposals and quote optimization.\n\nWe work with Pritzker Group on similar operational AI integration — the results align with Alpine's thesis: better people decisions, not fewer people.\n\nWould 15 minutes to walk through how AI deployment works in a people-first portfolio make sense?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. Alpine's people-driven PE model is fascinating — I think AI actually amplifies that thesis. Apex Service Partners on ServiceTitan and Clarity Windows on CRM plus quoting are both perfect for Microsoft Copilot that makes people more effective. We do this for Pritzker's portfolio. 15 minutes to compare notes?"
+    },
+    "pr_shore": {
+      "score": 80,
+      "similarClient": "Potomac Equity Partners",
+      "holdings": [
+        "Together Womens Health — EHR, practice mgmt, telehealth",
+        "Shore Rehab Platform — EHR, rehab scheduling, outcomes tracking",
+        "Shore F&B Platform — POS, supply chain, restaurant mgmt"
+      ],
+      "techStack": [
+        "EHR",
+        "Practice mgmt",
+        "Telehealth",
+        "POS",
+        "Supply chain"
+      ],
+      "sectors": [
+        "Healthcare",
+        "Food & beverage",
+        "Business services"
+      ],
+      "similarWhy": "Potomac's SiteMed does healthcare IT (EHR integration, telehealth). We help Potomac with Microsoft cloud strategy across their healthcare and tech holdings.",
+      "insight": "Shore does 1000+ microcap acquisitions — buy & build at massive scale. The tech challenge: integrating dozens of small healthcare practices (each with different EHR systems) onto a unified platform. Microsoft Cloud for Healthcare + Copilot creates portfolio-wide value here.",
+      "emailSubject": "1000+ acquisitions — the EHR integration challenge at scale",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nShore Capital's buy-and-build model at 1000+ microcap deals is impressive — but I imagine the technology integration challenge is significant, especially in healthcare.\n\nTogether Womens Health and your Rehab platform both run different EHR and practice management systems. Every acquisition adds another system. At Shore's pace, you're potentially dealing with dozens of EHR variants that need to share patient data, report outcomes, and support telehealth.\n\nMicrosoft Cloud for Healthcare was built for exactly this — a unifying platform layer above heterogeneous EHR systems with standardized clinical workflows, Teams-based telehealth, and Copilot for clinical documentation (which saves 2+ hours per provider per day).\n\nWe work with Potomac Equity Partners on their healthcare holdings, where EHR integration and telehealth are central challenges.\n\nWould 15 minutes to walk through how Microsoft Cloud for Healthcare works in a multi-practice roll-up make sense?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. Shore does 1000-plus microcap acquisitions — in healthcare, that means dozens of different EHR systems that need to talk to each other. Microsoft Cloud for Healthcare was built for exactly this. We help Potomac's healthcare holdings with the same challenge. Worth 15 minutes to compare approaches?"
+    },
+    "pr_redhill": {
+      "score": 79,
+      "similarClient": "Potomac Equity Partners",
+      "holdings": [
+        "City Kitch — Booking platform, kitchen mgmt software",
+        "Red Hill Tech Portfolio — Various SMB tech investments",
+        "Red Hill RE Portfolio — Property mgmt, RE analytics"
+      ],
+      "techStack": [
+        "Booking platforms",
+        "Kitchen mgmt",
+        "Property mgmt",
+        "RE analytics"
+      ],
+      "sectors": [
+        "Food & beverage",
+        "Software & technology",
+        "Real estate"
+      ],
+      "similarWhy": "Potomac invests in similar mid-market tech services companies. We help them with Microsoft cloud and Copilot readiness across their portfolio.",
+      "insight": "Red Hill is Charlotte-based doing direct equity to SMBs. City Kitch needs AI-powered booking optimization and demand forecasting. Their SMB tech portfolio would benefit from standardized Microsoft 365 + Copilot deployment — the kind of platform play that makes every future investment more efficient.",
+      "emailSubject": "SMB portfolio + AI — making every future deal more efficient",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nRed Hill's direct equity to SMBs model is interesting from a technology angle. Every SMB you invest in likely has a fragmented tech stack — different email, CRM, file sharing, communication tools.\n\nThe opportunity: a standardized Microsoft 365 + Copilot platform that every new portfolio company gets deployed to on day one. It's like infrastructure-as-a-service for your portfolio. City Kitch could get AI-powered booking optimization. Your tech portfolio gets unified cloud infrastructure. Your RE portfolio gets AI-assisted property analytics.\n\nWe work with PE firms on exactly this — building a 'portfolio technology platform' that reduces integration time for every future acquisition from months to weeks.\n\nThe payoff: lower integration costs, faster time to value on new deals, and AI capabilities that compound. Would 15 minutes to walk through how this works for SMB-focused PE make sense?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. Red Hill's SMB direct equity model could benefit from a standardized Microsoft technology platform that every new portfolio company gets on day one — reduces integration time from months to weeks. We do this for firms like Potomac. Worth 15 minutes?"
+    },
+    "pr_tailwind": {
+      "score": 78,
+      "similarClient": "Gryphon Investors",
+      "holdings": [
+        "Cloud for Good — Salesforce, MuleSoft, Tableau, Marketing Cloud",
+        "ACERTUS — Fleet mgmt, GPS tracking, logistics",
+        "Stratix — MDM, Samsung Knox, Apple DEP, managed mobility"
+      ],
+      "techStack": [
+        "Salesforce",
+        "MuleSoft",
+        "Tableau",
+        "Fleet mgmt",
+        "MDM",
+        "Samsung Knox",
+        "Apple DEP"
+      ],
+      "sectors": [
+        "Software & technology",
+        "Logistics",
+        "Telecom"
+      ],
+      "similarWhy": "Gryphon's 3Cloud was a Microsoft Azure services company (sold to Cognizant). Tailwind's holdings include IT services firms that could benefit from the same Microsoft-forward playbook.",
+      "insight": "Tailwind owns Cloud for Good, a Salesforce consulting firm, AND Stratix, a managed mobility company with Samsung Knox and Apple DEP. There's a cross-sell: Stratix could expand into Microsoft Intune/Entra for enterprise UEM, and Cloud for Good could add Microsoft consulting to their Salesforce practice.",
+      "emailSubject": "Stratix MDM — the Microsoft Intune expansion play",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nInteresting mix in Tailwind's portfolio: Stratix does managed mobility with Samsung Knox and Apple DEP, while Cloud for Good runs Salesforce consulting with MuleSoft and Tableau.\n\nHere's what I'd flag: the enterprise mobility market is rapidly shifting toward unified endpoint management, and Microsoft Intune + Entra ID is winning that consolidation. Stratix is well-positioned to ride that shift — but they need Microsoft capabilities to capture the enterprise UEM deals.\n\nSeparately, Cloud for Good could expand from pure Salesforce consulting into Microsoft consulting — adding Copilot/Azure to their practice would increase deal sizes significantly.\n\nWe helped Gryphon Investors with a similar playbook when their portfolio company 3Cloud (Azure services) was scaling.\n\nWould 15 minutes to walk through the UEM expansion opportunity for Stratix make sense?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. Tailwind's Stratix does MDM with Knox and Apple DEP — the market is moving to Microsoft Intune for unified endpoint management, and that's a revenue expansion opportunity for Stratix. We helped Gryphon with a similar IT services growth play. Worth 15 minutes to talk through it?"
+    },
+    "pr_mhr": {
+      "score": 77,
+      "similarClient": "Hellman & Friedman",
+      "holdings": [
+        "Lionsgate Studios — Cloud rendering, streaming (Starz), Avid, Adobe",
+        "Telesat — LEO constellation (Lightspeed), Ka-band, SDN",
+        "Iovance Biotherapeutics — TIL cell therapy mfg, cGMP bioprocessing"
+      ],
+      "techStack": [
+        "Cloud rendering",
+        "Streaming",
+        "Avid",
+        "Adobe",
+        "LEO satellite",
+        "SDN"
+      ],
+      "sectors": [
+        "Media & entertainment",
+        "Telecom",
+        "Healthcare"
+      ],
+      "similarWhy": "H&F owns Global Music Rights (entertainment IP). We work with H&F on tech assessment across their portfolio including media/entertainment assets.",
+      "insight": "Lionsgate's Starz streaming platform and content production pipeline (Avid, Adobe, cloud rendering) are ripe for AI-driven content optimization — from AI-assisted editing to personalized streaming recommendations to automated metadata tagging. Studios deploying these early see 15-20% production cost improvements.",
+      "emailSubject": "Lionsgate + AI content production — the streaming angle",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nMHR's holdings are unique in PE — Lionsgate Studios with Starz streaming, Telesat's LEO constellation, and Iovance's cell therapy manufacturing.\n\nThe AI opportunity at Lionsgate is especially interesting: cloud rendering optimization with AI scheduling, content metadata auto-tagging for the streaming library (which improves discovery and engagement), and AI-assisted production workflows integrating with Avid/Adobe. Studios that deploy these early are seeing 15-20% production cost improvements.\n\nWe work with H&F, which has entertainment IP in its portfolio (Global Music Rights), and we understand how PE firms evaluate technology investments in media assets.\n\nWould 15 minutes to walk through the AI content production use cases make sense? Specific, measurable opportunities — not generic AI hype.\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. Lionsgate's production pipeline and Starz streaming platform have specific AI opportunities — content auto-tagging, cloud rendering optimization, AI-assisted editing workflows. We work with H&F on entertainment tech assets. These are concrete, measurable use cases — worth 15 minutes?"
+    },
+    "pr_roark": {
+      "score": 76,
+      "similarClient": "Pritzker Group",
+      "holdings": [
+        "Subway — Oracle POS, mobile ordering, loyalty platform",
+        "Dunkin — Mobile ordering, loyalty app, drive-thru AI",
+        "Arby's — POS, mobile app, drive-thru tech"
+      ],
+      "techStack": [
+        "Oracle POS",
+        "Mobile apps",
+        "Drive-thru AI",
+        "Loyalty platforms",
+        "Cloud ordering"
+      ],
+      "sectors": [
+        "Food & beverage",
+        "Consumer & retail"
+      ],
+      "similarWhy": "Pritzker runs major industrial/consumer portfolio companies (ProAmpac, Buckman) on SAP. We help Pritzker with Microsoft AI integration across manufacturing and supply chain operations.",
+      "insight": "112K franchise locations generating $97B in system revenue — that's an AI goldmine. Dunkin is already testing drive-thru AI. Subway runs Oracle POS but mobile ordering is the growth vector. Standardizing AI-powered operations across three major QSR brands could drive significant margin improvement.",
+      "emailSubject": "Drive-thru AI across 112K locations — the PE math",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nRoark's QSR portfolio is fascinating from a technology angle. Dunkin is already piloting drive-thru AI, Subway's mobile ordering is growing fast on Oracle POS, and Arby's is investing in digital operations — all across 112K+ franchise locations.\n\nThe AI opportunity at that franchise scale is enormous: predictive labor scheduling alone typically saves 3-5% on labor costs. Multiply that across $97B in system revenue and the numbers get real fast.\n\nWe work with Pritzker Group on AI integration for their portfolio operations — companies like ProAmpac and Buckman where we've deployed Microsoft AI and Copilot. The franchise/QSR playbook is different but the PE value creation framework is the same.\n\nWould 15 minutes to walk through how AI-driven operations optimization works at franchise scale be useful?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. I've been looking at Roark's QSR portfolio — Dunkin's already testing drive-thru AI, and across Subway, Dunkin, and Arby's you have 112K locations where AI-powered operations could move the needle significantly. We help PE firms like Pritzker deploy AI across their portfolio operations. Curious if Roark has a centralized approach — worth 15 minutes?"
+    },
+    "pr_audax": {
+      "score": 75,
+      "similarClient": "Pritzker Group",
+      "holdings": [
+        "Flow Control Holdings — CAD/CAM, ERP, industrial automation",
+        "GRIFFIN Global Tech — Cloud services, managed IT, cybersecurity",
+        "Cumberland Wealth — Portfolio mgmt, financial planning"
+      ],
+      "techStack": [
+        "CAD/CAM",
+        "ERP",
+        "Industrial automation",
+        "Cloud services",
+        "Managed IT",
+        "Cybersecurity"
+      ],
+      "sectors": [
+        "Industrial",
+        "Software & technology",
+        "Financial services"
+      ],
+      "similarWhy": "Pritzker's ProAmpac does industrial manufacturing on SAP. We help Pritzker deploy Microsoft AI across manufacturing and supply chain operations.",
+      "insight": "1050+ add-on acquisitions is staggering. Every add-on brings its own tech stack, ERP system, and IT infrastructure. GRIFFIN Global Tech is literally a managed IT company — the irony is they need their own IT modernized. At Audax's add-on pace, the integration backlog compounds exponentially.",
+      "emailSubject": "1,050 add-ons — the compounding integration challenge",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nAudax's numbers are striking: 150+ platforms with 1,050+ add-on acquisitions. That's an average of 7 add-ons per platform, each bringing its own tech stack, ERP system, and IT infrastructure.\n\nThe integration math compounds fast. Flow Control Holdings alone — CAD/CAM, ERP, industrial automation — probably absorbed multiple acquisitions, each with different systems. GRIFFIN Global Tech does managed IT for others but likely faces internal integration challenges of its own.\n\nWe work with Pritzker Group on the industrial manufacturing side — ProAmpac runs SAP across a multi-acquisition platform and we help them deploy Microsoft AI for supply chain and operations. The framework we built specifically addresses 'add-on integration debt.'\n\nAt Audax's scale, a standardized portfolio technology playbook could meaningfully accelerate integration timelines for every future add-on. Would 15 minutes to walk through how that works be valuable?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. 1050 add-on acquisitions is incredible — but every add-on brings its own tech stack. We help PE firms like Pritzker standardize IT integration across multi-acquisition platforms. At Audax's scale, a portfolio tech playbook could accelerate every future add-on. Worth 15 minutes?"
+    },
+    "pr_silverlake": {
+      "score": 74,
+      "similarClient": "Bow River Capital",
+      "holdings": [
+        "Waymo — LiDAR, ML/AI, TensorFlow, custom silicon",
+        "Airbnb — AWS, Rails, React, Kafka, K8s",
+        "Dell Technologies — VMware, Azure Stack, Salesforce"
+      ],
+      "techStack": [
+        "AI/ML",
+        "TensorFlow",
+        "AWS",
+        "React",
+        "Azure Stack",
+        "VMware",
+        "Kafka",
+        "Kubernetes"
+      ],
+      "sectors": [
+        "Software & technology",
+        "Consumer & retail",
+        "Hardware"
+      ],
+      "similarWhy": "Bow River is a known Microsoft-heavy shop using Claude Enterprise. We help them with AI readiness and Copilot strategy across portfolio companies like TrackVia and CloudShare.",
+      "insight": "Dell runs Azure Stack and VMware side-by-side — classic hybrid that needs Microsoft-forward rationalization, especially with Broadcom's VMware pricing changes. Silver Lake is the premier tech PE — they think in platforms, not point solutions.",
+      "emailSubject": "Dell's Azure Stack + VMware — post-Broadcom opportunity",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nWith Broadcom's VMware pricing restructuring hitting enterprises hard, I imagine Dell's hybrid Azure Stack + VMware environment is getting fresh scrutiny across Silver Lake's portfolio team.\n\nWe specialize in exactly this inflection point — helping PE-backed companies evaluate Microsoft-forward cloud strategies when legacy virtualization economics shift. The playbook covers workload mapping, cost modeling, and a phased migration plan.\n\nWe built this approach working with Bow River Capital, who runs Microsoft-heavy across their portfolio and uses Claude Enterprise for AI augmentation alongside Copilot.\n\nGiven Silver Lake's portfolio scale ($243B revenue across 152 companies), even incremental cloud optimization has material impact. Worth a 15-minute call to compare notes?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. Calling because I was thinking about Dell's position with the Broadcom VMware pricing changes — Dell runs Azure Stack alongside VMware, and that hybrid environment is exactly where we help PE portfolio companies evaluate Microsoft-forward migration strategies. We do this with Bow River Capital across their portfolio. 15 minutes?"
+    },
+    "pr_waterland": {
+      "score": 73,
+      "similarClient": "Gryphon Investors",
+      "holdings": [
+        "9altitudes — MS Dynamics 365, Power Platform, Azure, SAP",
+        "A-ROSA Cruises — Booking platform, CRM, revenue mgmt",
+        "Medhold — LIMS, lab automation, diagnostic systems"
+      ],
+      "techStack": [
+        "MS Dynamics 365",
+        "Power Platform",
+        "Azure",
+        "SAP",
+        "Booking platforms",
+        "LIMS"
+      ],
+      "sectors": [
+        "Software & technology",
+        "Consumer & retail",
+        "Healthcare"
+      ],
+      "similarWhy": "Gryphon's 3Cloud was a Microsoft Azure services company. Waterland's 9altitudes is literally a Microsoft Dynamics 365 and Power Platform implementation firm.",
+      "insight": "Almost too perfect: Waterland owns 9altitudes, which IS a Microsoft Dynamics 365 and Power Platform implementation company. The opportunity: help 9altitudes expand into AI/Copilot services (their existing Microsoft practice is the distribution channel), and use 9altitudes to deploy Microsoft across Waterland's other 60 portfolio companies.",
+      "emailSubject": "9altitudes already does Dynamics 365 — the Copilot expansion",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nThis one's a natural fit: Waterland owns 9altitudes, which implements Microsoft Dynamics 365 and Power Platform for enterprises. You literally own a Microsoft consulting firm.\n\nThe growth opportunity: 9altitudes' existing Microsoft practice is the perfect distribution channel for AI/Copilot services. Every Dynamics 365 customer they serve is a Copilot upsell. And across Waterland's other 60 portfolio companies, 9altitudes could be the internal technology partner deploying Microsoft AI.\n\nWe work with PE firms on exactly this intersection — we helped a similar firm whose portfolio included a Microsoft Azure services company scale their AI practice. The playbook: Copilot training and certification for the consulting team, AI assessment framework for existing clients, and portfolio-first deployment for internal proof points.\n\nWould 15 minutes to walk through how 9altitudes could become your portfolio's AI accelerator make sense?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. Waterland owns 9altitudes, which literally does Microsoft Dynamics 365 implementation. The Copilot expansion opportunity is enormous — both as a revenue growth play for 9altitudes and as a way to deploy AI across Waterland's other 60 portfolio companies. Would love 15 minutes to walk through the playbook."
+    },
+    "pr_summit": {
+      "score": 72,
+      "similarClient": "Bow River Capital",
+      "holdings": [
+        "Klaviyo — 350+ integrations, REST APIs, Snowflake/BigQuery, AI/ML",
+        "GRESB — Cloud SaaS, ESG analytics, benchmarking engine",
+        "Fortis Life Sciences — Lab automation, reagent platforms, LIMS"
+      ],
+      "techStack": [
+        "350+ integrations",
+        "REST APIs",
+        "Snowflake",
+        "BigQuery",
+        "AI/ML",
+        "ESG analytics",
+        "LIMS"
+      ],
+      "sectors": [
+        "Software & technology",
+        "Real estate",
+        "Healthcare"
+      ],
+      "similarWhy": "Bow River's TrackVia is a SaaS platform on AWS — similar cloud-native profile. We help Bow River with AI readiness and cloud strategy.",
+      "insight": "Klaviyo is publicly traded (KVYO) with 350+ integrations — already a Microsoft partner opportunity. GRESB does ESG analytics for real estate — ESG + AI is the next big wave in PE due diligence. Across these three, there's a data infrastructure theme where Microsoft Fabric could add value.",
+      "emailSubject": "Klaviyo's 350+ integrations — the Microsoft Fabric angle",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nSummit's portfolio has an interesting data infrastructure theme: Klaviyo runs 350+ integrations with Snowflake and BigQuery, GRESB does ESG analytics on cloud SaaS, and Fortis Life Sciences runs LIMS and lab automation. All data-intensive, all cloud-native.\n\nThe opportunity: Microsoft Fabric is emerging as a unified analytics platform that consolidates data integration, warehousing, and AI — potentially simplifying the multi-tool analytics stacks that companies like Klaviyo and GRESB manage today.\n\nWe work with Bow River Capital on cloud strategy for their SaaS portfolio companies — TrackVia, CloudShare — where data infrastructure decisions directly impact product roadmap and margins.\n\nWould 15 minutes to walk through how Microsoft Fabric fits into a PE portfolio data strategy make sense? Especially relevant for GRESB's ESG analytics.\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. Summit's portfolio has a data infrastructure theme — Klaviyo with 350-plus integrations, GRESB doing ESG analytics, Fortis with LIMS. Microsoft Fabric could unify the analytics layer across these. We help Bow River with similar cloud strategy decisions. Worth 15 minutes?"
+    },
+    "pr_seaport": {
+      "score": 71,
+      "similarClient": "Gryphon Investors",
+      "holdings": [
+        "FMC GlobalSat — VSAT, satellite networking, managed connectivity",
+        "On Target Media — DRTV, lead gen analytics, digital marketing",
+        "Cyberlink ASP — Managed hosting, cloud services, app mgmt"
+      ],
+      "techStack": [
+        "VSAT",
+        "Satellite networking",
+        "Lead gen analytics",
+        "Managed hosting",
+        "Cloud services"
+      ],
+      "sectors": [
+        "Telecom",
+        "Media & entertainment",
+        "Software & technology"
+      ],
+      "similarWhy": "Gryphon has tech services holdings like Fortreum (cybersecurity) and 3Cloud (Azure). Seaport's Cyberlink ASP is a similar managed IT services firm.",
+      "insight": "Seaport invests $10-40M in comms infrastructure and business services. Cyberlink ASP does managed hosting but could modernize with Azure migration. On Target Media does DRTV lead gen analytics that could be supercharged with AI/ML.",
+      "emailSubject": "Cyberlink ASP — managed hosting to Azure managed services",
+      "emailBody": "Hi {{FIRST_NAME}},\n\nSeaport's comms infrastructure thesis is interesting — FMC GlobalSat in satellite networking, Cyberlink ASP in managed hosting, and On Target Media in lead gen analytics.\n\nThe evolution I'd flag: Cyberlink ASP's managed hosting business is positioned for an Azure migration play. The managed services market is shifting from traditional hosting to cloud-managed services, and companies that make that transition see both higher margins and better customer retention.\n\nOn Target Media's lead gen analytics could also benefit from AI/ML integration — predictive modeling for DRTV response rates and automated campaign optimization.\n\nWe work with PE firms whose portfolios include IT services companies (like Gryphon Investors with Fortreum and 3Cloud), and the managed services transformation playbook is well-established.\n\nWould 15 minutes to walk through the Azure managed services transition and what it means for Cyberlink's growth trajectory?\n\nBest,\nJonathan Hicks\nIncworx | AI & Microsoft Consulting for PE",
+      "phone": "Hey {{FIRST_NAME}}, Jonathan from Incworx. Seaport's Cyberlink ASP does managed hosting — the market is shifting to cloud managed services, and Azure migration opens up a significantly larger addressable market. We've seen this transformation with other PE-backed IT services companies. Worth 15 minutes to discuss the growth play?"
+    }
+  }
+}

@@ -1,184 +1,516 @@
 <script lang="ts">
-	import { tick } from 'svelte';
+	import { onMount } from 'svelte';
+	import * as d3 from 'd3';
 
-	interface Message {
-		role: 'user' | 'assistant';
-		content: string;
-	}
+	let { data } = $props();
 
-	let messages = $state<Message[]>([]);
-	let input = $state('');
-	let loading = $state(false);
-	let chatContainer: HTMLElement | undefined = $state();
+	const CAT: Record<string, { color: string; r: number; label: string }> = {
+		incworx: { color: '#6366f1', r: 22, label: 'Incworx' },
+		firm: { color: '#3b82f6', r: 16, label: 'PE Firms (Clients)' },
+		prospect: { color: '#f59e0b', r: 14, label: 'Prospect Firms' },
+		holding: { color: '#a78bfa', r: 7, label: 'Portfolio Holdings' },
+		person: { color: '#10b981', r: 8, label: 'Key Contacts' },
+		sector: { color: '#ef4444', r: 10, label: 'Sectors' },
+		tech: { color: '#06b6d4', r: 9, label: 'Tech Platforms' },
+		geo: { color: '#f97316', r: 9, label: 'Cities' }
+	};
 
-	const suggestions = [
-		'Find IT decision makers at acme.com',
-		'Set up my ICP — I sell managed IT services to mid-market companies',
-		'Show me all my leads',
-		'Qualify my pending leads and build an export list'
-	];
+	const EDGE_TYPES: Record<string, { color: string; label: string }> = {
+		client: { color: '#6366f1', label: 'Client relationship' },
+		employs: { color: '#10b981', label: 'Employs / contact' },
+		sector: { color: '#ef4444', label: 'Sector / industry' },
+		uses_tech: { color: '#06b6d4', label: 'Uses technology' },
+		located: { color: '#f97316', label: 'Located in' },
+		tech_rel: { color: '#06b6d4', label: 'Tech relationship' },
+		holds: { color: '#a78bfa', label: 'Portfolio holding' }
+	};
 
-	async function scrollToBottom() {
-		await tick();
-		if (chatContainer) {
-			chatContainer.scrollTop = chatContainer.scrollHeight;
+	let graphContainer: HTMLElement;
+	let scriptModalOpen = $state(false);
+	let modalContent = $state('');
+
+	onMount(() => {
+		if (!data.nodes.length) return;
+
+		const nodes = data.nodes.map(n => ({ ...n }));
+		const links = data.links.map(l => ({ ...l }));
+		const SCRIPTS = data.scripts;
+
+		// Stats
+		const sNodes = document.getElementById('sNodes');
+		const sEdges = document.getElementById('sEdges');
+		const sFirms = document.getElementById('sFirms');
+		const sContacts = document.getElementById('sContacts');
+		const sProspects = document.getElementById('sProspects');
+		const sHoldings = document.getElementById('sHoldings');
+		if (sNodes) sNodes.textContent = String(nodes.length);
+		if (sEdges) sEdges.textContent = String(links.length);
+		if (sFirms) sFirms.textContent = String(nodes.filter(n => n.cat === 'firm').length);
+		if (sContacts) sContacts.textContent = String(nodes.filter(n => n.cat === 'person').length);
+		if (sProspects) sProspects.textContent = String(nodes.filter(n => n.cat === 'prospect').length);
+		if (sHoldings) sHoldings.textContent = String(nodes.filter(n => n.cat === 'holding').length);
+
+		// Visibility toggles
+		const visible: Record<string, boolean> = { incworx: true, firm: true, prospect: true, holding: true, person: true, sector: true, tech: true, geo: true };
+		const edgeVis: Record<string, boolean> = { client: true, employs: true, sector: true, uses_tech: true, located: true, tech_rel: true, holds: true };
+
+		const togglesEl = document.getElementById('toggles')!;
+		Object.entries(CAT).forEach(([k, v]) => {
+			const count = nodes.filter(n => n.cat === k).length;
+			const row = document.createElement('div');
+			row.className = 'toggle-row';
+			row.innerHTML = `<span class="toggle-dot" style="background:${v.color}"></span><span class="toggle-label">${v.label}</span><span class="toggle-count">${count}</span>`;
+			row.addEventListener('click', () => {
+				visible[k] = !visible[k];
+				row.classList.toggle('off', !visible[k]);
+				updateVisibility();
+			});
+			togglesEl.appendChild(row);
+		});
+
+		const edgeTogglesEl = document.getElementById('edgeToggles')!;
+		Object.entries(EDGE_TYPES).forEach(([k, v]) => {
+			const count = links.filter(l => l.etype === k).length;
+			const row = document.createElement('div');
+			row.className = 'toggle-row';
+			row.innerHTML = `<span class="toggle-dot" style="background:${v.color}"></span><span class="toggle-label">${v.label}</span><span class="toggle-count">${count}</span>`;
+			row.addEventListener('click', () => {
+				edgeVis[k] = !edgeVis[k];
+				row.classList.toggle('off', !edgeVis[k]);
+				updateVisibility();
+			});
+			edgeTogglesEl.appendChild(row);
+		});
+
+		// D3 setup
+		const container = document.getElementById('graph-container')!;
+		const W = container.clientWidth;
+		const H = container.clientHeight;
+		const svg = d3.select('#graph');
+		const g = svg.append('g');
+		const zoomBehavior = d3.zoom<SVGSVGElement, unknown>().scaleExtent([0.2, 5]).on('zoom', (e) => g.attr('transform', e.transform));
+		svg.call(zoomBehavior);
+
+		const sim = d3.forceSimulation(nodes as any)
+			.force('link', d3.forceLink(links as any).id((d: any) => d.id).distance((d: any) => {
+				const sc = typeof d.source === 'object' ? d.source.cat : nodes.find(n => n.id === d.source)?.cat;
+				const tc = typeof d.target === 'object' ? d.target.cat : nodes.find(n => n.id === d.target)?.cat;
+				if (sc === 'incworx' || tc === 'incworx') return 200;
+				if (sc === 'firm' && tc === 'person') return 80;
+				if (sc === 'firm' && tc === 'firm') return 250;
+				if (sc === 'geo' || tc === 'geo') return 130;
+				return 100;
+			}).strength((d: any) => {
+				const sc = typeof d.source === 'object' ? d.source.cat : nodes.find(n => n.id === d.source)?.cat;
+				if (sc === 'incworx') return 0.3;
+				return 0.5;
+			}))
+			.force('charge', d3.forceManyBody().strength((d: any) => d.cat === 'incworx' ? -1200 : d.cat === 'firm' ? -600 : d.cat === 'prospect' ? -400 : d.cat === 'holding' ? -120 : -150))
+			.force('center', d3.forceCenter(W / 2, H / 2))
+			.force('collision', d3.forceCollide().radius((d: any) => CAT[d.cat].r + 10))
+			.force('x', d3.forceX(W / 2).strength(0.015))
+			.force('y', d3.forceY(H / 2).strength(0.015));
+
+		const linkG = g.append('g');
+		const nodeG = g.append('g');
+
+		const link = linkG.selectAll('line').data(links).join('line')
+			.attr('class', 'link')
+			.attr('stroke', (d: any) => EDGE_TYPES[d.etype]?.color || '#444')
+			.attr('stroke-width', (d: any) => d.etype === 'client' ? 2 : 1);
+
+		const node = nodeG.selectAll<SVGGElement, any>('g').data(nodes).join('g')
+			.call(d3.drag<SVGGElement, any>()
+				.on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+				.on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; })
+				.on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
+
+		node.append('circle')
+			.attr('class', 'node-circle')
+			.attr('r', (d: any) => CAT[d.cat].r)
+			.attr('fill', (d: any) => CAT[d.cat].color)
+			.attr('stroke', 'rgba(255,255,255,0.15)')
+			.attr('stroke-width', (d: any) => d.cat === 'incworx' ? 2.5 : 1);
+
+		node.filter((d: any) => d.cat === 'incworx' || d.cat === 'firm' || d.cat === 'prospect').append('text')
+			.text((d: any) => {
+				if (d.cat === 'incworx') return 'IW';
+				const words = d.label.split(' ');
+				return words.map((w: string) => w[0]).join('').substring(0, 3);
+			})
+			.attr('text-anchor', 'middle').attr('dy', '0.35em')
+			.attr('fill', 'rgba(255,255,255,0.9)')
+			.attr('font-size', (d: any) => d.cat === 'incworx' ? 14 : 11)
+			.attr('font-weight', 600)
+			.style('pointer-events', 'none');
+
+		node.append('text')
+			.attr('class', (d: any) => 'node-label' + (d.cat === 'firm' ? ' firm-label' : '') + (d.cat === 'prospect' ? ' firm-label' : '') + (d.cat === 'incworx' ? ' incworx-label' : ''))
+			.text((d: any) => d.label)
+			.attr('dy', (d: any) => CAT[d.cat].r + 14);
+
+		const tip = document.getElementById('tip')!;
+		let selectedNode: string | null = null;
+
+		node.on('mouseover', (e: MouseEvent, d: any) => {
+			if (selectedNode) return;
+			highlightNode(d);
+			showTooltip(e, d);
+		}).on('mouseout', () => {
+			if (selectedNode) return;
+			clearHighlight();
+			tip.style.opacity = '0';
+		}).on('click', (e: MouseEvent, d: any) => {
+			e.stopPropagation();
+			if (d.cat === 'prospect' && SCRIPTS[d.id]) { showScriptModal(d); return; }
+			if (selectedNode === d.id) { selectedNode = null; clearHighlight(); hideDetail(); return; }
+			selectedNode = d.id;
+			highlightNode(d);
+			showDetail(d);
+		});
+
+		svg.on('click', () => { selectedNode = null; clearHighlight(); hideDetail(); });
+
+		function highlightNode(d: any) {
+			const connected = new Set([d.id]);
+			links.forEach((l: any) => {
+				const si = typeof l.source === 'object' ? l.source.id : l.source;
+				const ti = typeof l.target === 'object' ? l.target.id : l.target;
+				if (si === d.id) connected.add(ti);
+				if (ti === d.id) connected.add(si);
+			});
+			node.select('.node-circle').classed('dim', (n: any) => !connected.has(n.id));
+			node.select('.node-label').classed('dim', (n: any) => !connected.has(n.id));
+			link.classed('highlight', (l: any) => {
+				const si = typeof l.source === 'object' ? l.source.id : l.source;
+				const ti = typeof l.target === 'object' ? l.target.id : l.target;
+				return si === d.id || ti === d.id;
+			}).classed('dim', (l: any) => {
+				const si = typeof l.source === 'object' ? l.source.id : l.source;
+				const ti = typeof l.target === 'object' ? l.target.id : l.target;
+				return si !== d.id && ti !== d.id;
+			});
 		}
-	}
 
-	async function send(text?: string) {
-		const msg = (text || input).trim();
-		if (!msg || loading) return;
-		input = '';
+		function clearHighlight() {
+			node.select('.node-circle').classed('dim', false);
+			node.select('.node-label').classed('dim', false);
+			link.classed('highlight', false).classed('dim', false);
+		}
 
-		messages = [...messages, { role: 'user', content: msg }];
-		loading = true;
-		await scrollToBottom();
+		function showTooltip(e: MouseEvent, d: any) {
+			tip.innerHTML = `<strong>${d.label}</strong><div class="tt-sub">${d.sub}</div>`;
+			tip.style.opacity = '1';
+			const rect = container.getBoundingClientRect();
+			tip.style.left = Math.min(e.clientX - rect.left + 15, rect.width - 280) + 'px';
+			tip.style.top = (e.clientY - rect.top - 50) + 'px';
+		}
 
-		try {
-			const res = await fetch('/api/chat', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					messages: messages.map(m => ({ role: m.role, content: m.content }))
-				})
+		function showDetail(d: any) {
+			const conns: { node: any; rel: string }[] = [];
+			links.forEach((l: any) => {
+				const si = typeof l.source === 'object' ? l.source.id : l.source;
+				const ti = typeof l.target === 'object' ? l.target.id : l.target;
+				if (si === d.id) { const n = nodes.find(x => x.id === ti); if (n) conns.push({ node: n, rel: l.rel }); }
+				if (ti === d.id) { const n = nodes.find(x => x.id === si); if (n) conns.push({ node: n, rel: l.rel }); }
+			});
+			const area = document.getElementById('detailArea')!;
+			area.innerHTML = `<div class="detail-panel">
+				<h2>${d.label}</h2>
+				<div class="detail-sub">${d.sub}</div>
+				<p style="font-size:12px;color:#aaa;margin-bottom:12px;line-height:1.5">${d.detail || ''}</p>
+				<div class="section-title">Connections (${conns.length})</div>
+				<ul class="detail-connections">
+					${conns.map(c => `<li><span class="conn-dot" style="background:${CAT[c.node.cat].color}"></span>${c.node.label}<span class="conn-rel">${c.rel}</span></li>`).join('')}
+				</ul>
+			</div>`;
+		}
+
+		function hideDetail() { document.getElementById('detailArea')!.innerHTML = ''; }
+
+		function updateVisibility() {
+			node.attr('display', (d: any) => visible[d.cat] ? null : 'none');
+			link.attr('display', (d: any) => {
+				const sc = typeof d.source === 'object' ? d.source.cat : d.source;
+				const tc = typeof d.target === 'object' ? d.target.cat : d.target;
+				return visible[sc] && visible[tc] && edgeVis[d.etype] ? null : 'none';
+			});
+		}
+
+		sim.on('tick', () => {
+			link.attr('x1', (d: any) => d.source.x).attr('y1', (d: any) => d.source.y)
+				.attr('x2', (d: any) => d.target.x).attr('y2', (d: any) => d.target.y);
+			node.attr('transform', (d: any) => `translate(${d.x},${d.y})`);
+		});
+
+		document.getElementById('resetBtn')!.addEventListener('click', () => {
+			selectedNode = null; clearHighlight(); hideDetail();
+			svg.transition().duration(500).call(zoomBehavior.transform as any, d3.zoomIdentity);
+		});
+
+		document.getElementById('focusIncworx')!.addEventListener('click', () => {
+			const n = nodes.find(d => d.id === 'incworx') as any;
+			if (n) svg.transition().duration(700).call(zoomBehavior.transform as any,
+				d3.zoomIdentity.translate(W / 2 - n.x * 1.8, H / 2 - n.y * 1.8).scale(1.8));
+		});
+
+		document.getElementById('focusFirms')!.addEventListener('click', () => {
+			Object.keys(visible).forEach(k => visible[k] = (k === 'firm' || k === 'incworx' || k === 'prospect' || k === 'holding'));
+			Object.keys(edgeVis).forEach(k => edgeVis[k] = (k === 'client' || k === 'holds'));
+			document.querySelectorAll('#toggles .toggle-row').forEach((row, i) => {
+				const k = Object.keys(CAT)[i];
+				row.classList.toggle('off', !visible[k]);
+			});
+			document.querySelectorAll('#edgeToggles .toggle-row').forEach((row, i) => {
+				const k = Object.keys(EDGE_TYPES)[i];
+				row.classList.toggle('off', !edgeVis[k]);
+			});
+			updateVisibility();
+		});
+
+		document.getElementById('search')!.addEventListener('input', (e) => {
+			const q = (e.target as HTMLInputElement).value.toLowerCase();
+			if (!q) { clearHighlight(); return; }
+			const matches = new Set<string>();
+			nodes.forEach(n => {
+				if (n.label.toLowerCase().includes(q) || n.sub.toLowerCase().includes(q) || (n.detail || '').toLowerCase().includes(q)) matches.add(n.id);
+			});
+			node.select('.node-circle').classed('dim', (n: any) => !matches.has(n.id));
+			node.select('.node-label').classed('dim', (n: any) => !matches.has(n.id));
+			link.classed('dim', (l: any) => {
+				const si = typeof l.source === 'object' ? l.source.id : l.source;
+				const ti = typeof l.target === 'object' ? l.target.id : l.target;
+				return !matches.has(si) && !matches.has(ti);
+			});
+		});
+
+		function showScriptModal(d: any) {
+			const s = SCRIPTS[d.id];
+			if (!s) return;
+			const conns: { node: any; rel: string; etype: string }[] = [];
+			links.forEach((l: any) => {
+				const si = typeof l.source === 'object' ? l.source.id : l.source;
+				const ti = typeof l.target === 'object' ? l.target.id : l.target;
+				if (si === d.id || ti === d.id) {
+					const otherId = si === d.id ? ti : si;
+					const n = nodes.find(x => x.id === otherId);
+					if (n) conns.push({ node: n, rel: l.rel, etype: l.etype });
+				}
 			});
 
-			const data = await res.json();
+			modalContent = `
+				<div class="modal-close"><button onclick="document.getElementById('scriptModal').classList.remove('open')">&times;</button></div>
+				<div class="modal-head">
+					<div class="m-name">${d.label} <span class="m-badge">Score: ${s.score}</span></div>
+					<div class="m-meta">${d.sub} &bull; ${d.detail.split('|')[0].trim()}</div>
+				</div>
+				<div class="m-method">
+					<div class="m-pill"><b>1.</b> Observation</div>
+					<div class="m-pill"><b>2.</b> Connection</div>
+					<div class="m-pill"><b>3.</b> Insight</div>
+					<div class="m-pill"><b>4.</b> CTA</div>
+				</div>
+				<div class="m-section">
+					<div class="m-section-title">Portfolio Holdings (Graph Signals)</div>
+					<div class="m-tags">${s.holdings.map((h: string) => '<span class="m-tag holding">' + h + '</span>').join('')}</div>
+				</div>
+				<div class="m-section">
+					<div class="m-section-title">Tech Stack Detected</div>
+					<div class="m-tags">${s.techStack.map((t: string) => '<span class="m-tag tech">' + t + '</span>').join('')}</div>
+				</div>
+				<div class="m-section">
+					<div class="m-section-title">Sector Focus</div>
+					<div class="m-tags">${s.sectors.map((x: string) => '<span class="m-tag sector">' + x + '</span>').join('')}</div>
+				</div>
+				<div class="m-section">
+					<div class="m-section-title">Similar Client Connection</div>
+					<div class="m-tags"><span class="m-tag sim">${s.similarClient}</span></div>
+					<div class="m-similar"><div class="il">Why this comparison works</div><p>${s.similarWhy}</p></div>
+				</div>
+				<div class="m-section">
+					<div class="m-section-title">Key Insight (Observation)</div>
+					<div class="m-insight"><div class="il">Signal intelligence</div><p>${s.insight}</p></div>
+				</div>
+				<div class="m-section">
+					<div class="m-section-title">Email Script — First Touch</div>
+					<div class="m-script">
+						<button class="m-copy" data-type="email" data-id="${d.id}">Copy</button>
+						<div class="ch">Email</div>
+						<div class="subj">Subject: ${s.emailSubject}</div>
+						<div class="body">${s.emailBody.replace(/\{\{FIRST_NAME\}\}/g, '<span class="vr">{{FIRST_NAME}}</span>').replace(/\n/g, '<br>')}</div>
+					</div>
+				</div>
+				<div class="m-section">
+					<div class="m-section-title">Cold Call Script</div>
+					<div class="m-script">
+						<button class="m-copy" data-type="phone" data-id="${d.id}">Copy</button>
+						<div class="ch">Phone — Opening</div>
+						<div class="body">${s.phone.replace(/\{\{FIRST_NAME\}\}/g, '<span class="vr">{{FIRST_NAME}}</span>')}</div>
+					</div>
+				</div>`;
 
-			if (data.error) {
-				messages = [...messages, { role: 'assistant', content: `Something went wrong: ${data.error}` }];
-			} else {
-				messages = [...messages, { role: 'assistant', content: data.message }];
-			}
-		} catch {
-			messages = [...messages, { role: 'assistant', content: 'Failed to connect. Check that your API keys are configured.' }];
+			scriptModalOpen = true;
+
+			// Bind copy buttons after render
+			setTimeout(() => {
+				document.querySelectorAll('.m-copy').forEach(btn => {
+					btn.addEventListener('click', () => {
+						const type = btn.getAttribute('data-type');
+						const id = btn.getAttribute('data-id')!;
+						const sc = SCRIPTS[id];
+						const text = type === 'email' ? 'Subject: ' + sc.emailSubject + '\n\n' + sc.emailBody : sc.phone;
+						navigator.clipboard.writeText(text).then(() => {
+							btn.textContent = 'Copied!';
+							setTimeout(() => { btn.textContent = 'Copy'; }, 2000);
+						});
+					});
+				});
+			}, 50);
 		}
+	});
 
-		loading = false;
-		await scrollToBottom();
+	function closeModal() {
+		scriptModalOpen = false;
 	}
 
-	function handleKeydown(e: KeyboardEvent) {
-		if (e.key === 'Enter' && !e.shiftKey) {
-			e.preventDefault();
-			send();
-		}
-	}
-
-	function renderMarkdown(text: string): string {
-		return text
-			.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-			.replace(/\*(.+?)\*/g, '<em>$1</em>')
-			.replace(/`([^`]+)`/g, '<code class="px-1 py-0.5 bg-gray-100 rounded text-xs">$1</code>')
-			.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-brand-600 hover:text-brand-700 underline underline-offset-2">$1</a>')
-			.replace(/^### (.+)$/gm, '<h3 class="text-sm font-semibold text-gray-900 mt-3 mb-1">$1</h3>')
-			.replace(/^## (.+)$/gm, '<h2 class="text-base font-semibold text-gray-900 mt-4 mb-1">$1</h2>')
-			.replace(/^- (.+)$/gm, '<li class="ml-4 list-disc text-sm">$1</li>')
-			.replace(/^(\d+)\. (.+)$/gm, '<li class="ml-4 list-decimal text-sm">$2</li>')
-			.replace(/\n{2,}/g, '</p><p class="mt-2">')
-			.replace(/\n/g, '<br>')
-			.replace(/^/, '<p>')
-			.replace(/$/, '</p>');
+	function handleModalKeydown(e: KeyboardEvent) {
+		if (e.key === 'Escape') closeModal();
 	}
 </script>
 
-<div class="flex flex-col h-[calc(100vh-4rem)] -m-8">
-	<!-- Chat Messages -->
-	<div class="flex-1 overflow-y-auto" bind:this={chatContainer}>
-		{#if messages.length === 0}
-			<!-- Empty State -->
-			<div class="flex flex-col items-center justify-center h-full px-8">
-				<div class="w-14 h-14 bg-brand-100 rounded-2xl flex items-center justify-center mb-5">
-					<svg class="w-7 h-7 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-					</svg>
-				</div>
-				<h2 class="text-xl font-semibold text-gray-900 mb-1">What are we building today?</h2>
-				<p class="text-sm text-gray-500 mb-8 text-center max-w-md">
-					Tell me who you're targeting and I'll source, enrich, qualify, and build your call list.
-				</p>
-				<div class="grid grid-cols-2 gap-2 w-full max-w-lg">
-					{#each suggestions as suggestion}
-						<button
-							onclick={() => send(suggestion)}
-							class="text-left px-4 py-3 text-sm text-gray-700 bg-white border border-gray-200 rounded-xl hover:border-brand-300 hover:bg-brand-50/50 transition-all cursor-pointer"
-						>
-							{suggestion}
-						</button>
-					{/each}
-				</div>
-			</div>
-		{:else}
-			<div class="max-w-3xl mx-auto px-6 py-6 space-y-5">
-				{#each messages as msg}
-					{#if msg.role === 'user'}
-						<div class="flex justify-end">
-							<div class="bg-brand-600 text-white px-4 py-2.5 rounded-2xl rounded-br-md max-w-lg text-sm whitespace-pre-wrap">
-								{msg.content}
-							</div>
-						</div>
-					{:else}
-						<div class="flex gap-3">
-							<div class="w-7 h-7 bg-brand-100 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-								<svg class="w-3.5 h-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-								</svg>
-							</div>
-							<div class="flex-1 min-w-0 bg-white border border-gray-200 rounded-2xl rounded-tl-md px-4 py-3 text-sm text-gray-800 leading-relaxed prose-links">
-								{@html renderMarkdown(msg.content)}
-							</div>
-						</div>
-					{/if}
-				{/each}
+<svelte:head>
+	<title>Incworx GTM Map</title>
+</svelte:head>
 
-				{#if loading}
-					<div class="flex gap-3">
-						<div class="w-7 h-7 bg-brand-100 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-							<svg class="w-3.5 h-3.5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-								<path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-							</svg>
-						</div>
-						<div class="bg-white border border-gray-200 rounded-2xl rounded-tl-md px-4 py-3">
-							<div class="flex gap-1.5 items-center">
-								<div class="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style="animation-delay: 0ms"></div>
-								<div class="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style="animation-delay: 150ms"></div>
-								<div class="w-2 h-2 bg-brand-400 rounded-full animate-bounce" style="animation-delay: 300ms"></div>
-								<span class="text-xs text-gray-400 ml-2">Working on it...</span>
-							</div>
-						</div>
-					</div>
-				{/if}
-			</div>
-		{/if}
+<svelte:document onkeydown={handleModalKeydown} />
+
+<div id="app">
+	<div id="sidebar">
+		<div id="sidebar-header">
+			<h1>PE Ecosystem Network</h1>
+			<p>Force-directed GTM intelligence map</p>
+		</div>
+		<div class="stats-bar">
+			<span><b id="sNodes">0</b> nodes</span>
+			<span><b id="sEdges">0</b> edges</span>
+			<span><b id="sFirms">0</b> firms</span>
+			<span><b id="sContacts">0</b> contacts</span>
+			<span><b id="sProspects">0</b> prospects</span>
+			<span><b id="sHoldings">0</b> holdings</span>
+		</div>
+		<div class="search-box">
+			<input type="text" id="search" placeholder="Search nodes..." />
+		</div>
+		<div class="section">
+			<div class="section-title">Node Types</div>
+			<div id="toggles"></div>
+		</div>
+		<div class="section">
+			<div class="section-title">Edge Types</div>
+			<div id="edgeToggles"></div>
+		</div>
+		<div id="detailArea"></div>
 	</div>
 
-	<!-- Input -->
-	<div class="border-t border-gray-200 bg-white px-6 py-4">
-		<div class="max-w-3xl mx-auto">
-			<div class="flex gap-3 items-end">
-				<div class="flex-1 relative">
-					<textarea
-						bind:value={input}
-						onkeydown={handleKeydown}
-						disabled={loading}
-						rows="1"
-						class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none transition-shadow disabled:opacity-50"
-						placeholder="Tell me what you need — e.g. 'Find CTOs at fintech companies in NYC'"
-					></textarea>
-				</div>
-				<button
-					onclick={() => send()}
-					disabled={loading || !input.trim()}
-					class="px-4 py-3 bg-brand-600 text-white rounded-xl hover:bg-brand-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
-				>
-					<svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-					</svg>
-				</button>
-			</div>
-			<p class="text-[11px] text-gray-400 mt-2 text-center">
-				AI-powered by Claude. Data views: <a href="/leads" class="text-brand-500 hover:underline">Leads</a> &middot; <a href="/lists" class="text-brand-500 hover:underline">Lists</a> &middot; <a href="/profile" class="text-brand-500 hover:underline">ICP</a> &middot; <a href="/usage" class="text-brand-500 hover:underline">Usage</a>
-			</p>
+	<div id="graph-container" bind:this={graphContainer}>
+		<svg id="graph"></svg>
+		<div class="tooltip" id="tip"></div>
+		<div class="toolbar">
+			<button id="resetBtn">Reset</button>
+			<button id="focusIncworx">Focus Incworx</button>
+			<button id="focusFirms">PE View</button>
 		</div>
 	</div>
 </div>
+
+<!-- Script Modal -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<!-- svelte-ignore a11y_no_static_element_interactions -->
+<div id="scriptModal" class:open={scriptModalOpen} onclick={(e) => { if (e.target === e.currentTarget) closeModal(); }}>
+	<div id="modalContent">
+		{@html modalContent}
+	</div>
+</div>
+
+<style>
+	#app { display: flex; height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e0e0e0; }
+	#sidebar { width: 320px; background: #111118; border-right: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; flex-shrink: 0; overflow-y: auto; }
+	#sidebar-header { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+	#sidebar-header h1 { font-size: 16px; font-weight: 600; color: #fff; margin: 0 0 4px 0; }
+	#sidebar-header p { font-size: 12px; color: #888; margin: 0; }
+	.stats-bar { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 11px; color: #888; }
+	.stats-bar b { color: #fff; }
+	.section { padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+	:global(.section-title) { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 10px; font-weight: 600; }
+	:global(.toggle-row) { display: flex; align-items: center; gap: 8px; padding: 6px 0; cursor: pointer; user-select: none; }
+	:global(.toggle-row:hover) { opacity: 0.8; }
+	:global(.toggle-dot) { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; transition: opacity 0.2s; }
+	:global(.toggle-row.off .toggle-dot) { opacity: 0.2; }
+	:global(.toggle-row.off .toggle-label) { opacity: 0.35; }
+	:global(.toggle-label) { font-size: 13px; }
+	:global(.toggle-count) { font-size: 11px; color: #555; margin-left: auto; }
+	:global(.detail-panel) { padding: 16px 20px; }
+	:global(.detail-panel h2) { font-size: 15px; font-weight: 600; color: #fff; margin: 0 0 2px 0; }
+	:global(.detail-sub) { font-size: 12px; color: #888; margin-bottom: 12px; }
+	:global(.detail-connections) { list-style: none; padding: 0; margin: 0; }
+	:global(.detail-connections li) { font-size: 12px; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 6px; }
+	:global(.detail-connections li:last-child) { border: none; }
+	:global(.conn-dot) { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+	:global(.conn-rel) { color: #666; margin-left: auto; font-size: 11px; }
+	#graph-container { flex: 1; position: relative; }
+	:global(#graph) { width: 100%; height: 100%; display: block; }
+	:global(.link) { stroke-opacity: 0.25; transition: stroke-opacity 0.2s, stroke-width 0.2s; }
+	:global(.link.highlight) { stroke-opacity: 0.8; }
+	:global(.link.dim) { stroke-opacity: 0.03; }
+	:global(.node-circle) { cursor: pointer; transition: opacity 0.2s; }
+	:global(.node-circle.dim) { opacity: 0.08; }
+	:global(.node-label) { pointer-events: none; font-size: 11px; fill: rgba(255,255,255,0.7); text-anchor: middle; transition: opacity 0.2s; }
+	:global(.node-label.dim) { opacity: 0.05; }
+	:global(.node-label.firm-label) { font-size: 12px; font-weight: 600; fill: rgba(255,255,255,0.9); }
+	:global(.node-label.incworx-label) { font-size: 14px; font-weight: 700; fill: #fff; }
+	.tooltip { position: absolute; background: rgba(17,17,24,0.95); border: 1px solid rgba(255,255,255,0.12); border-radius: 8px; padding: 10px 14px; font-size: 12px; pointer-events: none; opacity: 0; transition: opacity 0.15s; max-width: 260px; z-index: 10; }
+	:global(.tooltip strong) { color: #fff; display: block; margin-bottom: 2px; }
+	:global(.tt-sub) { color: #888; }
+	.toolbar { position: absolute; top: 16px; right: 16px; display: flex; gap: 6px; z-index: 5; }
+	.toolbar button { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #ccc; padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; transition: background 0.15s; }
+	.toolbar button:hover { background: rgba(255,255,255,0.12); }
+	.search-box { padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+	.search-box input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 7px 10px; color: #e0e0e0; font-size: 13px; outline: none; box-sizing: border-box; }
+	.search-box input:focus { border-color: rgba(99,102,241,0.5); }
+
+	/* Modal */
+	#scriptModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 100; overflow-y: auto; padding: 40px; }
+	#scriptModal.open { display: flex; justify-content: center; align-items: flex-start; }
+	#modalContent { background: #111118; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; max-width: 720px; width: 100%; padding: 32px; position: relative; }
+	:global(.modal-close) { position: absolute; top: 16px; right: 16px; }
+	:global(.modal-close button) { background: none; border: none; color: #888; font-size: 24px; cursor: pointer; padding: 4px 8px; }
+	:global(.modal-close button:hover) { color: #fff; }
+	:global(.modal-head) { margin-bottom: 20px; }
+	:global(.m-name) { font-size: 22px; font-weight: 700; color: #fff; }
+	:global(.m-badge) { background: #6366f1; color: #fff; font-size: 12px; padding: 2px 10px; border-radius: 12px; font-weight: 600; margin-left: 8px; }
+	:global(.m-meta) { font-size: 13px; color: #888; margin-top: 4px; }
+	:global(.m-method) { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+	:global(.m-pill) { background: #1e1e3a; border: 1px solid #2a2a5a; border-radius: 20px; padding: 6px 14px; font-size: 12px; color: #aab; }
+	:global(.m-pill b) { color: #7c8cf8; }
+	:global(.m-section) { margin-bottom: 16px; }
+	:global(.m-section-title) { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #5a5a8a; margin-bottom: 8px; }
+	:global(.m-tags) { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+	:global(.m-tag) { font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: 500; }
+	:global(.m-tag.holding) { background: #2a2010; color: #E6A545; border: 1px solid #3a3020; }
+	:global(.m-tag.tech) { background: #101a2e; color: #4a9af5; border: 1px solid #1a2a4e; }
+	:global(.m-tag.sector) { background: #1e1020; color: #e07070; border: 1px solid #2e1a2a; }
+	:global(.m-tag.sim) { background: #0a2020; color: #4ac4a0; border: 1px solid #1a3030; }
+	:global(.m-similar) { background: #0a0f1e; border: 1px solid #1a2040; border-radius: 8px; padding: 14px 18px; margin-top: 8px; }
+	:global(.m-similar .il) { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #7c8cf8; margin-bottom: 6px; }
+	:global(.m-similar p) { font-size: 13px; color: #a0a0d0; margin: 0; }
+	:global(.m-insight) { background: #0f1a10; border: 1px solid #1a3020; border-radius: 8px; padding: 14px 18px; }
+	:global(.m-insight .il) { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #4ac4a0; margin-bottom: 6px; }
+	:global(.m-insight p) { font-size: 13px; color: #a0c0a0; margin: 0; }
+	:global(.m-script) { background: #0a0a18; border: 1px solid #1a1a30; border-radius: 8px; padding: 16px 20px; position: relative; }
+	:global(.m-copy) { position: absolute; top: 12px; right: 12px; background: #1e1e3a; border: 1px solid #2a2a5a; color: #8888aa; border-radius: 6px; padding: 4px 10px; font-size: 11px; cursor: pointer; }
+	:global(.m-copy:hover) { background: #2a2a4a; color: #fff; }
+	:global(.ch) { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #5a5a8a; margin-bottom: 8px; }
+	:global(.subj) { font-size: 14px; font-weight: 600; color: #7c8cf8; margin-bottom: 10px; }
+	:global(.m-script .body) { font-size: 13.5px; color: #c0c0d0; white-space: pre-wrap; line-height: 1.6; }
+	:global(.vr) { color: #E6A545; font-weight: 600; }
+</style>

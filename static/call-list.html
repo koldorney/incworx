@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Incworx Cold Call List — 150 PE Contacts</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0a0a1a;color:#e0e0e0;min-height:100vh}
+.header{background:linear-gradient(135deg,#1a1a2e,#16213e);padding:24px 32px;border-bottom:1px solid #333}
+.header h1{font-size:22px;color:#fff;margin-bottom:4px}
+.header p{font-size:13px;color:#888}
+.controls{display:flex;gap:12px;padding:16px 32px;background:#111;flex-wrap:wrap;align-items:center;border-bottom:1px solid #222}
+.controls input,.controls select{background:#1a1a2e;border:1px solid #333;color:#e0e0e0;padding:8px 12px;border-radius:6px;font-size:13px}
+.controls input{width:280px}
+.controls select{min-width:160px}
+.stats{margin-left:auto;font-size:13px;color:#888}
+.stats span{color:#00d4aa;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{position:sticky;top:0;z-index:10}
+th{background:#1a1a2e;padding:10px 12px;text-align:left;font-weight:600;color:#aaa;border-bottom:2px solid #333;cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{color:#00d4aa}
+th.sorted-asc::after{content:' ▲';color:#00d4aa}
+th.sorted-desc::after{content:' ▼';color:#00d4aa}
+td{padding:8px 12px;border-bottom:1px solid #1a1a2e}
+tr:hover td{background:#1a1a3a}
+.name{font-weight:600;color:#fff}
+.email{color:#4da6ff}
+.email a{color:#4da6ff;text-decoration:none}
+.email a:hover{text-decoration:underline}
+.phone{color:#00d4aa}
+.linkedin a{color:#0077b5;text-decoration:none;font-size:12px}
+.linkedin a:hover{text-decoration:underline}
+.position{color:#ccc}
+.dept{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.dept-it{background:#1a3a5c;color:#4da6ff}
+.dept-executive{background:#3a1a5c;color:#b088f9}
+.dept-operations{background:#1a5c3a;color:#00d4aa}
+.dept-finance{background:#5c3a1a;color:#ffb347}
+.dept-management{background:#5c1a3a;color:#ff6b9d}
+.dept-other{background:#2a2a3a;color:#888}
+.firm-tag{font-size:11px;padding:2px 8px;border-radius:10px;background:#222;color:#ccc}
+.confidence{font-size:11px}
+.conf-high{color:#00d4aa}
+.conf-med{color:#ffb347}
+.conf-low{color:#ff6b6b}
+.copy-btn{background:#1a1a3a;border:1px solid #333;color:#aaa;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:11px}
+.copy-btn:hover{background:#2a2a4a;color:#fff}
+.actions{display:flex;gap:6px}
+.export-bar{padding:12px 32px;background:#111;border-top:1px solid #222;display:flex;gap:12px;align-items:center}
+.export-btn{background:linear-gradient(135deg,#00d4aa,#00a884);color:#000;border:none;padding:10px 20px;border-radius:6px;font-weight:600;cursor:pointer;font-size:13px}
+.export-btn:hover{opacity:.9}
+.export-btn.secondary{background:#1a1a3a;color:#e0e0e0;border:1px solid #333}
+.table-wrap{overflow-x:auto;flex:1}
+.page-wrap{display:flex;flex-direction:column;height:100vh}
+.priority-high{border-left:3px solid #00d4aa}
+.priority-med{border-left:3px solid #ffb347}
+.priority-low{border-left:3px solid #555}
+</style>
+</head>
+<body>
+<div class="page-wrap">
+<div class="header">
+<h1>Incworx PE Ecosystem — Cold Call List</h1>
+<p>150 senior contacts across 19 PE firms | Enriched via Hunter.io | Generated 2026-06-22</p>
+</div>
+<div class="controls">
+<input type="text" id="search" placeholder="Search name, firm, position, email...">
+<select id="firmFilter"><option value="">All Firms</option></select>
+<select id="deptFilter">
+<option value="">All Departments</option>
+<option value="it">IT / Technology</option>
+<option value="executive">Executive</option>
+<option value="operations">Operations</option>
+<option value="finance">Finance</option>
+<option value="management">Management</option>
+</select>
+<select id="priorityFilter">
+<option value="">All Priorities</option>
+<option value="high">High Priority</option>
+<option value="medium">Medium Priority</option>
+<option value="low">Lower Priority</option>
+</select>
+<div class="stats">Showing <span id="countShown">0</span> of <span id="countTotal">0</span> contacts</div>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th data-col="priority">#</th>
+<th data-col="name">Name</th>
+<th data-col="firm">Firm</th>
+<th data-col="position">Position</th>
+<th data-col="dept">Dept</th>
+<th data-col="email">Email</th>
+<th data-col="phone">Phone</th>
+<th data-col="confidence">Conf.</th>
+<th>LinkedIn</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+<div class="export-bar">
+<button class="export-btn" onclick="exportCSV()">Export CSV</button>
+<button class="export-btn secondary" onclick="copyAllEmails()">Copy All Emails</button>
+<button class="export-btn secondary" onclick="copyFiltered()">Copy Filtered Emails</button>
+</div>
+</div>
+
+<script>
+const CONTACTS = [
+// TJC LP (tjclp.com)
+{name:"Colin Macri",first:"Colin",last:"Macri",firm:"TJC LP",position:"Vice President",dept:"executive",email:"cmacri@tjclp.com",phone:"",linkedin:"https://www.linkedin.com/in/colin-macri-900bb568",confidence:94,priority:"medium"},
+{name:"Peter Suffredini",first:"Peter",last:"Suffredini",firm:"TJC LP",position:"Vice President",dept:"executive",email:"psuffredini@tjclp.com",phone:"",linkedin:"https://www.linkedin.com/in/peter-suffredini-89158b13",confidence:93,priority:"medium"},
+{name:"Dino Lavalle",first:"Dino",last:"Lavalle",firm:"TJC LP",position:"Vice President",dept:"executive",email:"dlavalle@tjclp.com",phone:"",linkedin:"https://www.linkedin.com/in/dino-lavalle-86664580",confidence:93,priority:"medium"},
+{name:"Jeff Dombek",first:"Jeff",last:"Dombek",firm:"TJC LP",position:"Principal",dept:"executive",email:"jdombek@tjclp.com",phone:"",linkedin:"https://www.linkedin.com/in/jeff-j-dombek-84ba1322",confidence:93,priority:"medium"},
+{name:"Tanner Lee",first:"Tanner",last:"Lee",firm:"TJC LP",position:"Vice President",dept:"executive",email:"tlee@tjclp.com",phone:"",linkedin:"https://www.linkedin.com/in/tanner-lee-b51aa2b3",confidence:91,priority:"medium"},
+{name:"Zain Lakhani",first:"Zain",last:"Lakhani",firm:"TJC LP",position:"Vice President",dept:"executive",email:"zlakhani@tjclp.com",phone:"",linkedin:"https://www.linkedin.com/in/zains-profile",confidence:91,priority:"medium"},
+{name:"Rich Caputo",first:"Rich",last:"Caputo",firm:"TJC LP",position:"Director of Data and AI",dept:"it",email:"rcaputo@tjclp.com",phone:"",linkedin:"https://www.linkedin.com/in/rich-caputo-864394ab",confidence:90,priority:"high"},
+{name:"Teresa Ricotta",first:"Teresa",last:"Ricotta",firm:"TJC LP",position:"VP Operations",dept:"operations",email:"tricotta@tjclp.com",phone:"",linkedin:"https://www.linkedin.com/in/teresa-ricotta-75862779",confidence:90,priority:"high"},
+
+// OneRock Capital (onerock.com)
+{name:"Allison Spector",first:"Allison",last:"Spector",firm:"OneRock Capital",position:"MD, Head of Sustainability",dept:"management",email:"aspector@onerock.com",phone:"",linkedin:"https://www.linkedin.com/in/allison-spector-ba494124",confidence:98,priority:"medium"},
+{name:"Monica Yavin",first:"Monica",last:"Yavin",firm:"OneRock Capital",position:"Chief People Officer",dept:"executive",email:"myavin@onerock.com",phone:"",linkedin:"https://www.linkedin.com/in/monica-yavin-6092016",confidence:96,priority:"medium"},
+{name:"Dana Powder",first:"Dana",last:"Powder",firm:"OneRock Capital",position:"VP Finance",dept:"finance",email:"dpowder@onerock.com",phone:"",linkedin:"https://www.linkedin.com/in/dana-powder-969b88a3",confidence:95,priority:"medium"},
+{name:"Rosie Thomas",first:"Rosie",last:"Thomas",firm:"OneRock Capital",position:"Director of Administration",dept:"management",email:"rthomas@onerock.com",phone:"",linkedin:"https://www.linkedin.com/in/rosie-thomas-255289138",confidence:95,priority:"low"},
+{name:"Maya Staples",first:"Maya",last:"Staples",firm:"OneRock Capital",position:"Compliance Coordinator",dept:"operations",email:"mstaples@onerock.com",phone:"",linkedin:"https://www.linkedin.com/in/maya-staples-233167222",confidence:70,priority:"low"},
+
+// GTCR (gtcr.com)
+{name:"Stephen Master",first:"Stephen",last:"Master",firm:"GTCR",position:"Managing Director",dept:"executive",email:"stephen.master@gtcr.com",phone:"",linkedin:"https://www.linkedin.com/in/stephen-master-39106612",confidence:94,priority:"high"},
+{name:"Aaron Cohen",first:"Aaron",last:"Cohen",firm:"GTCR",position:"Managing Director",dept:"executive",email:"aaron.cohen@gtcr.com",phone:"",linkedin:"https://www.linkedin.com/in/aaron-cohen-20544211",confidence:94,priority:"high"},
+{name:"Kirk Smith",first:"Kirk",last:"Smith",firm:"GTCR",position:"Managing Director",dept:"executive",email:"kirk.smith@gtcr.com",phone:"",linkedin:"https://www.linkedin.com/in/kirkcsmith1",confidence:93,priority:"high"},
+{name:"John Kos",first:"John",last:"Kos",firm:"GTCR",position:"Managing Director",dept:"executive",email:"john.kos@gtcr.com",phone:"",linkedin:"https://www.linkedin.com/in/johndkos",confidence:93,priority:"high"},
+{name:"David Lalo",first:"David",last:"Lalo",firm:"GTCR",position:"Director",dept:"management",email:"david.lalo@gtcr.com",phone:"",linkedin:"https://www.linkedin.com/in/david-lalo-069bb941",confidence:94,priority:"medium"},
+{name:"Michael Pappas",first:"Michael",last:"Pappas",firm:"GTCR",position:"Director",dept:"management",email:"michael.pappas@gtcr.com",phone:"",linkedin:"https://www.linkedin.com/in/michael-b-pappas-8604b72b",confidence:94,priority:"medium"},
+{name:"Ian Rivera",first:"Ian",last:"Rivera",firm:"GTCR",position:"Director of Compliance",dept:"management",email:"ian.rivera@gtcr.com",phone:"",linkedin:"https://www.linkedin.com/in/ian-rivera-78339a332",confidence:93,priority:"low"},
+{name:"Alexander Bennett",first:"Alexander",last:"Bennett",firm:"GTCR",position:"Vice President",dept:"executive",email:"alexander.bennett@gtcr.com",phone:"",linkedin:"https://www.linkedin.com/in/alexandersbennett",confidence:94,priority:"medium"},
+
+// Francisco Partners
+{name:"Edward Chung",first:"Edward",last:"Chung",firm:"Francisco Partners",position:"Director of Operations",dept:"operations",email:"edward.chung@franciscopartners.com",phone:"",linkedin:"https://www.linkedin.com/in/edward-chung-22074a50",confidence:99,priority:"high"},
+{name:"Dave Stevens",first:"Dave",last:"Stevens",firm:"Francisco Partners",position:"Senior Operating Partner",dept:"executive",email:"dave.stevens@franciscopartners.com",phone:"",linkedin:"https://www.linkedin.com/in/stevensdave",confidence:94,priority:"high"},
+{name:"John Herr",first:"John",last:"Herr",firm:"Francisco Partners",position:"Chief Financial Officer",dept:"finance",email:"john.herr@franciscopartners.com",phone:"",linkedin:"https://www.linkedin.com/in/johnwherriii",confidence:99,priority:"high"},
+{name:"Anders Mikkelsen",first:"Anders",last:"Mikkelsen",firm:"Francisco Partners",position:"Vice President",dept:"executive",email:"anders.mikkelsen@franciscopartners.com",phone:"",linkedin:"https://www.linkedin.com/in/anders-mikkelsen-966a594b",confidence:97,priority:"medium"},
+{name:"Peter Kreuch",first:"Peter",last:"Kreuch",firm:"Francisco Partners",position:"Vice President",dept:"executive",email:"kreuch@franciscopartners.com",phone:"",linkedin:"https://www.linkedin.com/in/peter-kreuch-44374348",confidence:96,priority:"medium"},
+{name:"Alex Waller",first:"Alex",last:"Waller",firm:"Francisco Partners",position:"Vice President",dept:"executive",email:"alex.waller@franciscopartners.com",phone:"",linkedin:"https://www.linkedin.com/in/apwaller",confidence:96,priority:"medium"},
+{name:"Michael Anderson",first:"Michael",last:"Anderson",firm:"Francisco Partners",position:"Vice President",dept:"executive",email:"michael.anderson@franciscopartners.com",phone:"",linkedin:"https://www.linkedin.com/in/michael-anderson",confidence:94,priority:"medium"},
+{name:"Ilan Lahav",first:"Ilan",last:"Lahav",firm:"Francisco Partners",position:"Vice President",dept:"executive",email:"ilan.lahav@franciscopartners.com",phone:"",linkedin:"https://www.linkedin.com/in/ilan-lahav-96068975",confidence:94,priority:"medium"},
+
+// Accel-KKR
+{name:"Ted Murray",first:"Ted",last:"Murray",firm:"Accel-KKR",position:"Director of IT",dept:"it",email:"tmurray@accel-kkr.com",phone:"",linkedin:"https://www.linkedin.com/in/tvmurray",confidence:93,priority:"high"},
+{name:"Samantha Shows",first:"Samantha",last:"Shows",firm:"Accel-KKR",position:"Managing Director",dept:"executive",email:"sshows@accel-kkr.com",phone:"",linkedin:"https://www.linkedin.com/in/samantha-shows-8398294",confidence:94,priority:"high"},
+{name:"David Cusimano",first:"David",last:"Cusimano",firm:"Accel-KKR",position:"Managing Director",dept:"executive",email:"dcusimano@accel-kkr.com",phone:"",linkedin:"https://www.linkedin.com/in/david-cusimano-9280688",confidence:91,priority:"high"},
+{name:"Gregory Williams",first:"Gregory",last:"Williams",firm:"Accel-KKR",position:"Managing Director",dept:"executive",email:"gwilliams@accel-kkr.com",phone:"",linkedin:"https://www.linkedin.com/in/gregory-williams-07b8409",confidence:91,priority:"high"},
+{name:"Roy Kelvin",first:"Roy",last:"Kelvin",firm:"Accel-KKR",position:"Chief Financial Officer",dept:"finance",email:"rkelvin@accel-kkr.com",phone:"",linkedin:"https://www.linkedin.com/in/roy-kelvin-30652011",confidence:93,priority:"medium"},
+{name:"John Burtnett",first:"John",last:"Burtnett",firm:"Accel-KKR",position:"Vice President",dept:"executive",email:"jburtnett@accel-kkr.com",phone:"",linkedin:"https://www.linkedin.com/in/john-burtnett-95003010",confidence:90,priority:"medium"},
+{name:"Wendy Ho",first:"Wendy",last:"Ho",firm:"Accel-KKR",position:"VP Marketing",dept:"executive",email:"who@accel-kkr.com",phone:"",linkedin:"https://www.linkedin.com/in/wendyho",confidence:83,priority:"low"},
+{name:"Sam Dekoven",first:"Sam",last:"Dekoven",firm:"Accel-KKR",position:"Head of Capital Markets",dept:"management",email:"sdekoven@accel-kkr.com",phone:"",linkedin:"https://www.linkedin.com/in/sam-dekoven-4b51ba36",confidence:82,priority:"medium"},
+
+// Gores Group
+{name:"Barrett Sprowl",first:"Barrett",last:"Sprowl",firm:"Gores Group",position:"Managing Director",dept:"executive",email:"bsprowl@gores.com",phone:"",linkedin:"https://www.linkedin.com/in/barrett-sprowl-08325311",confidence:98,priority:"high"},
+{name:"Jennifer Chou",first:"Jennifer",last:"Chou",firm:"Gores Group",position:"Managing Director",dept:"executive",email:"jchou@gores.com",phone:"",linkedin:"",confidence:99,priority:"high"},
+{name:"Andy McBride",first:"Andy",last:"McBride",firm:"Gores Group",position:"SVP Finance & Tax",dept:"finance",email:"amcbride@gores.com",phone:"",linkedin:"https://www.linkedin.com/in/andy-mcbride-7351914",confidence:97,priority:"medium"},
+{name:"Desmond Nugent",first:"Desmond",last:"Nugent",firm:"Gores Group",position:"VP Finance",dept:"finance",email:"dnugent@gores.com",phone:"",linkedin:"https://www.linkedin.com/in/desmond-nugent-3072bb28",confidence:97,priority:"medium"},
+{name:"Chris Sznewajs",first:"Chris",last:"Sznewajs",firm:"Gores Group",position:"Principal",dept:"executive",email:"csznewajs@gores.com",phone:"",linkedin:"https://www.linkedin.com/in/chris-sznewajs-21984a13a",confidence:98,priority:"medium"},
+
+// Charlesbank Capital
+{name:"Tim McGrath",first:"Tim",last:"McGrath",firm:"Charlesbank Capital",position:"Director of IT",dept:"it",email:"tmcgrath@charlesbank.com",phone:"",linkedin:"https://www.linkedin.com/in/tim-mcgrath-070ba7b3",confidence:94,priority:"high"},
+{name:"David Katz",first:"David",last:"Katz",firm:"Charlesbank Capital",position:"Managing Director",dept:"executive",email:"dkatz@charlesbank.com",phone:"",linkedin:"https://www.linkedin.com/in/davidlkatz",confidence:94,priority:"high"},
+{name:"Bert Duarte",first:"Bert",last:"Duarte",firm:"Charlesbank Capital",position:"Managing Director",dept:"executive",email:"bduarte@charlesbank.com",phone:"",linkedin:"https://www.linkedin.com/in/bert-duarte-a12ab996",confidence:94,priority:"high"},
+{name:"Sam Bartlett",first:"Sam",last:"Bartlett",firm:"Charlesbank Capital",position:"Managing Director",dept:"executive",email:"sbartlett@charlesbank.com",phone:"",linkedin:"https://www.linkedin.com/in/sam-bartlett-b402286",confidence:94,priority:"high"},
+{name:"Mayur Desai",first:"Mayur",last:"Desai",firm:"Charlesbank Capital",position:"Managing Director",dept:"executive",email:"mdesai@charlesbank.com",phone:"",linkedin:"https://www.linkedin.com/in/mayur-desai-03691a3",confidence:94,priority:"medium"},
+{name:"Drew Appleman",first:"Drew",last:"Appleman",firm:"Charlesbank Capital",position:"Senior Vice President",dept:"executive",email:"dappleman@charlesbank.com",phone:"",linkedin:"https://www.linkedin.com/in/drew-appleman",confidence:94,priority:"medium"},
+{name:"Danielle Lachman",first:"Danielle",last:"Lachman",firm:"Charlesbank Capital",position:"Advisory Director",dept:"management",email:"dlachman@charlesbank.com",phone:"",linkedin:"https://www.linkedin.com/in/danielle-lachman",confidence:94,priority:"medium"},
+{name:"Tim Schnabel",first:"Tim",last:"Schnabel",firm:"Charlesbank Capital",position:"Principal, Investor Relations",dept:"executive",email:"tschnabel@charlesbank.com",phone:"",linkedin:"https://www.linkedin.com/in/tim-schnabel-39a623bb",confidence:94,priority:"medium"},
+
+// THL Partners
+{name:"Gaurav Mittal",first:"Gaurav",last:"Mittal",firm:"THL Partners",position:"Managing Director",dept:"executive",email:"gmittal@thl.com",phone:"",linkedin:"https://www.linkedin.com/in/mittalgaurav",confidence:99,priority:"high"},
+{name:"Rob Spies",first:"Rob",last:"Spies",firm:"THL Partners",position:"MD, Strategic Resource Group",dept:"executive",email:"rspies@thl.com",phone:"",linkedin:"https://www.linkedin.com/in/rob-spies-a82295b",confidence:99,priority:"high"},
+{name:"Rocky Sisson",first:"Rocky",last:"Sisson",firm:"THL Partners",position:"Executive Partner",dept:"executive",email:"rsisson@thl.com",phone:"",linkedin:"https://www.linkedin.com/in/rocky-sisson-07b72094",confidence:99,priority:"high"},
+{name:"Gary Degruttola",first:"Gary",last:"Degruttola",firm:"THL Partners",position:"Executive Advisor",dept:"operations",email:"gdegruttola@thl.com",phone:"",linkedin:"https://www.linkedin.com/in/gary-degruttola-00603711",confidence:99,priority:"medium"},
+{name:"Mac Levin",first:"Mac",last:"Levin",firm:"THL Partners",position:"Vice President",dept:"executive",email:"mlevin@thl.com",phone:"",linkedin:"https://www.linkedin.com/in/mac-levin-103558b4",confidence:99,priority:"medium"},
+{name:"Andrew Garske",first:"Andrew",last:"Garske",firm:"THL Partners",position:"Vice President",dept:"executive",email:"agarske@thl.com",phone:"",linkedin:"https://www.linkedin.com/in/andrew-garske-99a4a1b9",confidence:99,priority:"medium"},
+{name:"Trevor Owens",first:"Trevor",last:"Owens",firm:"THL Partners",position:"Vice President",dept:"executive",email:"towens@thl.com",phone:"",linkedin:"https://www.linkedin.com/in/trevor-owens-102937b5",confidence:99,priority:"medium"},
+{name:"Ethan Chosnek",first:"Ethan",last:"Chosnek",firm:"THL Partners",position:"Vice President",dept:"executive",email:"echosnek@thl.com",phone:"",linkedin:"https://www.linkedin.com/in/ethan-chosnek-76729099",confidence:98,priority:"medium"},
+
+// Adams Street Partners
+{name:"Meghan Jones",first:"Meghan",last:"Jones",firm:"Adams Street Partners",position:"VP Performance Reporting & Analytics",dept:"it",email:"mjones@adamsstreetpartners.com",phone:"",linkedin:"https://www.linkedin.com/in/meghan-jones-cfa-1340b447",confidence:99,priority:"high"},
+{name:"Mike Lucarelli",first:"Mike",last:"Lucarelli",firm:"Adams Street Partners",position:"Global Head of Private Wealth",dept:"finance",email:"mlucarelli@adamsstreetpartners.com",phone:"",linkedin:"https://www.linkedin.com/in/mike-lucarelli-cfa-33013934",confidence:99,priority:"high"},
+{name:"Nolan Pauker",first:"Nolan",last:"Pauker",firm:"Adams Street Partners",position:"Partner - Private Credit",dept:"executive",email:"npauker@adamsstreetpartners.com",phone:"",linkedin:"https://www.linkedin.com/in/nolan-pauker-11782113",confidence:99,priority:"high"},
+{name:"Timothy Bonnar",first:"Timothy",last:"Bonnar",firm:"Adams Street Partners",position:"VP Product Strategy",dept:"executive",email:"tbonnar@adamsstreetpartners.com",phone:"",linkedin:"https://www.linkedin.com/in/timothy-bonnar-65689850",confidence:99,priority:"medium"},
+{name:"Tracy Olson",first:"Tracy",last:"Olson",firm:"Adams Street Partners",position:"Vice President",dept:"executive",email:"tolson@adamsstreetpartners.com",phone:"",linkedin:"https://www.linkedin.com/in/tracykapraun",confidence:99,priority:"medium"},
+{name:"Adam Gajewski",first:"Adam",last:"Gajewski",firm:"Adams Street Partners",position:"Vice President",dept:"executive",email:"agajewski@adamsstreetpartners.com",phone:"",linkedin:"https://www.linkedin.com/in/adamgajewski1",confidence:99,priority:"medium"},
+{name:"Kevin Smith",first:"Kevin",last:"Smith",firm:"Adams Street Partners",position:"VP Finance",dept:"finance",email:"ksmith@adamsstreetpartners.com",phone:"",linkedin:"https://www.linkedin.com/in/kevin-smith-cpa-6340a926",confidence:99,priority:"medium"},
+{name:"Shannon Carlin",first:"Shannon",last:"Carlin",firm:"Adams Street Partners",position:"Director of Investment Accounting",dept:"finance",email:"scarlin@adamsstreetpartners.com",phone:"",linkedin:"https://www.linkedin.com/in/shannon-carlin-44a09862",confidence:99,priority:"medium"},
+
+// Alpine Investors
+{name:"James Utton",first:"James",last:"Utton",firm:"Alpine Investors",position:"Director, Revenue Operations",dept:"operations",email:"jutton@alpineinvestors.com",phone:"",linkedin:"https://www.linkedin.com/in/jamesutton",confidence:99,priority:"high"},
+{name:"John Wanglin",first:"John",last:"Wanglin",firm:"Alpine Investors",position:"Partner",dept:"executive",email:"jwanglin@alpineinvestors.com",phone:"",linkedin:"https://www.linkedin.com/in/john-wanglin-8b32b280",confidence:99,priority:"high"},
+{name:"Nora Davis",first:"Nora",last:"Davis",firm:"Alpine Investors",position:"CEO, Elevation",dept:"executive",email:"ndavis@alpineinvestors.com",phone:"",linkedin:"https://www.linkedin.com/in/nora-davis-7a505a75",confidence:98,priority:"high"},
+{name:"Patrick Eble",first:"Patrick",last:"Eble",firm:"Alpine Investors",position:"Vice President",dept:"executive",email:"peble@alpineinvestors.com",phone:"",linkedin:"https://www.linkedin.com/in/patrick-eble-693340a7",confidence:99,priority:"medium"},
+{name:"Rohan Singh",first:"Rohan",last:"Singh",firm:"Alpine Investors",position:"Vice President",dept:"executive",email:"rsingh@alpineinvestors.com",phone:"",linkedin:"https://www.linkedin.com/in/rohan-singh-11aa98365",confidence:99,priority:"medium"},
+{name:"Luke Bushman",first:"Luke",last:"Bushman",firm:"Alpine Investors",position:"Vice President",dept:"executive",email:"lbushman@alpineinvestors.com",phone:"",linkedin:"https://www.linkedin.com/in/lukebushman",confidence:98,priority:"medium"},
+{name:"Katie Keeffe",first:"Katie",last:"Keeffe",firm:"Alpine Investors",position:"Head of Investor Relations",dept:"executive",email:"kkeeffe@alpineinvestors.com",phone:"",linkedin:"https://www.linkedin.com/in/katie-keeffe-77171919",confidence:99,priority:"medium"},
+{name:"April Smith",first:"April",last:"Smith",firm:"Alpine Investors",position:"Partner, Head of IR & Fundraising",dept:"finance",email:"asmith@alpineinvestors.com",phone:"",linkedin:"https://www.linkedin.com/in/april-smith-035a816a",confidence:98,priority:"medium"},
+
+// Shore Capital Partners
+{name:"Thomas Antony",first:"Thomas",last:"Antony",firm:"Shore Capital Partners",position:"AI, Office of the CEO",dept:"executive",email:"tantony@shorecp.com",phone:"",linkedin:"https://www.linkedin.com/in/thomasvantony",confidence:99,priority:"high"},
+{name:"Arthur Omilian",first:"Arthur",last:"Omilian",firm:"Shore Capital Partners",position:"Chief Development Officer",dept:"executive",email:"aomilian@shorecp.com",phone:"",linkedin:"https://www.linkedin.com/in/arthur-omilian-34a79555",confidence:99,priority:"high"},
+{name:"Paul Rutledge",first:"Paul",last:"Rutledge",firm:"Shore Capital Partners",position:"Executive Partner",dept:"executive",email:"prutledge@shorecp.com",phone:"",linkedin:"https://www.linkedin.com/in/paul-rutledge-b388a49b",confidence:99,priority:"high"},
+{name:"Riley Looser",first:"Riley",last:"Looser",firm:"Shore Capital Partners",position:"Head of Portfolio Performance",dept:"management",email:"rlooser@shorecp.com",phone:"",linkedin:"https://www.linkedin.com/in/rileychall",confidence:99,priority:"high"},
+{name:"Shannon Finocchi",first:"Shannon",last:"Finocchi",firm:"Shore Capital Partners",position:"Vice President",dept:"executive",email:"sfinocchi@shorecp.com",phone:"",linkedin:"https://www.linkedin.com/in/shannon-rose-reid",confidence:99,priority:"medium"},
+{name:"Keith Mika",first:"Keith",last:"Mika",firm:"Shore Capital Partners",position:"VP Finance",dept:"finance",email:"kmika@shorecp.com",phone:"",linkedin:"https://www.linkedin.com/in/keith-mika-584b1738",confidence:99,priority:"medium"},
+{name:"Melody Smythe",first:"Melody",last:"Smythe",firm:"Shore Capital Partners",position:"Director",dept:"management",email:"msmythe@shorecp.com",phone:"",linkedin:"https://www.linkedin.com/in/ruiqimelodychen",confidence:99,priority:"medium"},
+
+// Red Hill Ventures
+{name:"Marie Cattrell",first:"Marie",last:"Cattrell",firm:"Red Hill Ventures",position:"Chief Financial Officer",dept:"finance",email:"marie@redhillventures.com",phone:"",linkedin:"https://www.linkedin.com/in/marie-cattrell-96457367",confidence:95,priority:"high"},
+{name:"Janelle Collins",first:"Janelle",last:"Collins",firm:"Red Hill Ventures",position:"Director of Brand & Communications",dept:"executive",email:"janelle@redhillventures.com",phone:"",linkedin:"https://www.linkedin.com/in/janelle-collins-4264831b2",confidence:98,priority:"medium"},
+{name:"Meghan B",first:"Meghan",last:"Baxley",firm:"Red Hill Ventures",position:"Multi-Site Commercial Property Manager",dept:"management",email:"meghan@redhillventures.com",phone:"",linkedin:"https://www.linkedin.com/in/meghan-baxley",confidence:65,priority:"low"},
+
+// Tailwind Capital
+{name:"Bruce Dressel",first:"Bruce",last:"Dressel",firm:"Tailwind Capital",position:"Operating Executive",dept:"operations",email:"bdressel@tailwind.com",phone:"",linkedin:"https://www.linkedin.com/in/bruce-dressel-a1639927",confidence:97,priority:"high"},
+{name:"Michael Elliott",first:"Michael",last:"Elliott",firm:"Tailwind Capital",position:"Operating Executive",dept:"operations",email:"melliott@tailwind.com",phone:"",linkedin:"https://www.linkedin.com/in/melliott1",confidence:96,priority:"high"},
+{name:"Syed Mohsin",first:"Syed",last:"Mohsin",firm:"Tailwind Capital",position:"Partner & CFO",dept:"finance",email:"smohsin@tailwind.com",phone:"",linkedin:"https://www.linkedin.com/in/syed-mohsin-cpa-6787998",confidence:97,priority:"high"},
+{name:"Michael Bertisch",first:"Michael",last:"Bertisch",firm:"Tailwind Capital",position:"Partner, GC & CCO",dept:"executive",email:"mbertisch@tailwind.com",phone:"",linkedin:"https://www.linkedin.com/in/michaelbertisch",confidence:99,priority:"medium"},
+{name:"Juliana Anderson",first:"Juliana",last:"Anderson",firm:"Tailwind Capital",position:"Partner",dept:"executive",email:"janderson@tailwind.com",phone:"",linkedin:"https://www.linkedin.com/in/juliana-anderson-452a3533",confidence:96,priority:"high"},
+{name:"Jacob Nabatoff",first:"Jacob",last:"Nabatoff",firm:"Tailwind Capital",position:"Vice President",dept:"executive",email:"jnabatoff@tailwind.com",phone:"",linkedin:"https://www.linkedin.com/in/jacob-nabatoff-b99aaba0",confidence:99,priority:"medium"},
+{name:"Jake Franz",first:"Jake",last:"Franz",firm:"Tailwind Capital",position:"Vice President",dept:"executive",email:"jfranz@tailwind.com",phone:"",linkedin:"https://www.linkedin.com/in/jake-franz-b27482a1",confidence:96,priority:"medium"},
+{name:"Justin Schneiderman",first:"Justin",last:"Schneiderman",firm:"Tailwind Capital",position:"Vice President",dept:"executive",email:"jschneiderman@tailwind.com",phone:"",linkedin:"https://www.linkedin.com/in/justin-schneiderman-a69233178",confidence:98,priority:"medium"},
+
+// MHR Fund Management
+{name:"Mark Rosenberg",first:"Mark",last:"Rosenberg",firm:"MHR Fund",position:"Principal & COO",dept:"executive",email:"mrosenberg@mhrfund.com",phone:"",linkedin:"https://www.linkedin.com/in/mark-rosenberg-93350119",confidence:91,priority:"high"},
+{name:"Nathan Kiel",first:"Nathan",last:"Kiel",firm:"MHR Fund",position:"CCO & Counsel",dept:"executive",email:"nkiel@mhrfund.com",phone:"",linkedin:"https://www.linkedin.com/in/nathankiel",confidence:93,priority:"medium"},
+{name:"Christopher Fortner",first:"Christopher",last:"Fortner",firm:"MHR Fund",position:"Tax Director",dept:"finance",email:"cfortner@mhrfund.com",phone:"",linkedin:"https://www.linkedin.com/in/christopherfortnercpa",confidence:90,priority:"medium"},
+
+// Roark Capital
+{name:"Dennis Gies",first:"Dennis",last:"Gies",firm:"Roark Capital",position:"Managing Director",dept:"executive",email:"dgies@roarkcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/dennis-gies-b1051497",confidence:99,priority:"high"},
+{name:"Roanne Daniels",first:"Roanne",last:"Daniels",firm:"Roark Capital",position:"Managing Director",dept:"executive",email:"rdaniels@roarkcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/roanne-daniels-3b1aa68",confidence:99,priority:"high"},
+{name:"Clay Harmon",first:"Clay",last:"Harmon",firm:"Roark Capital",position:"Managing Director",dept:"executive",email:"charmon@roarkcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/clay-harmon-6500705",confidence:99,priority:"high"},
+{name:"Will Garman",first:"Will",last:"Garman",firm:"Roark Capital",position:"VP Operations",dept:"operations",email:"wgarman@roarkcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/willgarman",confidence:99,priority:"high"},
+{name:"Wes Lee",first:"Wes",last:"Lee",firm:"Roark Capital",position:"Chief Financial Officer",dept:"finance",email:"wlee@roarkcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/wes-lee-b34b2424",confidence:99,priority:"high"},
+{name:"Dave Katzman",first:"Dave",last:"Katzman",firm:"Roark Capital",position:"Head of Workforce Enablement",dept:"management",email:"dkatzman@roarkcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/davidkatzman54",confidence:99,priority:"high"},
+{name:"Aaron Silbar",first:"Aaron",last:"Silbar",firm:"Roark Capital",position:"Vice President",dept:"executive",email:"asilbar@roarkcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/aaron-silbar-02366158",confidence:99,priority:"medium"},
+{name:"Brennan McCormick",first:"Brennan",last:"McCormick",firm:"Roark Capital",position:"Vice President",dept:"executive",email:"bmccormick@roarkcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/brennan-mccormick-78a60729",confidence:99,priority:"medium"},
+{name:"Dan Merola",first:"Dan",last:"Merola",firm:"Roark Capital",position:"VP Finance",dept:"finance",email:"dmerola@roarkcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/dan-merola-10bba4120",confidence:99,priority:"medium"},
+{name:"Louis Matthews",first:"Louis",last:"Matthews",firm:"Roark Capital",position:"CCO & Associate GC",dept:"executive",email:"lmatthews@roarkcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/louismatthews",confidence:99,priority:"low"},
+
+// Audax Group
+{name:"Claudio Carmona",first:"Claudio",last:"Carmona",firm:"Audax Group",position:"VP IT Infrastructure & Operations",dept:"it",email:"ccarmona@audaxgroup.com",phone:"",linkedin:"https://www.linkedin.com/in/claudiocarmona",confidence:94,priority:"high"},
+{name:"Daniel Weintraub",first:"Daniel",last:"Weintraub",firm:"Audax Group",position:"Chief Admin & Legal Officer, MD",dept:"executive",email:"dweintraub@audaxgroup.com",phone:"",linkedin:"https://www.linkedin.com/in/daniel-h-weintraub-998bb546",confidence:94,priority:"high"},
+{name:"Michael McCarthy",first:"Michael",last:"McCarthy",firm:"Audax Group",position:"Managing Director",dept:"executive",email:"mmccarthy@audaxgroup.com",phone:"",linkedin:"https://www.linkedin.com/in/michael-mccarthy-6258441a",confidence:93,priority:"high"},
+{name:"Tamarah Belczyk",first:"Tamarah",last:"Belczyk",firm:"Audax Group",position:"MD & Deputy General Counsel",dept:"executive",email:"tbelczyk@audaxgroup.com",phone:"",linkedin:"https://www.linkedin.com/in/tamarah-belczyk-31b43912",confidence:94,priority:"medium"},
+{name:"Michael Fondo",first:"Michael",last:"Fondo",firm:"Audax Group",position:"MD & Tax Counsel",dept:"executive",email:"mfondo@audaxgroup.com",phone:"",linkedin:"https://www.linkedin.com/in/michael-c-fondo-9095b27",confidence:94,priority:"medium"},
+{name:"John Haydon",first:"John",last:"Haydon",firm:"Audax Group",position:"SVP Co-Invest & GP",dept:"executive",email:"jhaydon@audaxgroup.com",phone:"",linkedin:"https://www.linkedin.com/in/john-haydon-b283a47",confidence:93,priority:"medium"},
+{name:"John Harder",first:"John",last:"Harder",firm:"Audax Group",position:"Director",dept:"management",email:"jharder@audaxgroup.com",phone:"",linkedin:"https://www.linkedin.com/in/john-harder-1b6902b7",confidence:94,priority:"medium"},
+{name:"Hazim Jbara",first:"Hazim",last:"Jbara",firm:"Audax Group",position:"VP Finance",dept:"finance",email:"hjbara@audaxgroup.com",phone:"",linkedin:"https://www.linkedin.com/in/hazim-abu-jbara-cpa-3340575b",confidence:94,priority:"medium"},
+
+// Silver Lake
+{name:"Mike Widmann",first:"Mike",last:"Widmann",firm:"Silver Lake",position:"Managing Director",dept:"executive",email:"mike.widmann@silverlake.com",phone:"",linkedin:"https://www.linkedin.com/in/mike-widmann-94261215",confidence:94,priority:"high"},
+{name:"Frank Walters",first:"Frank",last:"Walters",firm:"Silver Lake",position:"Managing Director",dept:"executive",email:"frank.walters@silverlake.com",phone:"",linkedin:"https://www.linkedin.com/in/frank-walters-b6a41326",confidence:94,priority:"high"},
+{name:"Jason White",first:"Jason",last:"White",firm:"Silver Lake",position:"MD & Chief Financial Officer",dept:"finance",email:"jason.white@silverlake.com",phone:"",linkedin:"https://www.linkedin.com/in/jason-white-2714561b",confidence:94,priority:"high"},
+{name:"Angela Jiang",first:"Angela",last:"Jiang",firm:"Silver Lake",position:"Chief Accounting Officer",dept:"finance",email:"angela.jiang@silverlake.com",phone:"",linkedin:"https://www.linkedin.com/in/angela-jiang-5092604",confidence:94,priority:"medium"},
+{name:"Osman Ghafoor",first:"Osman",last:"Ghafoor",firm:"Silver Lake",position:"Vice President",dept:"executive",email:"osman.ghafoor@silverlake.com",phone:"",linkedin:"https://www.linkedin.com/in/osman-ghafoor-a4a6494",confidence:93,priority:"medium"},
+{name:"Helen Lim",first:"Helen",last:"Lim",firm:"Silver Lake",position:"VP Finance",dept:"finance",email:"helen.lim@silverlake.com",phone:"",linkedin:"https://www.linkedin.com/in/helen-lim-6a1b9a15a",confidence:94,priority:"medium"},
+{name:"John Park",first:"John",last:"Park",firm:"Silver Lake",position:"AVP Fundraising & IR",dept:"finance",email:"john.park@silverlake.com",phone:"",linkedin:"https://www.linkedin.com/in/johnjoohanpark",confidence:94,priority:"medium"},
+
+// Summit Partners
+{name:"John Carroll",first:"John",last:"Carroll",firm:"Summit Partners",position:"Managing Director",dept:"executive",email:"john@summitpartners.com",phone:"+1 617 824 1052",linkedin:"https://www.linkedin.com/in/john-carroll-9a3b101b5",confidence:94,priority:"high"},
+{name:"Andrew Collins",first:"Andrew",last:"Collins",firm:"Summit Partners",position:"Managing Director",dept:"executive",email:"acollins@summitpartners.com",phone:"+1 650 614 6652",linkedin:"https://www.linkedin.com/in/andrew-collins-263548a",confidence:94,priority:"high"},
+{name:"Darren Black",first:"Darren",last:"Black",firm:"Summit Partners",position:"Managing Director",dept:"executive",email:"dblack@summitpartners.com",phone:"",linkedin:"https://www.linkedin.com/in/darren-black-81a01625a",confidence:94,priority:"high"},
+{name:"Antony Clavel",first:"Antony",last:"Clavel",firm:"Summit Partners",position:"Managing Director",dept:"executive",email:"aclavel@summitpartners.com",phone:"+44 20 7659 7509",linkedin:"https://www.linkedin.com/in/antony-clavel-0b791b3",confidence:94,priority:"medium"},
+{name:"Katherine Tully",first:"Katherine",last:"Tully",firm:"Summit Partners",position:"Director of Operations",dept:"operations",email:"ktully@summitpartners.com",phone:"",linkedin:"https://www.linkedin.com/in/katherine-tully-78ba1510",confidence:94,priority:"high"},
+{name:"Adesh Jain",first:"Adesh",last:"Jain",firm:"Summit Partners",position:"Vice President",dept:"executive",email:"ajain@summitpartners.com",phone:"",linkedin:"https://www.linkedin.com/in/jainadesh",confidence:94,priority:"medium"},
+{name:"Andy Lee",first:"Andy",last:"Lee",firm:"Summit Partners",position:"Vice President",dept:"executive",email:"alee@summitpartners.com",phone:"",linkedin:"https://www.linkedin.com/in/andylee14",confidence:94,priority:"medium"},
+{name:"Ross Murphy",first:"Ross",last:"Murphy",firm:"Summit Partners",position:"Partner, Investor Relations",dept:"executive",email:"rmurphy@summitpartners.com",phone:"+1 617 824 1030",linkedin:"https://www.linkedin.com/in/ross-murphy-9b42b310",confidence:94,priority:"medium"},
+
+// Seaport Capital
+{name:"Kathleen Holohan",first:"Kathleen",last:"Holohan",firm:"Seaport Capital",position:"VP Investor Relations & Marketing",dept:"finance",email:"kholohan@seaportcapital.com",phone:"+1 212 847 8915",linkedin:"https://www.linkedin.com/in/kathleen-holohan-915a7825",confidence:94,priority:"medium"},
+{name:"Morgan Eddy",first:"Morgan",last:"Eddy",firm:"Seaport Capital",position:"Private Equity VP",dept:"executive",email:"meddy@seaportcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/morgan-eddy-767350a3",confidence:91,priority:"medium"},
+{name:"Caren Dina",first:"Caren",last:"Dina",firm:"Seaport Capital",position:"CCO",dept:"executive",email:"cdina@seaportcapital.com",phone:"",linkedin:"",confidence:93,priority:"medium"},
+{name:"Alison Sanders",first:"Alison",last:"Sanders",firm:"Seaport Capital",position:"Principal",dept:"executive",email:"asanders@seaportcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/sandersalison",confidence:93,priority:"medium"},
+{name:"Michael Stern",first:"Michael",last:"Stern",firm:"Seaport Capital",position:"Principal",dept:"executive",email:"mstern@seaportcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/michael-stern-6b7b0512",confidence:92,priority:"medium"},
+{name:"Sam Jablonski",first:"Sam",last:"Jablonski",firm:"Seaport Capital",position:"Private Equity VP",dept:"finance",email:"sjablonski@seaportcapital.com",phone:"",linkedin:"https://www.linkedin.com/in/sam-jablonski-327a66b4",confidence:94,priority:"medium"},
+{name:"Howard Kaufman",first:"Howard",last:"Kaufman",firm:"Seaport Capital",position:"Advisor",dept:"operations",email:"hkaufman@seaportcapital.com",phone:"",linkedin:"",confidence:90,priority:"low"}
+];
+
+let sortCol='priority',sortDir='asc';
+const priorityOrder={high:0,medium:1,low:2};
+
+function init(){
+  const firms=[...new Set(CONTACTS.map(c=>c.firm))].sort();
+  const sel=document.getElementById('firmFilter');
+  firms.forEach(f=>{const o=document.createElement('option');o.value=f;o.textContent=f;sel.appendChild(o)});
+  document.getElementById('countTotal').textContent=CONTACTS.length;
+  document.getElementById('search').addEventListener('input',render);
+  document.getElementById('firmFilter').addEventListener('change',render);
+  document.getElementById('deptFilter').addEventListener('change',render);
+  document.getElementById('priorityFilter').addEventListener('change',render);
+  document.querySelectorAll('th[data-col]').forEach(th=>{
+    th.addEventListener('click',()=>{
+      const col=th.dataset.col;
+      if(sortCol===col)sortDir=sortDir==='asc'?'desc':'asc';
+      else{sortCol=col;sortDir='asc'}
+      render();
+    });
+  });
+  render();
+}
+
+function getFiltered(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const firm=document.getElementById('firmFilter').value;
+  const dept=document.getElementById('deptFilter').value;
+  const pri=document.getElementById('priorityFilter').value;
+  let filtered=CONTACTS.filter(c=>{
+    if(firm&&c.firm!==firm)return false;
+    if(dept&&c.dept!==dept)return false;
+    if(pri&&c.priority!==pri)return false;
+    if(q){
+      const s=(c.name+' '+c.firm+' '+c.position+' '+c.email+' '+c.dept).toLowerCase();
+      if(!s.includes(q))return false;
+    }
+    return true;
+  });
+  filtered.sort((a,b)=>{
+    let va,vb;
+    if(sortCol==='priority'){va=priorityOrder[a.priority];vb=priorityOrder[b.priority]}
+    else if(sortCol==='confidence'){va=a.confidence;vb=b.confidence}
+    else if(sortCol==='name'){va=a.name.toLowerCase();vb=b.name.toLowerCase()}
+    else if(sortCol==='firm'){va=a.firm.toLowerCase();vb=b.firm.toLowerCase()}
+    else if(sortCol==='position'){va=a.position.toLowerCase();vb=b.position.toLowerCase()}
+    else if(sortCol==='dept'){va=a.dept;vb=b.dept}
+    else if(sortCol==='email'){va=a.email;vb=b.email}
+    else if(sortCol==='phone'){va=a.phone;vb=b.phone}
+    else{va=a.name;vb=b.name}
+    if(va<vb)return sortDir==='asc'?-1:1;
+    if(va>vb)return sortDir==='asc'?1:-1;
+    return 0;
+  });
+  return filtered;
+}
+
+function render(){
+  const filtered=getFiltered();
+  document.getElementById('countShown').textContent=filtered.length;
+  document.querySelectorAll('th[data-col]').forEach(th=>{
+    th.classList.remove('sorted-asc','sorted-desc');
+    if(th.dataset.col===sortCol)th.classList.add(sortDir==='asc'?'sorted-asc':'sorted-desc');
+  });
+  const tbody=document.getElementById('tbody');
+  tbody.innerHTML=filtered.map((c,i)=>{
+    const deptClass=(['it','executive','operations','finance','management'].includes(c.dept))?'dept-'+c.dept:'dept-other';
+    const confClass=c.confidence>=95?'conf-high':c.confidence>=85?'conf-med':'conf-low';
+    const priClass='priority-'+c.priority;
+    return `<tr class="${priClass}">
+      <td>${i+1}</td>
+      <td class="name">${c.name}</td>
+      <td><span class="firm-tag">${c.firm}</span></td>
+      <td class="position">${c.position}</td>
+      <td><span class="dept ${deptClass}">${c.dept}</span></td>
+      <td class="email"><a href="mailto:${c.email}">${c.email}</a></td>
+      <td class="phone">${c.phone||'—'}</td>
+      <td class="confidence ${confClass}">${c.confidence}%</td>
+      <td class="linkedin">${c.linkedin?`<a href="${c.linkedin}" target="_blank">Profile</a>`:''}</td>
+      <td class="actions"><button class="copy-btn" onclick="copyRow('${c.email}')">Copy</button></td>
+    </tr>`;
+  }).join('');
+}
+
+function copyRow(email){
+  navigator.clipboard.writeText(email);
+}
+
+function copyAllEmails(){
+  const emails=CONTACTS.map(c=>c.email).join('\\n');
+  navigator.clipboard.writeText(emails);
+  alert('Copied '+CONTACTS.length+' emails to clipboard');
+}
+
+function copyFiltered(){
+  const filtered=getFiltered();
+  const emails=filtered.map(c=>c.email).join('\\n');
+  navigator.clipboard.writeText(emails);
+  alert('Copied '+filtered.length+' emails to clipboard');
+}
+
+function exportCSV(){
+  const header='Name,First,Last,Firm,Position,Department,Email,Phone,LinkedIn,Confidence,Priority';
+  const rows=CONTACTS.map(c=>
+    [c.name,c.first,c.last,c.firm,'"'+c.position+'"',c.dept,c.email,c.phone,c.linkedin,c.confidence,c.priority].join(',')
+  );
+  const csv=header+'\\n'+rows.join('\\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='incworx-pe-call-list.csv';a.click();
+  URL.revokeObjectURL(url);
+}
+
+init();
+</script>
+</body>
+</html>

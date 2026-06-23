@@ -60,9 +60,9 @@ export const CLUSTERS: Cluster[] = [
 		key: 'finance',
 		label: 'Finance',
 		keywords: ['finance', 'cfo', 'chief financial', 'controller', 'accounting', 'tax', 'treasur', 'capital markets'],
-		hook: 'we do Microsoft work for PE firms like Gryphon and Potomac and we just took a financial firm from AI-curious to fully Copilot-ready',
-		valueAdd: 'could get your portfolio capturing real, measurable value from AI',
-		screen: 'like Gryphon and Potomac and wanted to see if you\'d be interested in getting real, measurable value from AI',
+		hook: 'we just automated invoice processing and built Power BI dashboards that give leadership real-time numbers',
+		valueAdd: 'could tighten reporting and cut manual work across your holdings',
+		screen: 'to automate financial reporting and back-office work across their portfolio companies',
 		emailSubject: 'Real-time numbers without waiting on month-end',
 		emailHook: 'We just automated invoice processing and built Power BI dashboards that give leadership real-time numbers.'
 	},
@@ -100,9 +100,9 @@ export const CLUSTERS: Cluster[] = [
 		key: 'executive',
 		label: 'Executive',
 		keywords: ['managing director', 'vice president', 'senior vice president', 'svp', 'partner', 'principal', 'president', 'ceo', 'director', 'advisor', 'executive', 'md'],
-		hook: "we took a financial firm from AI-curious to fully Copilot-ready, and we've done Microsoft work for PE firms like Gryphon Investors and Potomac Equity Partners",
-		valueAdd: 'could get your portfolio capturing real, measurable value from AI instead of just paying for the hype',
-		screen: 'to get their portfolio companies AI-ready and capturing real value from Microsoft and Copilot',
+		hook: 'we do Microsoft work for PE firms like Gryphon and Potomac and we just took a financial firm from AI-curious to fully Copilot-ready',
+		valueAdd: 'could get your portfolio capturing real, measurable value from AI',
+		screen: 'like Gryphon and Potomac and wanted to see if you\'d be interested in getting real, measurable value from AI',
 		emailSubject: 'Getting your portfolio AI-ready (Gryphon, Potomac)',
 		emailHook: "We took a financial firm from AI-curious to fully Copilot-ready, and we've done Microsoft work for PE firms like Gryphon Investors and Potomac Equity Partners."
 	}

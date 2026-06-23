@@ -60,8 +60,8 @@ export const CLUSTERS: Cluster[] = [
 		key: 'finance',
 		label: 'Finance',
 		keywords: ['finance', 'cfo', 'chief financial', 'controller', 'accounting', 'tax', 'treasur', 'capital markets'],
-		hook: 'we just automated invoice processing and built Power BI dashboards that give leadership real-time numbers',
-		valueAdd: 'could tighten reporting and cut manual work across your holdings',
+		hook: 'we do Microsoft work for PE firms like Gryphon and Potomac and we just took a financial firm from AI-curious to fully Copilot-ready',
+		valueAdd: 'could get your portfolio capturing real, measurable value from AI',
 		screen: 'automate financial reporting and back-office work across their portfolio companies',
 		emailSubject: 'Real-time numbers without waiting on month-end',
 		emailHook: 'We just automated invoice processing and built Power BI dashboards that give leadership real-time numbers.'

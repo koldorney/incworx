@@ -68,11 +68,6 @@
 		}));
 	});
 
-	const mailtoHref = $derived(
-		currentContact
-			? `mailto:${currentContact.email}?subject=${encodeURIComponent(emailSubjectDraft)}&body=${encodeURIComponent(emailBodyDraft)}`
-			: 'mailto:'
-	);
 
 	// Session stats
 	let sessionStats = $state({
@@ -279,10 +274,9 @@
 						<div class="script-head">
 							<span class="script-title email-title">Email</span>
 							<button class="copy-script" onclick={copyEmail}>Copy</button>
-							<a class="copy-script" href={mailtoHref}>Open in mail</a>
 						</div>
 						<input class="email-subject" bind:value={emailSubjectDraft} placeholder="Subject" />
-						<textarea class="email-body" bind:value={emailBodyDraft} rows="8"></textarea>
+						<textarea class="email-body" bind:value={emailBodyDraft} rows="8" placeholder="Type your email here…"></textarea>
 					</div>
 
 					<div class="disposition-grid">

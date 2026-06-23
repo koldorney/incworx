@@ -32,7 +32,7 @@ export const CLUSTERS: Cluster[] = [
 		keywords: ['it', 'i.t', 'information technology', 'technology', 'cio', 'cto', 'infrastructure', 'data and ai', 'data & ai', 'technical', 'systems'],
 		hook: "we just consolidated a client's SQL Server environment, pulled $350K out of their annual run-rate",
 		valueAdd: "could find that same kind of savings across your IT and data spend",
-		screen: 'save hundreds of thousands or millions across IT and data spend',
+		screen: 'to save hundreds of thousands or millions across IT and data spend',
 		emailSubject: 'Took $350K off a client’s annual run rate',
 		emailHook: "We recently consolidated a client's SQL Server environment and pulled $350,000 out of their annual run rate."
 	},
@@ -42,7 +42,7 @@ export const CLUSTERS: Cluster[] = [
 		keywords: ['counsel', 'legal', 'compliance', 'cco', 'gc', 'sustainability', 'governance'],
 		hook: 'we built an AI contract-review system on Microsoft Copilot that automated a firm’s entire first-pass review',
 		valueAdd: 'could take the contract-review bottleneck off your deal timelines without burning outside-counsel hours',
-		screen: 'use AI to speed up diligence and contract review on their deals',
+		screen: 'to use AI to speed up diligence and contract review on their deals',
 		emailSubject: 'AI-assisted contract review for your deals',
 		emailHook: 'We built an AI contract-review system on Microsoft Copilot that automated a firm’s entire first-pass review.'
 	},
@@ -52,7 +52,7 @@ export const CLUSTERS: Cluster[] = [
 		keywords: ['people', 'human resources', 'hr', 'talent', 'workforce enablement', 'chief people'],
 		hook: 'we built a Power App that mapped 40,000 job titles in a couple hours and an automated goal-tracking system for another client’s workforce',
 		valueAdd: 'could get clean, standardized HR data and take the manual people-ops off your team after every acquisition',
-		screen: 'standardize HR data and automate people operations across their portfolio companies',
+		screen: 'to standardize HR data and automate people operations across their portfolio companies',
 		emailSubject: 'Standardizing 40,000 job titles in a couple hours',
 		emailHook: 'We built a Power App that mapped and standardized 40,000 job titles in a couple hours, plus an automated goal-tracking system for another client’s workforce.'
 	},
@@ -62,7 +62,7 @@ export const CLUSTERS: Cluster[] = [
 		keywords: ['finance', 'cfo', 'chief financial', 'controller', 'accounting', 'tax', 'treasur', 'capital markets'],
 		hook: 'we do Microsoft work for PE firms like Gryphon and Potomac and we just took a financial firm from AI-curious to fully Copilot-ready',
 		valueAdd: 'could get your portfolio capturing real, measurable value from AI',
-		screen: 'automate financial reporting and back-office work across their portfolio companies',
+		screen: 'like Gryphon and Potomac and wanted to see if you\'d be interested in getting real, measurable value from AI',
 		emailSubject: 'Real-time numbers without waiting on month-end',
 		emailHook: 'We just automated invoice processing and built Power BI dashboards that give leadership real-time numbers.'
 	},
@@ -72,7 +72,7 @@ export const CLUSTERS: Cluster[] = [
 		keywords: ['investor relations', 'investor', 'ir', 'fundraising', 'co-invest', 'private wealth', 'marketing', 'brand', 'communications'],
 		hook: 'we built automated lead-capture and reporting workflows that pulled hours of manual data entry off a client’s team',
 		valueAdd: 'could take the manual data entry and reporting grind off your team so LP reporting stops being a quarterly fire drill',
-		screen: 'streamline LP reporting and automate their fundraising operations',
+		screen: 'to streamline LP reporting and automate their fundraising operations',
 		emailSubject: 'Automating the manual work in LP reporting',
 		emailHook: 'We built automated lead-capture and reporting workflows that pulled hours of manual data entry off a client’s team.'
 	},
@@ -82,7 +82,7 @@ export const CLUSTERS: Cluster[] = [
 		keywords: ['administration', 'administrative', 'admin', 'office manager', 'facilities', 'property manager', 'project manager', 'coordinator', 'intake', 'filing', 'records', 'document'],
 		hook: 'we replace manual intake and filing with agents that cut errors and delays',
 		valueAdd: 'can automate your admin and tracking work',
-		screen: 'automate the manual intake, filing, and tracking work across their portfolio companies',
+		screen: 'to automate the manual intake, filing, and tracking work across their portfolio companies',
 		emailSubject: 'Replacing manual intake and filing with AI agents',
 		emailHook: 'We replace manual intake and filing with AI agents that cut the errors and delays out of admin work.'
 	},
@@ -92,7 +92,7 @@ export const CLUSTERS: Cluster[] = [
 		keywords: ['operations', 'operating', 'coo', 'portfolio performance', 'portfolio', 'performance reporting', 'strategic resource', 'revenue operations'],
 		hook: 'we just built a Power App that mapped and standardized 40,000 job titles in a fraction of the time and cost other vendors quoted',
 		valueAdd: 'could standardize systems and data across your portco immediately after close',
-		screen: 'standardize systems and data across their portfolio companies after an acquisition',
+		screen: 'to standardize systems and data across their portfolio companies after an acquisition',
 		emailSubject: 'Standardizing portfolio systems right after close',
 		emailHook: 'We just built a Power App that mapped and standardized 40,000 job titles in a fraction of the time and cost other vendors quoted.'
 	},
@@ -102,7 +102,7 @@ export const CLUSTERS: Cluster[] = [
 		keywords: ['managing director', 'vice president', 'senior vice president', 'svp', 'partner', 'principal', 'president', 'ceo', 'director', 'advisor', 'executive', 'md'],
 		hook: "we took a financial firm from AI-curious to fully Copilot-ready, and we've done Microsoft work for PE firms like Gryphon Investors and Potomac Equity Partners",
 		valueAdd: 'could get your portfolio capturing real, measurable value from AI instead of just paying for the hype',
-		screen: 'get their portfolio companies AI-ready and capturing real value from Microsoft and Copilot',
+		screen: 'to get their portfolio companies AI-ready and capturing real value from Microsoft and Copilot',
 		emailSubject: 'Getting your portfolio AI-ready (Gryphon, Potomac)',
 		emailHook: "We took a financial firm from AI-curious to fully Copilot-ready, and we've done Microsoft work for PE firms like Gryphon Investors and Potomac Equity Partners."
 	}
@@ -114,7 +114,7 @@ export const DEFAULT_CLUSTER: Cluster = {
 	keywords: [],
 	hook: 'we recently built a Power App that standardized 40,000 job titles in a couple hours, and consolidated another client’s SQL environment to save $350,000 a year',
 	valueAdd: 'could erase the grunt work and standardize the systems your portfolio companies are still running by hand',
-	screen: 'erase the grunt work and standardize the systems across their portfolio companies',
+	screen: 'to erase the grunt work and standardize the systems across their portfolio companies',
 	emailSubject: 'Erasing the grunt work across your portfolio',
 	emailHook: 'We recently built a Power App that standardized 40,000 job titles in a couple hours, and consolidated another client’s SQL environment to save $350,000 a year.'
 };
@@ -159,7 +159,7 @@ export function buildScript(contact: ScriptContact, rep: Rep): string {
 
 export function buildScreen(rep: Rep, contact: ScriptContact): string {
 	const c = clusterFor(contact);
-	return `${rep} with IncWorx. I work with PE firms to ${c.screen}.`;
+	return `${rep} with IncWorx. I work with PE firms ${c.screen}.`;
 }
 
 export function buildEmail(contact: ScriptContact, rep: Rep): { subject: string; body: string } {

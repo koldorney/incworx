@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { buildScript, buildScreen, clusterFor, OBJECTIONS, type Rep } from '$lib/data/script-engine';
+	import { buildScript, buildScreen, buildEmail, clusterFor, OBJECTIONS, type Rep, type Objection } from '$lib/data/script-engine';
 
 	let { data } = $props();
 
@@ -13,21 +13,66 @@
 	let queueIndex = $state(0);
 	let firmFilter = $state('');
 	let groupFilter = $state('');
+	let priorityFilter = $state(''); // '' = any priority
+	let search = $state('');
 	let hideDnc = $state(true);
 	const firms = [...new Set(data.contacts.map(c => c.firm))].sort();
 
 	const queue = $derived.by(() => {
-		let list = data.contacts.filter(c => c.priority === 'high');
+		let list = data.contacts;
+		if (priorityFilter) list = list.filter(c => c.priority === priorityFilter);
 		if (firmFilter) list = list.filter(c => c.firm === firmFilter);
 		if (groupFilter) list = list.filter(c => c.group_name === groupFilter);
 		if (hideDnc) list = list.filter(c => !c.dnc);
+		const q = search.trim().toLowerCase();
+		if (q) {
+			list = list.filter(c =>
+				(c.name ?? '').toLowerCase().includes(q) ||
+				(c.firm ?? '').toLowerCase().includes(q) ||
+				(c.position ?? '').toLowerCase().includes(q)
+			);
+		}
 		return list;
+	});
+
+	// Keep the cursor in range whenever the filtered queue changes.
+	$effect(() => {
+		if (queueIndex > queue.length - 1) queueIndex = Math.max(0, queue.length - 1);
 	});
 
 	const currentContact = $derived(queue[queueIndex] || null);
 	const currentScript = $derived(currentContact ? buildScript(currentContact, rep) : '');
 	const currentScreen = $derived(currentContact ? buildScreen(rep, currentContact) : '');
 	const currentCluster = $derived(currentContact ? clusterFor(currentContact) : null);
+	const currentEmail = $derived(currentContact ? buildEmail(currentContact, rep) : { subject: '', body: '' });
+
+	// Editable working copies — reset to the generated text when the contact or rep changes,
+	// but stay editable in between so you can tweak on the fly during a call.
+	let scriptDraft = $state('');
+	let emailSubjectDraft = $state('');
+	let emailBodyDraft = $state('');
+	$effect(() => { scriptDraft = currentScript; });
+	$effect(() => {
+		emailSubjectDraft = currentEmail.subject;
+		emailBodyDraft = currentEmail.body;
+	});
+
+	// Editable objection bank — rep name injected; resets if you switch reps.
+	let objections = $state<Objection[]>([]);
+	$effect(() => {
+		objections = OBJECTIONS.map((o) => ({
+			trigger: o.trigger,
+			response: o.response.includes('this is with IncWorx')
+				? o.response.replace('this is with IncWorx', `this is ${rep} with IncWorx`)
+				: o.response
+		}));
+	});
+
+	const mailtoHref = $derived(
+		currentContact
+			? `mailto:${currentContact.email}?subject=${encodeURIComponent(emailSubjectDraft)}&body=${encodeURIComponent(emailBodyDraft)}`
+			: 'mailto:'
+	);
 
 	// Session stats
 	let sessionStats = $state({
@@ -61,7 +106,11 @@
 	}
 
 	function copyScript() {
-		if (currentScript) navigator.clipboard.writeText(currentScript);
+		if (scriptDraft) navigator.clipboard.writeText(scriptDraft);
+	}
+
+	function copyEmail() {
+		if (emailBodyDraft) navigator.clipboard.writeText(`Subject: ${emailSubjectDraft}\n\n${emailBodyDraft}`);
 	}
 
 	let dispositionNotes = $state('');
@@ -147,6 +196,21 @@
 		<div class="left-col">
 			<div class="queue-header">
 				<h2>Call Queue</h2>
+				<input
+					class="queue-search"
+					type="search"
+					placeholder="Search anyone — name, firm, title…"
+					bind:value={search}
+				/>
+				<span class="queue-pos">{queue.length ? queueIndex + 1 : 0} / {queue.length}</span>
+			</div>
+			<div class="queue-filters">
+				<select bind:value={priorityFilter}>
+					<option value="">Any priority</option>
+					<option value="high">High</option>
+					<option value="medium">Medium</option>
+					<option value="low">Low</option>
+				</select>
 				<select bind:value={firmFilter}>
 					<option value="">All Firms</option>
 					{#each firms as f}
@@ -159,7 +223,6 @@
 					<option value="B">Group B</option>
 				</select>
 				<label class="dnc-toggle"><input type="checkbox" bind:checked={hideDnc} /> Hide DNC</label>
-				<span class="queue-pos">{queueIndex + 1} / {queue.length}</span>
 			</div>
 
 			{#if currentContact}
@@ -195,20 +258,31 @@
 						</div>
 					</div>
 
-					<!-- Dynamic Script (P6) -->
+					<!-- Dynamic Script (P6) — editable -->
 					<div class="script-panel">
 						<div class="script-head">
 							<span class="script-title">Script</span>
 							{#if currentCluster}<span class="cluster-tag">{currentCluster.label}</span>{/if}
 							<button class="copy-script" onclick={copyScript}>Copy</button>
 						</div>
-						<p class="script-body">{currentScript}</p>
+						<textarea class="script-edit" bind:value={scriptDraft} rows="5"></textarea>
 					</div>
 
 					<!-- Gatekeeper Screening Line (P7) -->
 					<div class="screen-panel">
 						<span class="screen-label">If a gatekeeper picks up</span>
 						<p class="screen-body">{currentScreen}</p>
+					</div>
+
+					<!-- Email draft — editable -->
+					<div class="email-panel">
+						<div class="script-head">
+							<span class="script-title email-title">Email</span>
+							<button class="copy-script" onclick={copyEmail}>Copy</button>
+							<a class="copy-script" href={mailtoHref}>Open in mail</a>
+						</div>
+						<input class="email-subject" bind:value={emailSubjectDraft} placeholder="Subject" />
+						<textarea class="email-body" bind:value={emailBodyDraft} rows="8"></textarea>
 					</div>
 
 					<div class="disposition-grid">
@@ -274,10 +348,10 @@
 			<div class="objection-bank">
 				<h3>Objection Bank</h3>
 				<div class="obj-list">
-					{#each OBJECTIONS as o}
+					{#each objections as o}
 						<details class="obj">
 							<summary>{o.trigger}</summary>
-							<p>{rep && o.response.includes('this is with IncWorx') ? o.response.replace('this is with IncWorx', `this is ${rep} with IncWorx`) : o.response}</p>
+							<textarea class="obj-edit" bind:value={o.response} rows="4"></textarea>
 						</details>
 					{/each}
 				</div>
@@ -339,6 +413,14 @@
 	.copy-script { margin-left: auto; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #ccc; padding: 3px 10px; border-radius: 5px; font-size: 11px; cursor: pointer; }
 	.copy-script:hover { background: rgba(255,255,255,0.12); }
 	.script-body { font-size: 14px; line-height: 1.55; color: #e8e8f0; margin: 0; }
+	.script-edit { width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.25); border: 1px solid rgba(99,102,241,0.25); border-radius: 8px; padding: 10px 12px; color: #e8e8f0; font-size: 14px; line-height: 1.55; font-family: inherit; resize: vertical; }
+	.script-edit:focus { outline: none; border-color: rgba(99,102,241,0.6); }
+	.email-panel { background: rgba(77,166,255,0.06); border: 1px solid rgba(77,166,255,0.22); border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }
+	.email-title { color: #7cc1ff; }
+	.email-subject { width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.25); border: 1px solid rgba(77,166,255,0.22); border-radius: 8px; padding: 8px 12px; color: #e8e8f0; font-size: 13px; font-weight: 600; font-family: inherit; margin-bottom: 8px; }
+	.email-subject:focus { outline: none; border-color: rgba(77,166,255,0.6); }
+	.email-body { width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.25); border: 1px solid rgba(77,166,255,0.22); border-radius: 8px; padding: 10px 12px; color: #e0e0e0; font-size: 13px; line-height: 1.5; font-family: inherit; resize: vertical; }
+	.email-body:focus { outline: none; border-color: rgba(77,166,255,0.6); }
 	.screen-panel { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; }
 	.screen-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #fbbf24; }
 	.screen-body { font-size: 13px; line-height: 1.5; color: #fde68a; margin: 4px 0 0; }
@@ -353,6 +435,8 @@
 	.obj summary::before { content: '› '; color: #6366f1; }
 	.obj[open] summary::before { content: '⌄ '; }
 	.obj p { font-size: 13px; line-height: 1.5; color: #aaa; margin: 8px 0 0; }
+	.obj-edit { width: 100%; box-sizing: border-box; margin-top: 8px; background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 8px 10px; color: #ccc; font-size: 13px; line-height: 1.5; font-family: inherit; resize: vertical; }
+	.obj-edit:focus { outline: none; border-color: rgba(99,102,241,0.5); }
 
 	/* Main Grid */
 	.main-grid { display: grid; grid-template-columns: 420px 1fr; flex: 1; overflow: hidden; }
@@ -360,10 +444,13 @@
 	.right-col { overflow-y: auto; padding: 16px; display: flex; flex-direction: column; }
 
 	/* Queue */
-	.queue-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-	.queue-header h2 { font-size: 14px; font-weight: 600; color: #fff; margin: 0; }
-	.queue-header select { background: #1a1a2e; border: 1px solid #333; color: #e0e0e0; padding: 5px 8px; border-radius: 5px; font-size: 12px; }
-	.queue-pos { font-size: 12px; color: #666; margin-left: auto; }
+	.queue-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+	.queue-header h2 { font-size: 14px; font-weight: 600; color: #fff; margin: 0; flex-shrink: 0; }
+	.queue-search { flex: 1; min-width: 0; background: #1a1a2e; border: 1px solid #333; color: #e0e0e0; padding: 6px 10px; border-radius: 6px; font-size: 12px; font-family: inherit; }
+	.queue-search:focus { outline: none; border-color: rgba(99,102,241,0.5); }
+	.queue-filters { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+	.queue-filters select { background: #1a1a2e; border: 1px solid #333; color: #e0e0e0; padding: 5px 8px; border-radius: 5px; font-size: 12px; }
+	.queue-pos { font-size: 12px; color: #666; margin-left: auto; flex-shrink: 0; }
 
 	/* Contact Card */
 	.contact-card { background: #111118; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; }

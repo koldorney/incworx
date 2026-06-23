@@ -32,7 +32,7 @@ export const CLUSTERS: Cluster[] = [
 		keywords: ['it', 'i.t', 'information technology', 'technology', 'cio', 'cto', 'infrastructure', 'data and ai', 'data & ai', 'technical', 'systems'],
 		hook: "we just consolidated a client's SQL Server environment, pulled $350K out of their annual run-rate",
 		valueAdd: "could find that same kind of savings across your IT and data spend",
-		screen: 'modernize and consolidate the IT and data systems across their portfolio companies',
+		screen: 'save hundreds of thousands or millions across IT and data spend',
 		emailSubject: 'Took $350K off a client’s annual run rate',
 		emailHook: "We recently consolidated a client's SQL Server environment and pulled $350,000 out of their annual run rate."
 	},

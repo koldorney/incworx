@@ -19,26 +19,34 @@
 	let hideDnc = $state(true);
 	const firms = [...new Set(data.contacts.map(c => c.firm))].sort();
 
+	// The queue is filtered by the dropdowns/DNC only — NOT by the search box.
+	// Search jumps to a person inside this list (below) so Next/Prev keep working.
 	const queue = $derived.by(() => {
 		let list = data.contacts;
 		if (priorityFilter) list = list.filter(c => c.priority === priorityFilter);
 		if (firmFilter) list = list.filter(c => c.firm === firmFilter);
 		if (groupFilter) list = list.filter(c => c.group_name === groupFilter);
 		if (hideDnc) list = list.filter(c => !c.dnc);
-		const q = search.trim().toLowerCase();
-		if (q) {
-			list = list.filter(c =>
-				(c.name ?? '').toLowerCase().includes(q) ||
-				(c.firm ?? '').toLowerCase().includes(q) ||
-				(c.position ?? '').toLowerCase().includes(q)
-			);
-		}
 		return list;
 	});
 
 	// Keep the cursor in range whenever the filtered queue changes.
 	$effect(() => {
 		if (queueIndex > queue.length - 1) queueIndex = Math.max(0, queue.length - 1);
+	});
+
+	// Typing in the search box JUMPS to the first matching contact in the queue
+	// instead of filtering everyone else out — so you can pull anyone up out of
+	// order and still hit Next to keep moving through the full list.
+	$effect(() => {
+		const q = search.trim().toLowerCase();
+		if (!q) return;
+		const idx = queue.findIndex(c =>
+			(c.name ?? '').toLowerCase().includes(q) ||
+			(c.firm ?? '').toLowerCase().includes(q) ||
+			(c.position ?? '').toLowerCase().includes(q)
+		);
+		if (idx >= 0) queueIndex = idx;
 	});
 
 	const currentContact = $derived(queue[queueIndex] || null);
@@ -268,7 +276,7 @@
 				<input
 					class="queue-search"
 					type="search"
-					placeholder="Search anyone — name, firm, title…"
+					placeholder="Jump to anyone — name, firm, title…"
 					bind:value={search}
 				/>
 				<span class="queue-pos">{queue.length ? queueIndex + 1 : 0} / {queue.length}</span>

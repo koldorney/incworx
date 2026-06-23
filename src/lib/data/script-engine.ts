@@ -30,8 +30,8 @@ export const CLUSTERS: Cluster[] = [
 		key: 'it',
 		label: 'IT / Data',
 		keywords: ['it', 'i.t', 'information technology', 'technology', 'cio', 'cto', 'infrastructure', 'data and ai', 'data & ai', 'technical', 'systems'],
-		hook: "we just consolidated a client's SQL Server environment and pulled $350,000 out of their annual run rate",
-		valueAdd: "could pull that cost out of your IT and data spend without leaning on a team that's already stretched thin",
+		hook: "we just consolidated a client's SQL Server environment, pulled $350K out of their annual run-rate",
+		valueAdd: "could find that same kind of savings across your IT and data spend",
 		screen: 'modernize and consolidate the IT and data systems across their portfolio companies',
 		emailSubject: 'Took $350K off a client’s annual run rate',
 		emailHook: "We recently consolidated a client's SQL Server environment and pulled $350,000 out of their annual run rate."
@@ -154,7 +154,7 @@ export function firstName(contact: ScriptContact): string {
 export function buildScript(contact: ScriptContact, rep: Rep): string {
 	const c = clusterFor(contact);
 	const fn = firstName(contact);
-	return `Hey ${fn}, this is ${rep} with IncWorx. How are you? I'm calling because ${c.hook}. So I thought I'd reach out to see if you think it'd be worth a fifteen minute meeting talking about how you ${c.valueAdd}.`;
+	return `Hey ${fn}, this is ${rep} with IncWorx. How are you? I'm calling because ${c.hook}. So I wanted to reach out to you to see if you'd be interested in a meeting with our president talking about how you ${c.valueAdd}.`;
 }
 
 export function buildScreen(rep: Rep, contact: ScriptContact): string {

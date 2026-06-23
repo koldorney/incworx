@@ -8,7 +8,8 @@
 	const nav = [
 		{ href: '/', label: 'Ecosystem Map' },
 		{ href: '/call-list', label: 'Call List' },
-		{ href: '/outbound', label: 'Outbound Center' }
+		{ href: '/outbound', label: 'Outbound Center' },
+		{ href: '/rotation', label: 'Daily Rotation' }
 	];
 
 	const isAuth = $derived(page.url.pathname.startsWith('/auth'));

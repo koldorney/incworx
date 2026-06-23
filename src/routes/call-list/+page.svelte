@@ -5,10 +5,15 @@
 	let firmFilter = $state('');
 	let deptFilter = $state('');
 	let priorityFilter = $state('');
-	let sortCol = $state('priority');
+	let tzFilter = $state('');
+	let groupFilter = $state('');
+	let hideDnc = $state(false);
+	let sortCol = $state('timezone');
 	let sortDir = $state<'asc' | 'desc'>('asc');
 
 	const priorityOrder: Record<string, number> = { high: 0, medium: 1, low: 2 };
+	// East -> West ordering for timezone sort
+	const tzOrder: Record<string, number> = { ET: 0, CT: 1, MT: 2, PT: 3 };
 	const firms = $derived([...new Set(data.contacts.map(c => c.firm))].sort());
 
 	const filtered = $derived.by(() => {
@@ -16,6 +21,9 @@
 			if (firmFilter && c.firm !== firmFilter) return false;
 			if (deptFilter && c.dept !== deptFilter) return false;
 			if (priorityFilter && c.priority !== priorityFilter) return false;
+			if (tzFilter && c.timezone !== tzFilter) return false;
+			if (groupFilter && c.group_name !== groupFilter) return false;
+			if (hideDnc && c.dnc) return false;
 			if (search) {
 				const s = `${c.name} ${c.firm} ${c.position} ${c.email} ${c.dept}`.toLowerCase();
 				if (!s.includes(search.toLowerCase())) return false;
@@ -30,6 +38,8 @@
 			else if (sortCol === 'firm') { va = a.firm.toLowerCase(); vb = b.firm.toLowerCase(); }
 			else if (sortCol === 'position') { va = a.position.toLowerCase(); vb = b.position.toLowerCase(); }
 			else if (sortCol === 'dept') { va = a.dept; vb = b.dept; }
+			else if (sortCol === 'timezone') { va = tzOrder[a.timezone] ?? 9; vb = tzOrder[b.timezone] ?? 9; }
+			else if (sortCol === 'group_name') { va = a.group_name ?? ''; vb = b.group_name ?? ''; }
 			else { va = a.name; vb = b.name; }
 			if (va < vb) return sortDir === 'asc' ? -1 : 1;
 			if (va > vb) return sortDir === 'asc' ? 1 : -1;
@@ -64,9 +74,9 @@
 	}
 
 	function exportCSV() {
-		const header = 'Name,First,Last,Firm,Position,Department,Email,Phone,LinkedIn,Confidence,Priority';
-		const rows = data.contacts.map(c =>
-			[c.name, c.first_name, c.last_name, c.firm, `"${c.position}"`, c.dept, c.email, c.phone, c.linkedin, c.confidence, c.priority].join(',')
+		const header = 'Name,First,Last,Firm,Position,Department,Group,Timezone,DNC,Email,Phone,LinkedIn,Confidence,Priority';
+		const rows = filtered.map(c =>
+			[c.name, c.first_name, c.last_name, c.firm, `"${c.position}"`, c.dept, c.group_name, c.timezone, c.dnc ? 'yes' : 'no', c.email, c.phone, c.linkedin, c.confidence, c.priority].join(',')
 		);
 		const csv = header + '\n' + rows.join('\n');
 		const blob = new Blob([csv], { type: 'text/csv' });
@@ -110,6 +120,19 @@
 			<option value="medium">Medium Priority</option>
 			<option value="low">Lower Priority</option>
 		</select>
+		<select bind:value={tzFilter}>
+			<option value="">All Time Zones</option>
+			<option value="ET">Eastern (ET)</option>
+			<option value="CT">Central (CT)</option>
+			<option value="MT">Mountain (MT)</option>
+			<option value="PT">Pacific (PT)</option>
+		</select>
+		<select bind:value={groupFilter}>
+			<option value="">All Groups</option>
+			<option value="A">Group A</option>
+			<option value="B">Group B</option>
+		</select>
+		<label class="dnc-toggle"><input type="checkbox" bind:checked={hideDnc} /> Hide DNC</label>
 		<div class="stats">Showing <b>{filtered.length}</b> of <b>{data.contacts.length}</b> contacts</div>
 	</div>
 	<div class="table-wrap">
@@ -121,6 +144,8 @@
 					<th class:sorted-asc={sortCol === 'firm' && sortDir === 'asc'} class:sorted-desc={sortCol === 'firm' && sortDir === 'desc'} onclick={() => toggleSort('firm')}>Firm</th>
 					<th class:sorted-asc={sortCol === 'position' && sortDir === 'asc'} class:sorted-desc={sortCol === 'position' && sortDir === 'desc'} onclick={() => toggleSort('position')}>Position</th>
 					<th class:sorted-asc={sortCol === 'dept' && sortDir === 'asc'} class:sorted-desc={sortCol === 'dept' && sortDir === 'desc'} onclick={() => toggleSort('dept')}>Dept</th>
+					<th class:sorted-asc={sortCol === 'group_name' && sortDir === 'asc'} class:sorted-desc={sortCol === 'group_name' && sortDir === 'desc'} onclick={() => toggleSort('group_name')}>Grp</th>
+					<th class:sorted-asc={sortCol === 'timezone' && sortDir === 'asc'} class:sorted-desc={sortCol === 'timezone' && sortDir === 'desc'} onclick={() => toggleSort('timezone')}>TZ</th>
 					<th>Email</th>
 					<th>Phone</th>
 					<th class:sorted-asc={sortCol === 'confidence' && sortDir === 'asc'} class:sorted-desc={sortCol === 'confidence' && sortDir === 'desc'} onclick={() => toggleSort('confidence')}>Conf.</th>
@@ -136,8 +161,10 @@
 						<td><span class="firm-tag">{c.firm}</span></td>
 						<td class="position">{c.position}</td>
 						<td><span class="dept {deptClass(c.dept)}">{c.dept}</span></td>
+						<td><span class="grp grp-{c.group_name}">{c.group_name || '—'}</span></td>
+						<td><span class="tz">{c.timezone || '—'}</span></td>
 						<td class="email"><a href="mailto:{c.email}">{c.email}</a></td>
-						<td class="phone">{c.phone || '—'}</td>
+						<td class="phone">{#if c.dnc}<span class="dnc-flag" title="Do Not Call">DNC</span>{:else}{c.phone || '—'}{/if}</td>
 						<td class="confidence {confClass(c.confidence)}">{c.confidence}%</td>
 						<td class="linkedin">{#if c.linkedin}<a href={c.linkedin} target="_blank" rel="noopener">Profile</a>{/if}</td>
 						<td class="actions"><button class="copy-btn" onclick={() => copyEmail(c.email)}>Copy</button></td>
@@ -176,6 +203,13 @@
 	.email a { color: #4da6ff; text-decoration: none; }
 	.email a:hover { text-decoration: underline; }
 	.phone { color: #00d4aa; }
+	.dnc-flag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; background: #5c1a1a; color: #ff6b6b; }
+	.grp { display: inline-block; width: 18px; text-align: center; padding: 2px 0; border-radius: 6px; font-size: 11px; font-weight: 700; }
+	.grp-A { background: #1a3a5c; color: #4da6ff; }
+	.grp-B { background: #5c3a1a; color: #ffb347; }
+	.tz { font-size: 11px; font-weight: 600; color: #b088f9; }
+	.dnc-toggle { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #aaa; cursor: pointer; }
+	.dnc-toggle input { accent-color: #00d4aa; }
 	.linkedin a { color: #0077b5; text-decoration: none; font-size: 12px; }
 	.linkedin a:hover { text-decoration: underline; }
 	.position { color: #ccc; }

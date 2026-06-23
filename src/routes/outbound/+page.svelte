@@ -1,32 +1,33 @@
 <script lang="ts">
-	import { onMount, onDestroy } from 'svelte';
+	import { buildScript, buildScreen, clusterFor, OBJECTIONS, type Rep } from '$lib/data/script-engine';
 
 	let { data } = $props();
 
-	// A/B/A/B Timer State
-	const A_DURATION = 25 * 60;
-	const B_DURATION = 5 * 60;
+	// Who's calling — toggled at the top of the session.
+	let rep = $state<Rep>('Joseph');
 
 	let sessionActive = $state(false);
-	let currentBlock = $state<'A' | 'B'>('A');
-	let blockNumber = $state(1);
-	let timeRemaining = $state(A_DURATION);
-	let totalSessionTime = $state(0);
-	let timerInterval: ReturnType<typeof setInterval> | null = null;
 	let sessionId = $state('');
 
 	// Contact queue
 	let queueIndex = $state(0);
 	let firmFilter = $state('');
+	let groupFilter = $state('');
+	let hideDnc = $state(true);
 	const firms = [...new Set(data.contacts.map(c => c.firm))].sort();
 
 	const queue = $derived.by(() => {
 		let list = data.contacts.filter(c => c.priority === 'high');
 		if (firmFilter) list = list.filter(c => c.firm === firmFilter);
+		if (groupFilter) list = list.filter(c => c.group_name === groupFilter);
+		if (hideDnc) list = list.filter(c => !c.dnc);
 		return list;
 	});
 
 	const currentContact = $derived(queue[queueIndex] || null);
+	const currentScript = $derived(currentContact ? buildScript(currentContact, rep) : '');
+	const currentScreen = $derived(currentContact ? buildScreen(rep, currentContact) : '');
+	const currentCluster = $derived(currentContact ? clusterFor(currentContact) : null);
 
 	// Session stats
 	let sessionStats = $state({
@@ -52,49 +53,15 @@
 	function startSession() {
 		sessionActive = true;
 		sessionId = 'sess_' + Date.now().toString(36);
-		currentBlock = 'A';
-		blockNumber = 1;
-		timeRemaining = A_DURATION;
-		totalSessionTime = 0;
 		sessionStats = { dials: 0, connects: 0, voicemails: 0, noAnswers: 0, meetingsBooked: 0, emailsSent: 0 };
-		startTimer();
 	}
 
 	function stopSession() {
 		sessionActive = false;
-		if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
 	}
 
-	function startTimer() {
-		if (timerInterval) clearInterval(timerInterval);
-		timerInterval = setInterval(() => {
-			timeRemaining--;
-			totalSessionTime++;
-			if (timeRemaining <= 0) {
-				advanceBlock();
-			}
-		}, 1000);
-	}
-
-	function advanceBlock() {
-		if (currentBlock === 'A') {
-			currentBlock = 'B';
-			timeRemaining = B_DURATION;
-		} else {
-			currentBlock = 'A';
-			blockNumber++;
-			timeRemaining = A_DURATION;
-		}
-	}
-
-	function skipBlock() {
-		advanceBlock();
-	}
-
-	function formatTime(secs: number) {
-		const m = Math.floor(secs / 60);
-		const s = secs % 60;
-		return `${m}:${s.toString().padStart(2, '0')}`;
+	function copyScript() {
+		if (currentScript) navigator.clipboard.writeText(currentScript);
 	}
 
 	let dispositionNotes = $state('');
@@ -107,7 +74,7 @@
 			firm: currentContact.firm,
 			disposition,
 			notes: dispositionNotes,
-			block_type: currentBlock,
+			block_type: rep,
 			created_at: new Date().toISOString(),
 			session_id: sessionId,
 			contact_id: currentContact.id,
@@ -153,11 +120,6 @@
 	];
 
 	const connectRate = $derived(sessionStats.dials > 0 ? Math.round((sessionStats.connects / sessionStats.dials) * 100) : 0);
-	const dialsPerHour = $derived(totalSessionTime > 60 ? Math.round(sessionStats.dials / (totalSessionTime / 3600)) : sessionStats.dials);
-
-	onDestroy(() => {
-		if (timerInterval) clearInterval(timerInterval);
-	});
 </script>
 
 <svelte:head>
@@ -165,31 +127,18 @@
 </svelte:head>
 
 <div class="page">
-	<!-- Timer Bar -->
-	<div class="timer-bar" class:active={sessionActive} class:block-a={currentBlock === 'A'} class:block-b={currentBlock === 'B'}>
+	<!-- Session Bar -->
+	<div class="session-bar">
+		<div class="rep-toggle">
+			<span class="rep-label">Calling as</span>
+			<button class:active={rep === 'Joseph'} onclick={() => (rep = 'Joseph')}>Joseph</button>
+			<button class:active={rep === 'Ryan'} onclick={() => (rep = 'Ryan')}>Ryan</button>
+		</div>
 		{#if !sessionActive}
-			<div class="timer-idle">
-				<div class="method-label">Connor Murray A/B/A/B System</div>
-				<div class="method-desc">25 min Activity sprints + 5 min Batch reviews. Pure volume, pure focus.</div>
-				<button class="start-btn" onclick={startSession}>Start Session</button>
-			</div>
+			<button class="start-btn" onclick={startSession}>Start Session</button>
 		{:else}
-			<div class="timer-active">
-				<div class="block-indicator">
-					<span class="block-letter">{currentBlock}</span>
-					<span class="block-name">{currentBlock === 'A' ? 'ACTIVITY SPRINT' : 'BATCH REVIEW'}</span>
-					<span class="block-num">Block {blockNumber}</span>
-				</div>
-				<div class="timer-clock">{formatTime(timeRemaining)}</div>
-				<div class="timer-hint">{currentBlock === 'A' ? 'Dial. Pitch. Move on. No pausing.' : 'Log notes. Research next batch. Prep.'}</div>
-				<div class="timer-controls">
-					<button class="timer-btn" onclick={skipBlock}>Skip →</button>
-					<button class="timer-btn stop" onclick={stopSession}>End Session</button>
-				</div>
-			</div>
-			<div class="progress-bar">
-				<div class="progress-fill" style="width: {((currentBlock === 'A' ? A_DURATION : B_DURATION) - timeRemaining) / (currentBlock === 'A' ? A_DURATION : B_DURATION) * 100}%"></div>
-			</div>
+			<span class="session-live">Session live</span>
+			<button class="end-btn" onclick={stopSession}>End Session</button>
 		{/if}
 	</div>
 
@@ -204,6 +153,12 @@
 						<option value={f}>{f}</option>
 					{/each}
 				</select>
+				<select bind:value={groupFilter}>
+					<option value="">A + B</option>
+					<option value="A">Group A</option>
+					<option value="B">Group B</option>
+				</select>
+				<label class="dnc-toggle"><input type="checkbox" bind:checked={hideDnc} /> Hide DNC</label>
 				<span class="queue-pos">{queueIndex + 1} / {queue.length}</span>
 			</div>
 
@@ -234,6 +189,26 @@
 							<span class="cc-label">Confidence</span>
 							<span class="cc-conf">{currentContact.confidence}%</span>
 						</div>
+						<div class="cc-row">
+							<span class="cc-label">Group / TZ</span>
+							<span class="cc-meta">{currentContact.group_name || '—'} · {currentContact.timezone || '—'}{#if currentContact.dnc} · <span class="cc-dnc">DNC</span>{/if}</span>
+						</div>
+					</div>
+
+					<!-- Dynamic Script (P6) -->
+					<div class="script-panel">
+						<div class="script-head">
+							<span class="script-title">Script</span>
+							{#if currentCluster}<span class="cluster-tag">{currentCluster.label}</span>{/if}
+							<button class="copy-script" onclick={copyScript}>Copy</button>
+						</div>
+						<p class="script-body">{currentScript}</p>
+					</div>
+
+					<!-- Gatekeeper Screening Line (P7) -->
+					<div class="screen-panel">
+						<span class="screen-label">If a gatekeeper picks up</span>
+						<p class="screen-body">{currentScreen}</p>
 					</div>
 
 					<div class="disposition-grid">
@@ -287,12 +262,24 @@
 					<div class="stat-lbl">Connect Rate</div>
 				</div>
 				<div class="stat-card">
-					<div class="stat-val">{dialsPerHour}</div>
-					<div class="stat-lbl">Dials/Hr</div>
+					<div class="stat-val">{sessionStats.voicemails}</div>
+					<div class="stat-lbl">Voicemails</div>
 				</div>
 				<div class="stat-card">
 					<div class="stat-val">{sessionStats.emailsSent}</div>
 					<div class="stat-lbl">Emails</div>
+				</div>
+			</div>
+
+			<div class="objection-bank">
+				<h3>Objection Bank</h3>
+				<div class="obj-list">
+					{#each OBJECTIONS as o}
+						<details class="obj">
+							<summary>{o.trigger}</summary>
+							<p>{rep && o.response.includes('this is with IncWorx') ? o.response.replace('this is with IncWorx', `this is ${rep} with IncWorx`) : o.response}</p>
+						</details>
+					{/each}
 				</div>
 			</div>
 
@@ -328,33 +315,44 @@
 <style>
 	.page { display: flex; flex-direction: column; height: 100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0f; color: #e0e0e0; overflow: hidden; }
 
-	/* Timer Bar */
-	.timer-bar { background: #111118; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 16px 32px; position: relative; }
-	.timer-bar.active.block-a { background: linear-gradient(135deg, #0f1a0f, #111118); border-bottom-color: #10b981; }
-	.timer-bar.active.block-b { background: linear-gradient(135deg, #1a1a0f, #111118); border-bottom-color: #f59e0b; }
-	.timer-idle { text-align: center; padding: 8px 0; }
-	.method-label { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-	.method-desc { font-size: 13px; color: #888; margin-bottom: 12px; }
-	.start-btn { background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 10px 32px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; }
+	/* Session Bar */
+	.session-bar { background: #111118; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 12px 32px; display: flex; align-items: center; gap: 20px; }
+	.rep-toggle { display: flex; align-items: center; gap: 8px; }
+	.rep-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+	.rep-toggle button { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: #aaa; padding: 6px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; }
+	.rep-toggle button.active { background: linear-gradient(135deg, #6366f1, #4f46e5); border-color: transparent; color: #fff; }
+	.start-btn { margin-left: auto; background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 9px 28px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; }
 	.start-btn:hover { opacity: 0.9; }
-	.timer-active { display: flex; align-items: center; gap: 24px; }
-	.block-indicator { display: flex; align-items: center; gap: 8px; }
-	.block-letter { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; color: #fff; }
-	.block-a .block-letter { background: #10b981; }
-	.block-b .block-letter { background: #f59e0b; }
-	.block-name { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #aaa; }
-	.block-num { font-size: 11px; color: #666; }
-	.timer-clock { font-size: 36px; font-weight: 700; font-variant-numeric: tabular-nums; color: #fff; min-width: 100px; }
-	.timer-hint { font-size: 13px; color: #888; flex: 1; }
-	.timer-controls { display: flex; gap: 8px; }
-	.timer-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #ccc; padding: 6px 14px; border-radius: 6px; font-size: 12px; cursor: pointer; }
-	.timer-btn:hover { background: rgba(255,255,255,0.12); }
-	.timer-btn.stop { border-color: #ef4444; color: #ef4444; }
-	.timer-btn.stop:hover { background: rgba(239,68,68,0.1); }
-	.progress-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: rgba(255,255,255,0.05); }
-	.progress-fill { height: 100%; transition: width 1s linear; }
-	.block-a .progress-fill { background: #10b981; }
-	.block-b .progress-fill { background: #f59e0b; }
+	.session-live { margin-left: auto; font-size: 12px; font-weight: 700; color: #10b981; padding: 4px 12px; border: 1px solid #10b981; border-radius: 10px; }
+	.end-btn { background: rgba(239,68,68,0.1); border: 1px solid #ef4444; color: #ef4444; padding: 8px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
+	.end-btn:hover { background: rgba(239,68,68,0.2); }
+	.dnc-toggle { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #aaa; cursor: pointer; }
+	.dnc-toggle input { accent-color: #10b981; }
+
+	/* Script + Screening Panels */
+	.cc-meta { color: #b088f9; font-weight: 600; }
+	.cc-dnc { color: #ff6b6b; font-weight: 700; }
+	.script-panel { background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.25); border-radius: 10px; padding: 12px 14px; margin-bottom: 12px; }
+	.script-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+	.script-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a5b4fc; }
+	.cluster-tag { font-size: 10px; font-weight: 600; background: rgba(99,102,241,0.2); color: #c7d2fe; padding: 2px 8px; border-radius: 8px; }
+	.copy-script { margin-left: auto; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #ccc; padding: 3px 10px; border-radius: 5px; font-size: 11px; cursor: pointer; }
+	.copy-script:hover { background: rgba(255,255,255,0.12); }
+	.script-body { font-size: 14px; line-height: 1.55; color: #e8e8f0; margin: 0; }
+	.screen-panel { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; }
+	.screen-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #fbbf24; }
+	.screen-body { font-size: 13px; line-height: 1.5; color: #fde68a; margin: 4px 0 0; }
+
+	/* Objection Bank */
+	.objection-bank { margin-bottom: 16px; }
+	.objection-bank h3 { font-size: 14px; font-weight: 600; color: #fff; margin: 0 0 8px; }
+	.obj-list { display: flex; flex-direction: column; gap: 4px; }
+	.obj { background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 8px 12px; }
+	.obj summary { font-size: 13px; font-weight: 600; color: #ddd; cursor: pointer; list-style: none; }
+	.obj summary::-webkit-details-marker { display: none; }
+	.obj summary::before { content: '› '; color: #6366f1; }
+	.obj[open] summary::before { content: '⌄ '; }
+	.obj p { font-size: 13px; line-height: 1.5; color: #aaa; margin: 8px 0 0; }
 
 	/* Main Grid */
 	.main-grid { display: grid; grid-template-columns: 420px 1fr; flex: 1; overflow: hidden; }

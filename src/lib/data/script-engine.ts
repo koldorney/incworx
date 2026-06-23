@@ -42,7 +42,7 @@ export const CLUSTERS: Cluster[] = [
 		keywords: ['counsel', 'legal', 'compliance', 'cco', 'gc', 'sustainability', 'governance'],
 		hook: 'we just built an AI contract-review system on Microsoft Copilot that automated a firm’s entire first-pass review',
 		valueAdd: 'could use AI to speed up diligence and contract review on your deals',
-		screen: 'to use AI to speed up diligence and contract review on their deals',
+		screen: 'like Gryphon and Potomac and wanted to talk to you about how you could use AI to speed up diligence and contract review on your deals',
 		emailSubject: 'AI-assisted contract review for your deals',
 		emailHook: 'We built an AI contract-review system on Microsoft Copilot that automated a firm’s entire first-pass review.'
 	},

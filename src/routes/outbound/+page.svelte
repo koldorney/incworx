@@ -43,13 +43,13 @@
 
 	const currentContact = $derived(queue[queueIndex] || null);
 	const currentCluster = $derived(currentContact ? clusterFor(currentContact) : null);
-	const currentScreen = $derived(currentContact ? buildScreen(rep, currentContact) : '');
 	const currentEmail = $derived(currentContact ? buildEmail(currentContact, rep) : { subject: '', body: '' });
 
-	// Per-cluster script overrides — editing a script makes it stick for EVERYONE
-	// with that same script (cluster). Stored as a template with {{name}}/{{rep}}
+	// Per-cluster overrides — editing a script or screening line makes it stick for
+	// EVERYONE with that same cluster. Stored as a template with {{name}}/{{rep}}
 	// tokens so each contact still gets their own first name and the right rep.
 	let scriptOverrides = $state<Record<string, string>>({});
+	let screenOverrides = $state<Record<string, string>>({});
 
 	function personalizeScript(tpl: string, contact: ScriptContact | null, who: Rep): string {
 		const fn = contact ? firstName(contact) : 'there';
@@ -70,9 +70,17 @@
 		return buildScript(currentContact, rep);
 	});
 
+	const currentScreen = $derived.by(() => {
+		if (!currentContact) return '';
+		const key = currentCluster?.key;
+		if (key && screenOverrides[key] != null) return personalizeScript(screenOverrides[key], currentContact, rep);
+		return buildScreen(rep, currentContact);
+	});
+
 	// Editable working copies — reset to the generated/override text when the
 	// contact or rep changes, but stay editable in between so you can tweak on the fly.
 	let scriptDraft = $state('');
+	let screenDraft = $state('');
 	let emailSubjectDraft = $state('');
 	let emailBodyDraft = $state('');
 	// Re-sync only when the contact or rep changes — not on every keystroke,
@@ -81,6 +89,7 @@
 		currentContact?.id;
 		rep;
 		scriptDraft = untrack(() => currentScript);
+		screenDraft = untrack(() => currentScreen);
 	});
 	$effect(() => {
 		emailSubjectDraft = currentEmail.subject;
@@ -92,8 +101,12 @@
 		const key = currentCluster?.key;
 		if (key) scriptOverrides[key] = templatizeScript(scriptDraft, currentContact, rep);
 	}
+	function onScreenInput() {
+		const key = currentCluster?.key;
+		if (key) screenOverrides[key] = templatizeScript(screenDraft, currentContact, rep);
+	}
 
-	// Revert this cluster's script back to the generated default.
+	// Revert this cluster's script/screen back to the generated default.
 	function resetScript() {
 		const key = currentCluster?.key;
 		if (key && key in scriptOverrides) {
@@ -101,6 +114,14 @@
 			scriptOverrides = { ...scriptOverrides };
 		}
 		if (currentContact) scriptDraft = buildScript(currentContact, rep);
+	}
+	function resetScreen() {
+		const key = currentCluster?.key;
+		if (key && key in screenOverrides) {
+			delete screenOverrides[key];
+			screenOverrides = { ...screenOverrides };
+		}
+		if (currentContact) screenDraft = buildScreen(rep, currentContact);
 	}
 
 	// Editable objection bank — rep name injected; resets if you switch reps.
@@ -148,6 +169,10 @@
 
 	function copyScript() {
 		if (scriptDraft) navigator.clipboard.writeText(scriptDraft);
+	}
+
+	function copyScreen() {
+		if (screenDraft) navigator.clipboard.writeText(screenDraft);
 	}
 
 	function copyEmail() {
@@ -316,8 +341,13 @@
 
 					<!-- Gatekeeper Screening Line (P7) -->
 					<div class="screen-panel">
-						<span class="screen-label">If a gatekeeper picks up</span>
-						<p class="screen-body">{currentScreen}</p>
+						<div class="script-head">
+							<span class="screen-label">If a gatekeeper picks up</span>
+							{#if currentCluster && screenOverrides[currentCluster.key] != null}<span class="edited-tag">edited · applies to all {currentCluster.label}</span>{/if}
+							{#if currentCluster && screenOverrides[currentCluster.key] != null}<button class="copy-script reset-script" onclick={resetScreen}>Reset</button>{/if}
+							<button class="copy-script" onclick={copyScreen}>Copy</button>
+						</div>
+						<textarea class="screen-edit" bind:value={screenDraft} oninput={onScreenInput} rows="3"></textarea>
 					</div>
 
 					<!-- Email draft — editable -->
@@ -470,6 +500,8 @@
 	.screen-panel { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; }
 	.screen-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #fbbf24; }
 	.screen-body { font-size: 13px; line-height: 1.5; color: #fde68a; margin: 4px 0 0; }
+	.screen-edit { width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.25); border: 1px solid rgba(245,158,11,0.25); border-radius: 8px; padding: 9px 12px; color: #fde68a; font-size: 13px; line-height: 1.5; font-family: inherit; resize: vertical; }
+	.screen-edit:focus { outline: none; border-color: rgba(245,158,11,0.6); }
 
 	/* Objection Bank */
 	.objection-bank { margin-bottom: 16px; }

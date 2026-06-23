@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { buildScript, buildScreen, buildEmail, clusterFor, OBJECTIONS, type Rep, type Objection } from '$lib/data/script-engine';
+	import { untrack } from 'svelte';
+	import { buildScript, buildScreen, buildEmail, clusterFor, firstName, OBJECTIONS, type Rep, type Objection, type ScriptContact } from '$lib/data/script-engine';
 
 	let { data } = $props();
 
@@ -41,21 +42,66 @@
 	});
 
 	const currentContact = $derived(queue[queueIndex] || null);
-	const currentScript = $derived(currentContact ? buildScript(currentContact, rep) : '');
-	const currentScreen = $derived(currentContact ? buildScreen(rep, currentContact) : '');
 	const currentCluster = $derived(currentContact ? clusterFor(currentContact) : null);
+	const currentScreen = $derived(currentContact ? buildScreen(rep, currentContact) : '');
 	const currentEmail = $derived(currentContact ? buildEmail(currentContact, rep) : { subject: '', body: '' });
 
-	// Editable working copies — reset to the generated text when the contact or rep changes,
-	// but stay editable in between so you can tweak on the fly during a call.
+	// Per-cluster script overrides — editing a script makes it stick for EVERYONE
+	// with that same script (cluster). Stored as a template with {{name}}/{{rep}}
+	// tokens so each contact still gets their own first name and the right rep.
+	let scriptOverrides = $state<Record<string, string>>({});
+
+	function personalizeScript(tpl: string, contact: ScriptContact | null, who: Rep): string {
+		const fn = contact ? firstName(contact) : 'there';
+		return tpl.split('{{name}}').join(fn).split('{{rep}}').join(who);
+	}
+	function templatizeScript(text: string, contact: ScriptContact | null, who: Rep): string {
+		let t = text;
+		const fn = contact ? firstName(contact) : '';
+		if (fn) t = t.split(fn).join('{{name}}');
+		t = t.split(who).join('{{rep}}');
+		return t;
+	}
+
+	const currentScript = $derived.by(() => {
+		if (!currentContact) return '';
+		const key = currentCluster?.key;
+		if (key && scriptOverrides[key] != null) return personalizeScript(scriptOverrides[key], currentContact, rep);
+		return buildScript(currentContact, rep);
+	});
+
+	// Editable working copies — reset to the generated/override text when the
+	// contact or rep changes, but stay editable in between so you can tweak on the fly.
 	let scriptDraft = $state('');
 	let emailSubjectDraft = $state('');
 	let emailBodyDraft = $state('');
-	$effect(() => { scriptDraft = currentScript; });
+	// Re-sync only when the contact or rep changes — not on every keystroke,
+	// so editing doesn't fight the cursor.
+	$effect(() => {
+		currentContact?.id;
+		rep;
+		scriptDraft = untrack(() => currentScript);
+	});
 	$effect(() => {
 		emailSubjectDraft = currentEmail.subject;
 		emailBodyDraft = currentEmail.body;
 	});
+
+	// Capture every edit into the cluster override so it applies to the whole cluster.
+	function onScriptInput() {
+		const key = currentCluster?.key;
+		if (key) scriptOverrides[key] = templatizeScript(scriptDraft, currentContact, rep);
+	}
+
+	// Revert this cluster's script back to the generated default.
+	function resetScript() {
+		const key = currentCluster?.key;
+		if (key && key in scriptOverrides) {
+			delete scriptOverrides[key];
+			scriptOverrides = { ...scriptOverrides };
+		}
+		if (currentContact) scriptDraft = buildScript(currentContact, rep);
+	}
 
 	// Editable objection bank — rep name injected; resets if you switch reps.
 	let objections = $state<Objection[]>([]);
@@ -258,9 +304,11 @@
 						<div class="script-head">
 							<span class="script-title">Script</span>
 							{#if currentCluster}<span class="cluster-tag">{currentCluster.label}</span>{/if}
+							{#if currentCluster && scriptOverrides[currentCluster.key] != null}<span class="edited-tag">edited · applies to all {currentCluster.label}</span>{/if}
+							{#if currentCluster && scriptOverrides[currentCluster.key] != null}<button class="copy-script reset-script" onclick={resetScript}>Reset</button>{/if}
 							<button class="copy-script" onclick={copyScript}>Copy</button>
 						</div>
-						<textarea class="script-edit" bind:value={scriptDraft} rows="5"></textarea>
+						<textarea class="script-edit" bind:value={scriptDraft} oninput={onScriptInput} rows="5"></textarea>
 					</div>
 
 					<!-- Gatekeeper Screening Line (P7) -->
@@ -404,6 +452,8 @@
 	.script-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
 	.script-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #a5b4fc; }
 	.cluster-tag { font-size: 10px; font-weight: 600; background: rgba(99,102,241,0.2); color: #c7d2fe; padding: 2px 8px; border-radius: 8px; }
+	.edited-tag { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; background: rgba(16,185,129,0.15); color: #6ee7b7; padding: 2px 8px; border-radius: 8px; }
+	.reset-script { margin-left: auto; }
 	.copy-script { margin-left: auto; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: #ccc; padding: 3px 10px; border-radius: 5px; font-size: 11px; cursor: pointer; }
 	.copy-script:hover { background: rgba(255,255,255,0.12); }
 	.script-body { font-size: 14px; line-height: 1.55; color: #e8e8f0; margin: 0; }

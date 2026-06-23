@@ -158,6 +158,9 @@
 
 	async function logDisposition(disposition: string) {
 		if (!currentContact) return;
+		// Auto-start a session if one isn't running, so you can log + advance
+		// without having to hit Start first.
+		if (!sessionActive) startSession();
 
 		const entry = {
 			contact_name: currentContact.name,
@@ -333,7 +336,6 @@
 								class="disp-btn"
 								style="--btn-color: {d.color}"
 								onclick={() => logDisposition(d.key)}
-								disabled={!sessionActive}
 							>
 								<span class="disp-icon">{d.icon}</span>
 								<span class="disp-label">{d.label}</span>

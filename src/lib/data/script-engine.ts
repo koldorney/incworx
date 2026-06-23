@@ -40,8 +40,8 @@ export const CLUSTERS: Cluster[] = [
 		key: 'legal',
 		label: 'Legal / Compliance',
 		keywords: ['counsel', 'legal', 'compliance', 'cco', 'gc', 'sustainability', 'governance'],
-		hook: 'we built an AI contract-review system on Microsoft Copilot that automated a firm’s entire first-pass review',
-		valueAdd: 'could take the contract-review bottleneck off your deal timelines without burning outside-counsel hours',
+		hook: 'we just built an AI contract-review system on Microsoft Copilot that automated a firm’s entire first-pass review',
+		valueAdd: 'could use AI to speed up diligence and contract review on your deals',
 		screen: 'to use AI to speed up diligence and contract review on their deals',
 		emailSubject: 'AI-assisted contract review for your deals',
 		emailHook: 'We built an AI contract-review system on Microsoft Copilot that automated a firm’s entire first-pass review.'
@@ -154,7 +154,7 @@ export function firstName(contact: ScriptContact): string {
 export function buildScript(contact: ScriptContact, rep: Rep): string {
 	const c = clusterFor(contact);
 	const fn = firstName(contact);
-	return `Hey ${fn}, this is ${rep} with IncWorx. How are you? I'm calling because ${c.hook}. So I wanted to reach out to you to see if you'd be interested in a meeting with our president talking about how you ${c.valueAdd}.`;
+	return `Hey ${fn}, this is ${rep} with IncWorx. How are you? I'm calling because ${c.hook}. So I wanted to reach out to you to see if you'd be interested in a meeting with our president Jonathan talking about how you ${c.valueAdd}.`;
 }
 
 export function buildScreen(rep: Rep, contact: ScriptContact): string {

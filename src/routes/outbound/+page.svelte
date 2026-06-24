@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
-	import { buildScript, buildScreen, buildEmail, clusterFor, firstName, OBJECTIONS, type Rep, type Objection, type ScriptContact } from '$lib/data/script-engine';
+	import { buildScript, buildScreen, buildEmail, clusterFor, firstName, objectionsFor, OBJECTIONS, type Rep, type Objection, type ScriptContact } from '$lib/data/script-engine';
 
 	let { data } = $props();
 
@@ -132,14 +132,14 @@
 		if (currentContact) screenDraft = buildScreen(rep, currentContact);
 	}
 
-	// Editable objection bank — rep name injected; resets if you switch reps.
+	// Editable objection bank — role-specific to the current contact's cluster,
+	// with the rep name injected. Re-derives when the contact or rep changes.
 	let objections = $state<Objection[]>([]);
 	$effect(() => {
-		objections = OBJECTIONS.map((o) => ({
+		const list = currentContact ? objectionsFor(currentContact) : OBJECTIONS;
+		objections = list.map((o) => ({
 			trigger: o.trigger,
-			response: o.response.includes('this is with IncWorx')
-				? o.response.replace('this is with IncWorx', `this is ${rep} with IncWorx`)
-				: o.response
+			response: o.response.split('{{rep}}').join(rep)
 		}));
 	});
 
@@ -428,7 +428,7 @@
 			</div>
 
 			<div class="objection-bank">
-				<h3>Objection Bank</h3>
+				<h3>Objection Bank {#if currentCluster}<span class="obj-cluster">{currentCluster.label}</span>{/if}</h3>
 				<div class="obj-list">
 					{#each objections as o}
 						<details class="obj">
@@ -514,6 +514,7 @@
 	/* Objection Bank */
 	.objection-bank { margin-bottom: 16px; }
 	.objection-bank h3 { font-size: 14px; font-weight: 600; color: #fff; margin: 0 0 8px; }
+	.obj-cluster { font-size: 10px; font-weight: 600; background: rgba(99,102,241,0.2); color: #c7d2fe; padding: 2px 8px; border-radius: 8px; vertical-align: middle; margin-left: 6px; }
 	.obj-list { display: flex; flex-direction: column; gap: 4px; }
 	.obj { background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 8px 12px; }
 	.obj summary { font-size: 13px; font-weight: 600; color: #ddd; cursor: pointer; list-style: none; }

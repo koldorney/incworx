@@ -147,6 +147,29 @@
 		emailsSent: 0
 	});
 
+	// All-time tracking, per rep. The server hands us a snapshot (data.repStats)
+	// taken at page load; `liveByRep` adds anything logged since, so the numbers
+	// update as you dial without needing a reload. Answer rate = connects / calls,
+	// set rate = meetings / calls.
+	type RepStat = { rep: string; dials: number; connects: number; meetings: number };
+	const repStatsSnapshot = (data.repStats ?? []) as RepStat[];
+	let liveByRep = $state<Record<string, { dials: number; connects: number; meetings: number }>>({});
+
+	const allTime = $derived.by(() => {
+		const base = repStatsSnapshot.find((r) => r.rep === rep) ?? { dials: 0, connects: 0, meetings: 0 };
+		const live = liveByRep[rep] ?? { dials: 0, connects: 0, meetings: 0 };
+		const dials = base.dials + live.dials;
+		const connects = base.connects + live.connects;
+		const meetings = base.meetings + live.meetings;
+		return {
+			dials,
+			connects,
+			meetings,
+			answerRate: dials > 0 ? Math.round((connects / dials) * 100) : 0,
+			setRate: dials > 0 ? Math.round((meetings / dials) * 100) : 0
+		};
+	});
+
 	// Activity feed
 	let activityFeed = $state<Array<{
 		id?: number;
@@ -156,6 +179,7 @@
 		disposition: string;
 		notes: string;
 		block_type: string;
+		rep?: string | null;
 		created_at: string;
 	}>>(data.recentActivity);
 
@@ -205,7 +229,8 @@
 			firm: currentContact.firm,
 			disposition,
 			notes: dispositionNotes,
-			block_type: rep,
+			block_type: currentContact.group_name === 'B' ? 'B' : 'A',
+			rep,
 			created_at: new Date().toISOString(),
 			session_id: sessionId,
 			contact_id: currentContact.id,
@@ -221,6 +246,14 @@
 		else if (disposition === 'no_answer') sessionStats.noAnswers++;
 		else if (disposition === 'meeting_booked') { sessionStats.meetingsBooked++; sessionStats.connects++; }
 		else if (disposition === 'email_sent') sessionStats.emailsSent++;
+
+		// All-time live tally for the rep who placed this call. Every logged
+		// outcome is a call; connects = connected + meeting_booked; sets = meetings.
+		const lr = liveByRep[rep] ?? { dials: 0, connects: 0, meetings: 0 };
+		lr.dials++;
+		if (disposition === 'connected' || disposition === 'meeting_booked') lr.connects++;
+		if (disposition === 'meeting_booked') lr.meetings++;
+		liveByRep = { ...liveByRep, [rep]: lr };
 
 		if (queueIndex < queue.length - 1) queueIndex++;
 
@@ -419,6 +452,28 @@
 
 		<!-- Right: Stats + Feed -->
 		<div class="right-col">
+			<!-- All-time tracking for the selected rep — persists across sessions -->
+			<div class="alltime">
+				<div class="alltime-head">All-Time · {rep}</div>
+				<div class="alltime-grid">
+					<div class="at-card">
+						<div class="at-val">{allTime.dials}</div>
+						<div class="at-lbl">Calls</div>
+					</div>
+					<div class="at-card">
+						<div class="at-val accent">{allTime.answerRate}%</div>
+						<div class="at-lbl">Answer Rate</div>
+						<div class="at-sub">{allTime.connects} answered</div>
+					</div>
+					<div class="at-card">
+						<div class="at-val gold">{allTime.setRate}%</div>
+						<div class="at-lbl">Set Rate</div>
+						<div class="at-sub">{allTime.meetings} set</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="stats-label">This session</div>
 			<div class="stats-grid">
 				<div class="stat-card">
 					<div class="stat-val">{sessionStats.dials}</div>
@@ -591,6 +646,18 @@
 	.nav-btns button:hover:not(:disabled) { background: rgba(255,255,255,0.08); }
 	.nav-btns button:disabled { opacity: 0.3; cursor: not-allowed; }
 	.empty-queue { text-align: center; padding: 40px; color: #666; }
+
+	/* All-Time tracking panel */
+	.alltime { background: linear-gradient(135deg, rgba(99,102,241,0.12), rgba(16,185,129,0.08)); border: 1px solid rgba(99,102,241,0.25); border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; }
+	.alltime-head { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: #a5b4fc; margin-bottom: 10px; }
+	.alltime-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+	.at-card { text-align: center; }
+	.at-val { font-size: 28px; font-weight: 800; color: #fff; line-height: 1; }
+	.at-val.accent { color: #10b981; }
+	.at-val.gold { color: #f59e0b; }
+	.at-lbl { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+	.at-sub { font-size: 10px; color: #666; margin-top: 2px; }
+	.stats-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #666; margin-bottom: 6px; }
 
 	/* Stats Grid */
 	.stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 16px; }

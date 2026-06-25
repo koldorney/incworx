@@ -353,7 +353,10 @@
 			{#if currentContact}
 				<div class="contact-card">
 					<div class="cc-priority priority-{currentContact.priority}">{currentContact.priority}</div>
-					<div class="cc-name">{currentContact.name}</div>
+					<div class="cc-name-row">
+						<div class="cc-name">{currentContact.name}</div>
+						<button class="cc-next" onclick={nextContact} disabled={queueIndex >= queue.length - 1}>Next →</button>
+					</div>
 					<div class="cc-position">{currentContact.position}</div>
 					<div class="cc-firm">{currentContact.firm}</div>
 					<div class="cc-details">
@@ -442,7 +445,6 @@
 
 					<div class="nav-btns">
 						<button onclick={prevContact} disabled={queueIndex === 0}>← Prev</button>
-						<button onclick={nextContact} disabled={queueIndex >= queue.length - 1}>Next →</button>
 					</div>
 				</div>
 			{:else}
@@ -613,7 +615,11 @@
 	.cc-priority.priority-high { color: #10b981; }
 	.cc-priority.priority-medium { color: #f59e0b; }
 	.cc-priority.priority-low { color: #6b7280; }
-	.cc-name { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+	.cc-name-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 2px; }
+	.cc-name { font-size: 22px; font-weight: 700; color: #fff; }
+	.cc-next { flex-shrink: 0; background: linear-gradient(135deg, #6366f1, #4f46e5); border: none; color: #fff; padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
+	.cc-next:hover:not(:disabled) { opacity: 0.9; }
+	.cc-next:disabled { opacity: 0.3; cursor: not-allowed; }
 	.cc-position { font-size: 14px; color: #aaa; margin-bottom: 2px; }
 	.cc-firm { font-size: 13px; color: #6366f1; font-weight: 600; margin-bottom: 16px; }
 	.cc-details { margin-bottom: 16px; }

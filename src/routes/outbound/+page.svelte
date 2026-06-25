@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
-	import { buildScript, buildScreen, buildEmail, clusterFor, firstName, objectionsFor, OBJECTIONS, type Rep, type Objection, type ScriptContact } from '$lib/data/script-engine';
+	import { buildScript, buildScreen, clusterFor, firstName, objectionsFor, OBJECTIONS, type Rep, type Objection, type ScriptContact } from '$lib/data/script-engine';
 
 	let { data } = $props();
 
@@ -51,7 +51,6 @@
 
 	const currentContact = $derived(queue[queueIndex] || null);
 	const currentCluster = $derived(currentContact ? clusterFor(currentContact) : null);
-	const currentEmail = $derived(currentContact ? buildEmail(currentContact, rep) : { subject: '', body: '' });
 
 	// Per-cluster overrides — editing a script or screening line makes it stick for
 	// EVERYONE with that same cluster. Stored as a template with {{name}}/{{rep}}
@@ -89,8 +88,6 @@
 	// contact or rep changes, but stay editable in between so you can tweak on the fly.
 	let scriptDraft = $state('');
 	let screenDraft = $state('');
-	let emailSubjectDraft = $state('');
-	let emailBodyDraft = $state('');
 	// Re-sync only when the contact or rep changes — not on every keystroke,
 	// so editing doesn't fight the cursor.
 	$effect(() => {
@@ -98,10 +95,6 @@
 		rep;
 		scriptDraft = untrack(() => currentScript);
 		screenDraft = untrack(() => currentScreen);
-	});
-	$effect(() => {
-		emailSubjectDraft = currentEmail.subject;
-		emailBodyDraft = currentEmail.body;
 	});
 
 	// Capture every edit into the cluster override so it applies to the whole cluster.
@@ -157,6 +150,7 @@
 	// Activity feed
 	let activityFeed = $state<Array<{
 		id?: number;
+		contact_id?: number | null;
 		contact_name: string;
 		firm: string;
 		disposition: string;
@@ -164,6 +158,20 @@
 		block_type: string;
 		created_at: string;
 	}>>(data.recentActivity);
+
+	// Latest outcome per contact, drawn from loaded history + live logs. Lets the
+	// contact card show a persistent "already called" badge that survives reload.
+	const dispositionByContact = $derived.by(() => {
+		const map: Record<string, string> = {};
+		for (const e of activityFeed) {
+			const id = e.contact_id;
+			if (id != null && !(id in map)) map[String(id)] = e.disposition;
+		}
+		return map;
+	});
+	const currentDisposition = $derived(
+		currentContact ? dispositionByContact[String(currentContact.id)] : undefined
+	);
 
 	function startSession() {
 		sessionActive = true;
@@ -183,11 +191,8 @@
 		if (screenDraft) navigator.clipboard.writeText(screenDraft);
 	}
 
-	function copyEmail() {
-		if (emailBodyDraft) navigator.clipboard.writeText(`Subject: ${emailSubjectDraft}\n\n${emailBodyDraft}`);
-	}
-
 	let dispositionNotes = $state('');
+	let saveError = $state('');
 
 	async function logDisposition(disposition: string) {
 		if (!currentContact) return;
@@ -219,11 +224,21 @@
 
 		if (queueIndex < queue.length - 1) queueIndex++;
 
+		saveError = '';
 		fetch('/api/log-activity', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(entry)
-		}).catch(() => {});
+		})
+			.then(async (r) => {
+				if (!r.ok) {
+					const j = await r.json().catch(() => ({}));
+					saveError = j.error || `Save failed (${r.status})`;
+				}
+			})
+			.catch(() => {
+				saveError = 'Save failed — network error';
+			});
 	}
 
 	function nextContact() {
@@ -350,7 +365,7 @@
 					<!-- Gatekeeper Screening Line (P7) -->
 					<div class="screen-panel">
 						<div class="script-head">
-							<span class="screen-label">If a gatekeeper picks up</span>
+							<span class="screen-label">Screening</span>
 							{#if currentCluster && screenOverrides[currentCluster.key] != null}<span class="edited-tag">edited · applies to all {currentCluster.label}</span>{/if}
 							{#if currentCluster && screenOverrides[currentCluster.key] != null}<button class="copy-script reset-script" onclick={resetScreen}>Reset</button>{/if}
 							<button class="copy-script" onclick={copyScreen}>Copy</button>
@@ -358,15 +373,15 @@
 						<textarea class="screen-edit" bind:value={screenDraft} oninput={onScreenInput} rows="3"></textarea>
 					</div>
 
-					<!-- Email draft — editable -->
-					<div class="email-panel">
-						<div class="script-head">
-							<span class="script-title email-title">Email</span>
-							<button class="copy-script" onclick={copyEmail}>Copy</button>
+					{#if currentDisposition}
+						<div
+							class="last-disp"
+							style="--btn-color: {dispositions.find((d) => d.key === currentDisposition)?.color || '#888'}"
+						>
+							<span class="last-disp-icon">{dispositions.find((d) => d.key === currentDisposition)?.icon || '•'}</span>
+							Last outcome: {dispositions.find((d) => d.key === currentDisposition)?.label || currentDisposition}
 						</div>
-						<input class="email-subject" bind:value={emailSubjectDraft} placeholder="Subject" />
-						<textarea class="email-body" bind:value={emailBodyDraft} rows="8" placeholder="Type your email here…"></textarea>
-					</div>
+					{/if}
 
 					<div class="disposition-grid">
 						{#each dispositions as d}
@@ -380,6 +395,10 @@
 							</button>
 						{/each}
 					</div>
+
+					{#if saveError}
+						<div class="save-error">⚠ {saveError} — outcome shown locally but not saved to the database.</div>
+					{/if}
 
 					<textarea
 						class="notes-input"
@@ -499,12 +518,6 @@
 	.script-body { font-size: 14px; line-height: 1.55; color: #e8e8f0; margin: 0; }
 	.script-edit { width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.25); border: 1px solid rgba(99,102,241,0.25); border-radius: 8px; padding: 10px 12px; color: #e8e8f0; font-size: 14px; line-height: 1.55; font-family: inherit; resize: vertical; }
 	.script-edit:focus { outline: none; border-color: rgba(99,102,241,0.6); }
-	.email-panel { background: rgba(77,166,255,0.06); border: 1px solid rgba(77,166,255,0.22); border-radius: 10px; padding: 12px 14px; margin-bottom: 14px; }
-	.email-title { color: #7cc1ff; }
-	.email-subject { width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.25); border: 1px solid rgba(77,166,255,0.22); border-radius: 8px; padding: 8px 12px; color: #e8e8f0; font-size: 13px; font-weight: 600; font-family: inherit; margin-bottom: 8px; }
-	.email-subject:focus { outline: none; border-color: rgba(77,166,255,0.6); }
-	.email-body { width: 100%; box-sizing: border-box; background: rgba(0,0,0,0.25); border: 1px solid rgba(77,166,255,0.22); border-radius: 8px; padding: 10px 12px; color: #e0e0e0; font-size: 13px; line-height: 1.5; font-family: inherit; resize: vertical; }
-	.email-body:focus { outline: none; border-color: rgba(77,166,255,0.6); }
 	.screen-panel { background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.2); border-radius: 10px; padding: 10px 14px; margin-bottom: 14px; }
 	.screen-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #fbbf24; }
 	.screen-body { font-size: 13px; line-height: 1.5; color: #fde68a; margin: 4px 0 0; }
@@ -556,6 +569,13 @@
 	.cc-phone { color: #10b981; text-decoration: none; font-weight: 600; }
 	.cc-linkedin { color: #0077b5; text-decoration: none; }
 	.cc-conf { color: #f59e0b; font-weight: 600; }
+
+	/* Last outcome badge */
+	.last-disp { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; color: var(--btn-color); background: color-mix(in srgb, var(--btn-color) 12%, transparent); border: 1px solid color-mix(in srgb, var(--btn-color) 35%, transparent); border-radius: 8px; padding: 7px 12px; margin-bottom: 12px; }
+	.last-disp-icon { font-size: 14px; }
+
+	/* Save error */
+	.save-error { font-size: 12px; font-weight: 600; color: #fca5a5; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.35); border-radius: 6px; padding: 8px 10px; margin-bottom: 12px; }
 
 	/* Disposition Grid */
 	.disposition-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 12px; }

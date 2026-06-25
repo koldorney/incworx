@@ -60,32 +60,32 @@ export const SHARED_OBJECTIONS: Objection[] = [
 	{
 		trigger: 'Not interested',
 		response:
-			"Totally fair — most folks aren't until they see the numbers. And just so I'm not misreading it: is that because you've already got someone on the AI and Microsoft side, or is it more that nothing's on the radar right now?\n\n[Tier-2 move. Don't try to overcome \"not interested\" — trade it for a real objection. Once they say budget / a vendor / timing, jump to that card and run ARA.]"
+			"Totally fair — most folks aren't until they see the numbers. And just so I'm not misreading it: is that because you've already got someone on the AI and Microsoft side, or is it more that nothing's on the radar right now?"
 	},
 	{
 		trigger: "I'm busy / bad time",
 		response:
-			"Totally — I'll be quick. The reason I called: I run the AI and Microsoft automation side for PE firms — we standardized 40,000 job titles for one client in a couple hours and pulled $350K out of another's annual run-rate. I'm not trying to do it all now, just looking to grab fifteen minutes later this week. Is Thursday or Friday better, or should I catch you another day?\n\n[Don't just ask permission and pause — squeeze in a condensed value statement. Most people will hear you out.]"
+			"Totally — I'll be quick. The reason I called: I run the AI and Microsoft automation side for PE firms — we standardized 40,000 job titles for one client in a couple hours and pulled $350K out of another's annual run-rate. I'm not trying to do it all now, just looking to grab fifteen minutes next week. Is Monday or Tuesday better, or should I catch you another day?"
 	},
 	{
 		trigger: 'Just send me an email',
 		response:
-			"Yeah, I can send something over. I'll say though — it still makes sense to grab fifteen minutes live, even briefly, because what's in the email usually lands but creates more questions than it answers. So how about I send it inside a calendar invite for Thursday or Friday, we review it together, and if it's not relevant you just decline it?\n\n[Hold yourself as an equal — a useful note takes real work; the least they can do is hold a tentative slot.]"
+			"Yeah, I can send something over. I'll say though — it still makes sense to grab fifteen minutes live, even briefly, because what's in the email usually lands but creates more questions than it answers. So how about I send it inside a calendar invite for Monday or Tuesday, we review it together, and if it's not relevant you just decline it?"
 	},
 	{
 		trigger: 'Who are you? / What is this about? / Is this a cold call?',
 		response:
-			"Fair question — and no, I'm not selling you anything on this call. I'm {{rep}} with IncWorx; we're a Microsoft and AI shop that works with PE firms to standardize systems and erase the manual work across their portfolio companies. I'd just be your point of contact for it going forward — and I'm really only looking to get fifteen minutes set up later this week.\n\n[Don't get defensive. Skip right past it and land back in the value statement.]"
+			"Fair question — and no, I'm not selling you anything on this call. I'm {{rep}} with IncWorx; we're a Microsoft and AI shop that works with PE firms to standardize systems and erase the manual work across their portfolio companies. I'd just be your point of contact for it going forward — and I'm really only looking to get fifteen minutes set up next week."
 	},
 	{
 		trigger: 'How did you get my number?',
 		response:
-			"Nothing sketchy — it's a public B2B database, same way most outreach works these days, and I'll scrub you in a second if you'd rather I not call. The reason I reached out specifically is that what we do for PE portfolios looked like a real fit for you. Worth fifteen minutes before you decide?\n\n[Don't dwell. Tell the truth, then straight back into the value statement.]"
+			"Nothing sketchy — it's a public B2B database, same way most outreach works these days, and I'll scrub you in a second if you'd rather I not call. The reason I reached out specifically is that what we do for PE portfolios looked like a real fit for you. Worth fifteen minutes before you decide?"
 	},
 	{
 		trigger: 'Do we already work with you?',
 		response:
-			"No — that's actually why I reached out. Looks like there's been some back-and-forth in the past but it's been pretty inconsistent, so I wanted to properly introduce myself and make sure we're on the same page going forward. Easiest is fifteen minutes later this week — Thursday or Friday?"
+			"No — that's actually why I reached out. Looks like there's been some back-and-forth in the past but it's been pretty inconsistent, so I wanted to properly introduce myself and make sure we're on the same page going forward. Easiest is fifteen minutes next week — Monday or Tuesday?"
 	}
 ];
 
@@ -111,7 +111,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: 'We already have an MSP / IT team',
 				response:
-					"Got it — and that's actually why I reached out; we sit right alongside the MSP. They keep the lights on, we come in on the AI and consolidation projects they don't have the bandwidth to build. So it still makes sense to get introduced — I'd be your point of contact for exactly that. Does Thursday or Friday work?\n\nIf they push back: When you say the MSP has it covered, does that include consolidating the duplicate systems across the portfolio? The reason I ask — that's usually where we come in. We pulled $350K out of one client's run-rate doing exactly that, and it's the kind of thing an MSP rarely touches."
+					"Got it — and that's actually why I reached out; we sit right alongside the MSP. They keep the lights on, we come in on the AI and consolidation projects they don't have the bandwidth to build. So it still makes sense to get introduced — I'd be your point of contact for exactly that. Does Monday or Tuesday work?\n\nIf they push back: When you say the MSP has it covered, does that include consolidating the duplicate systems across the portfolio? The reason I ask — that's usually where we come in. We pulled $350K out of one client's run-rate doing exactly that, and it's the kind of thing an MSP rarely touches."
 			},
 			{
 				trigger: 'We handle that in-house',
@@ -126,7 +126,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: "I'm not the right person",
 				response:
-					"Fair — who owns technology or value-creation across the portfolio? I'd rather start with the right name than waste anyone's time. That said, since you'd touch this day-to-day, it might still make sense to have you on a quick intro — Thursday or Friday?"
+					"Fair — who owns technology or value-creation across the portfolio? I'd rather start with the right name than waste anyone's time. That said, since you'd touch this day-to-day, it might still make sense to have you on a quick intro — Monday or Tuesday?"
 			},
 			{
 				trigger: 'No budget / not a priority right now',
@@ -152,7 +152,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: 'We use outside counsel for that',
 				response:
-					"Of course — and we're not replacing counsel. We sit underneath them on the manual side: first-pass review, flagging risk across an agreement, cutting the diligence hours — so counsel spends their time on judgment, not reading. Worth fifteen minutes to get introduced? Thursday or Friday?\n\nIf they push back: On a typical deal, how much of first-pass review and diligence is still done by hand today? The reason I ask is we built an AI contract-review system on Copilot that automated a firm's entire first pass — that's usually the slow, expensive part."
+					"Of course — and we're not replacing counsel. We sit underneath them on the manual side: first-pass review, flagging risk across an agreement, cutting the diligence hours — so counsel spends their time on judgment, not reading. Worth fifteen minutes to get introduced? Monday or Tuesday?\n\nIf they push back: On a typical deal, how much of first-pass review and diligence is still done by hand today? The reason I ask is we built an AI contract-review system on Copilot that automated a firm's entire first pass — that's usually the slow, expensive part."
 			},
 			{
 				trigger: 'We handle compliance in-house',
@@ -167,7 +167,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: "I'm not the right person",
 				response:
-					"Fair — is that the GC, or whoever owns diligence and compliance across the portfolio? I'd rather start with the right name. Since you'd be close to this, a quick intro with you might still be the fastest way to point it the right direction — Thursday or Friday?"
+					"Fair — is that the GC, or whoever owns diligence and compliance across the portfolio? I'd rather start with the right name. Since you'd be close to this, a quick intro with you might still be the fastest way to point it the right direction — Monday or Tuesday?"
 			},
 			{
 				trigger: 'No budget / not a priority right now',
@@ -193,7 +193,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: 'We already have an HRIS / a PEO',
 				response:
-					"Got it — and we work right alongside the HRIS. We're not replacing it; we come in on the data and the manual people-ops it doesn't touch — cleaning up job titles, onboarding, provisioning — especially after an acquisition. Worth fifteen minutes to get introduced? Thursday or Friday?\n\nIf they push back: When a new company joins the portfolio, who's standardizing the people data and titles across it today? The reason I ask is we built a Power App that mapped 40,000 job titles in a couple hours — that's usually a painful manual lift the HRIS leaves on the team."
+					"Got it — and we work right alongside the HRIS. We're not replacing it; we come in on the data and the manual people-ops it doesn't touch — cleaning up job titles, onboarding, provisioning — especially after an acquisition. Worth fifteen minutes to get introduced? Monday or Tuesday?\n\nIf they push back: When a new company joins the portfolio, who's standardizing the people data and titles across it today? The reason I ask is we built a Power App that mapped 40,000 job titles in a couple hours — that's usually a painful manual lift the HRIS leaves on the team."
 			},
 			{
 				trigger: 'We handle that in-house',
@@ -208,7 +208,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: "I'm not the right person",
 				response:
-					"Fair — who owns people operations or HR systems across the portfolio? I'd rather start with the right name. Since you'd be close to the day-to-day, a quick intro with you might still be the fastest path — Thursday or Friday?"
+					"Fair — who owns people operations or HR systems across the portfolio? I'd rather start with the right name. Since you'd be close to the day-to-day, a quick intro with you might still be the fastest path — Monday or Tuesday?"
 			},
 			{
 				trigger: 'No budget / not a priority right now',
@@ -234,7 +234,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: 'We already have an ERP / a finance vendor',
 				response:
-					"Got it — and that's actually why I reached out; we work alongside whatever ERP you've got. We're not replacing it, we come in on the automation and reporting layer on top — invoice processing, month-end, real-time dashboards. Still makes sense to get introduced. Thursday or Friday?\n\nIf they push back: Does the current setup give leadership real-time numbers, or is it still waiting on month-end close? The reason I ask is that's usually where we come in — we automated one client's close and reporting so leadership stopped waiting on the team."
+					"Got it — and that's actually why I reached out; we work alongside whatever ERP you've got. We're not replacing it, we come in on the automation and reporting layer on top — invoice processing, month-end, real-time dashboards. Still makes sense to get introduced. Monday or Tuesday?\n\nIf they push back: Does the current setup give leadership real-time numbers, or is it still waiting on month-end close? The reason I ask is that's usually where we come in — we automated one client's close and reporting so leadership stopped waiting on the team."
 			},
 			{
 				trigger: 'We handle that in-house',
@@ -249,7 +249,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: "I'm not the right person",
 				response:
-					"Fair — is that the CFO, or whoever owns finance systems across the portfolio? I'd rather start with the right name. Since you'd touch the reporting day-to-day, a quick intro with you might still be the fastest path — Thursday or Friday?"
+					"Fair — is that the CFO, or whoever owns finance systems across the portfolio? I'd rather start with the right name. Since you'd touch the reporting day-to-day, a quick intro with you might still be the fastest path — Monday or Tuesday?"
 			},
 			{
 				trigger: 'No budget / not a priority right now',
@@ -275,7 +275,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: 'We have an IR team / fund admin for that',
 				response:
-					"Totally — and that's who we work alongside. We're not replacing IR or the fund admin; we take the manual data-entry and reporting grind off them so LP reporting stops being a quarterly fire drill. Worth fifteen minutes to get introduced? Thursday or Friday?\n\nIf they push back: Is LP reporting and the data pull mostly manual today, or is it automated? The reason I ask is that's exactly what we automate — we pulled hours of manual data entry off one client's team."
+					"Totally — and that's who we work alongside. We're not replacing IR or the fund admin; we take the manual data-entry and reporting grind off them so LP reporting stops being a quarterly fire drill. Worth fifteen minutes to get introduced? Monday or Tuesday?\n\nIf they push back: Is LP reporting and the data pull mostly manual today, or is it automated? The reason I ask is that's exactly what we automate — we pulled hours of manual data entry off one client's team."
 			},
 			{
 				trigger: 'We handle that in-house',
@@ -290,7 +290,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: "I'm not the right person",
 				response:
-					"Fair — who owns IR operations or reporting systems? I'd rather start with the right name. Since you're close to the reporting, a quick intro with you might still be the fastest path — Thursday or Friday?"
+					"Fair — who owns IR operations or reporting systems? I'd rather start with the right name. Since you're close to the reporting, a quick intro with you might still be the fastest path — Monday or Tuesday?"
 			},
 			{
 				trigger: 'No budget / not a priority right now',
@@ -326,7 +326,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: "I'm not the right person",
 				response:
-					"Fair — who owns operations or the admin systems here? I'd rather start with the right name. Since you'd be close to the day-to-day, a quick intro with you might still help point it the right direction — Thursday or Friday?"
+					"Fair — who owns operations or the admin systems here? I'd rather start with the right name. Since you'd be close to the day-to-day, a quick intro with you might still help point it the right direction — Monday or Tuesday?"
 			},
 			{
 				trigger: 'No budget / not a priority right now',
@@ -352,7 +352,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: 'We have a portfolio-ops team for that',
 				response:
-					"That's exactly who we work alongside — we're not replacing portfolio ops. We're the team that handles the systems-and-data heavy lifting after a deal closes so your ops folks aren't doing it by hand. Worth fifteen minutes to get introduced? Thursday or Friday?\n\nIf they push back: When a new platform or add-on closes, who's standardizing systems and data across it today? The reason I ask is that's the grunt work we erase — we mapped 40,000 job titles for one client in a couple hours."
+					"That's exactly who we work alongside — we're not replacing portfolio ops. We're the team that handles the systems-and-data heavy lifting after a deal closes so your ops folks aren't doing it by hand. Worth fifteen minutes to get introduced? Monday or Tuesday?\n\nIf they push back: When a new platform or add-on closes, who's standardizing systems and data across it today? The reason I ask is that's the grunt work we erase — we mapped 40,000 job titles for one client in a couple hours."
 			},
 			{
 				trigger: 'We handle that in-house',
@@ -367,7 +367,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: "I'm not the right person",
 				response:
-					"Fair — who owns value-creation or operations across the portfolio? I'd rather start with the right name. Since you're close to the operating side, a quick intro with you might still be the fastest path — Thursday or Friday?"
+					"Fair — who owns value-creation or operations across the portfolio? I'd rather start with the right name. Since you're close to the operating side, a quick intro with you might still be the fastest path — Monday or Tuesday?"
 			},
 			{
 				trigger: 'No budget / not a priority right now',
@@ -408,7 +408,7 @@ export const CLUSTERS: Cluster[] = [
 			{
 				trigger: "I'm not the right person",
 				response:
-					"Fair — who runs value-creation or technology across the portfolio? I'd rather start with the right name. Honestly though, since this is a portfolio-level play, a quick intro with you might be the fastest way to point it the right direction — Thursday or Friday?"
+					"Fair — who runs value-creation or technology across the portfolio? I'd rather start with the right name. Honestly though, since this is a portfolio-level play, a quick intro with you might be the fastest way to point it the right direction — Monday or Tuesday?"
 			},
 			{
 				trigger: 'No budget / not a priority right now',
@@ -451,7 +451,7 @@ export const DEFAULT_CLUSTER: Cluster = {
 		{
 			trigger: "I'm not the right person",
 			response:
-				"Fair — who owns technology or value-creation across the portfolio? I'd rather start with the right name than waste anyone's time. A quick intro with you might still be the fastest way to point it the right direction — Thursday or Friday?"
+				"Fair — who owns technology or value-creation across the portfolio? I'd rather start with the right name than waste anyone's time. A quick intro with you might still be the fastest way to point it the right direction — Monday or Tuesday?"
 		},
 		{
 			trigger: 'No budget / not a priority right now',
@@ -510,22 +510,18 @@ export function objectionsFor(contact: ScriptContact): Objection[] {
 export function buildScript(contact: ScriptContact, rep: Rep): string {
 	const c = clusterFor(contact);
 	const fn = firstName(contact);
-	return `Hey ${fn}, this is ${rep} with IncWorx — how've you been?
+	return `Hey ${fn}, this is ${rep} with IncWorx. How are you?
 
-[Let them give a formality back. Downward inflection — you're not asking permission, you've got something to say next.]
+Good — yeah, the reason I'm calling is I help PE firms ${c.hook}. ${c.how} So I know that's high level, but I'd be your point of contact here for anything in these areas going forward.
 
-Good — yeah, so I help PE firms ${c.hook}. I'm part of ${c.who}. ${c.how} So I know that's high level, but I'd be your point of contact here for anything in these areas going forward.
-
-I caught you a bit out of the blue, so I'm not looking to get into all of it right now — I was more looking to grab fifteen minutes later this week with you and our president Jonathan, just to introduce the team and get on the same page. Do you have time Thursday or Friday?`;
+I caught you a bit out of the blue, so I'm not looking to get into all of it right now. I was more looking to grab fifteen minutes next week with you and our president Jonathan, just to introduce the team and get priorities aligned going forward. Do you have time Monday or Tuesday for a fifteen minute sync?`;
 }
 
 // GATEKEEPER — one standardized, generic ask for every contact. Stay broad with
 // the gatekeeper: you belong, you're the point of contact, you're not pitching.
 export function buildScreen(rep: Rep, contact: ScriptContact): string {
 	const fn = firstName(contact);
-	return `[Assumptive — you belong here. Same easy, downward inflection you'd use if you'd called a dozen times before.]
-
-Hey, it's ${rep} with IncWorx. I'm the PoC on our side for the systems and data work across the portco, and I just need to introduce myself and get a quick fifteen minutes set up. Put me through to ${fn}?`;
+	return `Hey, it's ${rep} with IncWorx. I'm the PoC on our side for the systems and data work across the portco, and I just need to introduce myself and get a quick fifteen minutes set up. Put me through to ${fn}?`;
 }
 
 export function buildEmail(contact: ScriptContact, rep: Rep): { subject: string; body: string } {
@@ -538,7 +534,7 @@ I help PE firms ${c.hook} — and I'd be your point of contact for it going forw
 
 ${c.emailHook}
 
-Not looking to get into it over email — worth fifteen minutes later this week with me and our president Jonathan to introduce the team? I can do Thursday or Friday, whatever's easier for ${firm}.
+Not looking to get into it over email — worth fifteen minutes next week with me and our president Jonathan to introduce the team? I can do Monday or Tuesday, whatever's easier for ${firm}.
 
 Best,
 ${rep}

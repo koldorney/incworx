@@ -37,6 +37,7 @@ export interface Cluster {
 	label: string;
 	keywords: string[];
 	// Value-statement opener pieces:
+	hook: string; // follows "I help PE firms " — the tight, benefit-led lead line
 	who: string; // follows "I'm part of " — the team you sit on
 	priorities: string; // follows "that works with PE firms on " — named priorities
 	how: string; // a standalone sentence — how we solve it, with a proof point
@@ -97,6 +98,7 @@ export const CLUSTERS: Cluster[] = [
 		key: 'it',
 		label: 'IT / Data',
 		keywords: ['it', 'i.t', 'information technology', 'technology', 'cio', 'cto', 'infrastructure', 'data and ai', 'data & ai', 'technical', 'systems'],
+		hook: 'cut IT run-rate and consolidate systems across their portfolio companies',
 		who: 'the AI and data team at IncWorx',
 		priorities:
 			'consolidating systems and cutting IT run-rate across their portfolio companies — things like standardizing data, retiring duplicate tools, and getting clean reporting after an acquisition',
@@ -137,6 +139,7 @@ export const CLUSTERS: Cluster[] = [
 		key: 'legal',
 		label: 'Legal / Compliance',
 		keywords: ['counsel', 'legal', 'compliance', 'cco', 'gc', 'sustainability', 'governance'],
+		hook: 'speed up diligence and contract review on their deals',
 		who: 'the AI and compliance team at IncWorx',
 		priorities:
 			'speeding up diligence and contract review on their deals — things like first-pass contract review, surfacing risk across an agreement, and cutting the manual hours out of diligence',
@@ -177,6 +180,7 @@ export const CLUSTERS: Cluster[] = [
 		key: 'hr',
 		label: 'HR / People',
 		keywords: ['people', 'human resources', 'hr', 'talent', 'workforce enablement', 'chief people'],
+		hook: 'clean up HR data and automate people-ops after every acquisition',
 		who: 'the people-systems team at IncWorx',
 		priorities:
 			'standardizing HR data and automating people-ops across their portfolio companies — things like mapping and cleaning up job titles, onboarding and provisioning, and taking the manual work off the team after every acquisition',
@@ -217,6 +221,7 @@ export const CLUSTERS: Cluster[] = [
 		key: 'finance',
 		label: 'Finance',
 		keywords: ['finance', 'cfo', 'chief financial', 'controller', 'accounting', 'tax', 'treasur', 'capital markets'],
+		hook: 'get leadership real-time numbers and automate the back-office close',
 		who: 'the finance-automation team at IncWorx',
 		priorities:
 			'tightening reporting and automating back-office work across their portfolio companies — things like invoice processing, month-end close, and getting leadership real-time numbers',
@@ -257,6 +262,7 @@ export const CLUSTERS: Cluster[] = [
 		key: 'ir',
 		label: 'Investor Relations',
 		keywords: ['investor relations', 'investor', 'ir', 'fundraising', 'co-invest', 'private wealth', 'marketing', 'brand', 'communications'],
+		hook: 'automate LP reporting and take the manual grind out of fundraising ops',
 		who: 'the investor-operations team at IncWorx',
 		priorities:
 			'taking the manual grind out of LP reporting and fundraising operations — things like automating data entry, standardizing reporting, and pulling fund and deal data together in one place',
@@ -297,6 +303,7 @@ export const CLUSTERS: Cluster[] = [
 		key: 'admin',
 		label: 'Management / Admin',
 		keywords: ['administration', 'administrative', 'admin', 'office manager', 'facilities', 'property manager', 'project manager', 'coordinator', 'intake', 'filing', 'records', 'document'],
+		hook: 'automate the manual intake, filing, and tracking work across their portfolio companies',
 		who: 'the automation team at IncWorx',
 		priorities:
 			'automating the manual intake, filing, and tracking work across their portfolio companies — things like document handling, status tracking, and the repetitive admin that eats up the day',
@@ -332,6 +339,7 @@ export const CLUSTERS: Cluster[] = [
 		key: 'operations',
 		label: 'Operations',
 		keywords: ['operations', 'operating', 'coo', 'portfolio performance', 'portfolio', 'performance reporting', 'strategic resource', 'revenue operations'],
+		hook: 'standardize systems and data across the portfolio right after a deal closes',
 		who: 'the portfolio-operations team at IncWorx',
 		priorities:
 			'standardizing systems and data across their portfolio companies right after close — things like consolidating tooling, cleaning up operational and workforce data, and cutting the manual work out of integration',
@@ -372,6 +380,7 @@ export const CLUSTERS: Cluster[] = [
 		key: 'executive',
 		label: 'Executive',
 		keywords: ['managing director', 'vice president', 'senior vice president', 'svp', 'partner', 'principal', 'president', 'ceo', 'director', 'advisor', 'executive', 'md'],
+		hook: 'get real, measurable value out of AI across their portfolio',
 		who: 'the AI and Microsoft team at IncWorx',
 		priorities:
 			'getting real, measurable value out of AI across their portfolio — things like getting the portfolio companies’ data and systems clean enough that Copilot actually works on real work',
@@ -414,6 +423,7 @@ export const DEFAULT_CLUSTER: Cluster = {
 	key: 'default',
 	label: 'General',
 	keywords: [],
+	hook: 'erase the manual grunt work and standardize the systems their portfolio companies still run by hand',
 	who: 'the AI and Microsoft automation team at IncWorx',
 	priorities:
 		'erasing the manual grunt work and standardizing the systems their portfolio companies still run by hand',
@@ -504,19 +514,18 @@ export function buildScript(contact: ScriptContact, rep: Rep): string {
 
 [Let them give a formality back. Downward inflection — you're not asking permission, you've got something to say next.]
 
-Good — yeah, I'm just reaching out because I'm part of ${c.who} that works with PE firms on ${c.priorities}. ${c.how} So I know that's high level, but I'd be your point of contact here for anything in these areas going forward.
+Good — yeah, so I help PE firms ${c.hook}. I'm part of ${c.who}. ${c.how} So I know that's high level, but I'd be your point of contact here for anything in these areas going forward.
 
 I caught you a bit out of the blue, so I'm not looking to get into all of it right now — I was more looking to grab fifteen minutes later this week with you and our president Jonathan, just to introduce the team and get on the same page. Do you have time Thursday or Friday?`;
 }
 
-// GATEKEEPER — same assumptive frame. You belong, you're the point of contact,
-// you're not asking permission to exist on the call.
+// GATEKEEPER — one standardized, generic ask for every contact. Stay broad with
+// the gatekeeper: you belong, you're the point of contact, you're not pitching.
 export function buildScreen(rep: Rep, contact: ScriptContact): string {
-	const c = clusterFor(contact);
 	const fn = firstName(contact);
 	return `[Assumptive — you belong here. Same easy, downward inflection you'd use if you'd called a dozen times before.]
 
-Hey, this is ${rep} with IncWorx — is ${fn} around? ... I'm the point of contact on our side for ${c.screenReason}, and I just need to introduce myself and get a quick fifteen minutes set up. Mind putting me through — or when's the best time to catch ${fn}?`;
+Hey, it's ${rep} with IncWorx. I'm the PoC on our side for the systems and data work across the portco, and I just need to introduce myself and get a quick fifteen minutes set up. Put me through to ${fn}?`;
 }
 
 export function buildEmail(contact: ScriptContact, rep: Rep): { subject: string; body: string } {
@@ -525,9 +534,9 @@ export function buildEmail(contact: ScriptContact, rep: Rep): { subject: string;
 	const firm = contact.firm ?? 'your firm';
 	const body = `Hi ${fn},
 
-${c.emailHook}
+I help PE firms ${c.hook} — and I'd be your point of contact for it going forward.
 
-We ${c.emailReason} — and I'd be your point of contact for it going forward.
+${c.emailHook}
 
 Not looking to get into it over email — worth fifteen minutes later this week with me and our president Jonathan to introduce the team? I can do Thursday or Friday, whatever's easier for ${firm}.
 

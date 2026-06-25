@@ -42,7 +42,7 @@ export interface Cluster {
 	priorities: string; // follows "that works with PE firms on " — named priorities
 	how: string; // a standalone sentence — how we solve it, with a proof point
 	// Gatekeeper:
-	screenReason: string; // follows "I'm the point of contact on our side for "
+	screenReason: string; // a short focus phrase: "I'm the PoC on our side for the [screenReason] work across the portco"
 	// Email:
 	emailSubject: string;
 	emailHook: string; // past-tense proof sentence for the email body
@@ -103,7 +103,7 @@ export const CLUSTERS: Cluster[] = [
 		priorities:
 			'consolidating systems and cutting IT run-rate across their portfolio companies — things like standardizing data, retiring duplicate tools, and getting clean reporting after an acquisition',
 		how: "We just consolidated one client's SQL environment and pulled three hundred and fifty thousand dollars out of their annual run-rate — usually by getting the data and tooling cleaned up so the portfolio isn't paying for five systems that all do the same thing.",
-		screenReason: "the AI and Microsoft work across the portfolio's IT and data",
+		screenReason: 'systems consolidation and data',
 		emailSubject: 'Took $350K off a client’s annual run rate',
 		emailHook: "We recently consolidated a client's SQL Server environment and pulled $350,000 out of their annual run rate.",
 		emailReason: 'help PE firms consolidate systems and cut IT run-rate across their portfolio companies',
@@ -144,7 +144,7 @@ export const CLUSTERS: Cluster[] = [
 		priorities:
 			'speeding up diligence and contract review on their deals — things like first-pass contract review, surfacing risk across an agreement, and cutting the manual hours out of diligence',
 		how: "We built an AI contract-review system on Microsoft Copilot that automated a firm's entire first-pass review — usually by taking the manual reading and risk-flagging off the team so diligence moves faster.",
-		screenReason: 'the AI and contract-review work on the deal side',
+		screenReason: 'diligence and contract review',
 		emailSubject: 'AI-assisted contract review for your deals',
 		emailHook: 'We built an AI contract-review system on Microsoft Copilot that automated a firm’s entire first-pass review.',
 		emailReason: 'help PE firms speed up diligence and contract review on their deals',
@@ -185,7 +185,7 @@ export const CLUSTERS: Cluster[] = [
 		priorities:
 			'standardizing HR data and automating people-ops across their portfolio companies — things like mapping and cleaning up job titles, onboarding and provisioning, and taking the manual work off the team after every acquisition',
 		how: "We built a Power App that mapped and standardized 40,000 job titles in a couple hours, plus an automated goal-tracking system for another client's workforce — usually by cleaning up people data and automating the manual ops after a deal closes.",
-		screenReason: 'the people-systems and HR-data work across the portfolio',
+		screenReason: 'HR data and people-ops',
 		emailSubject: 'Standardizing 40,000 job titles in a couple hours',
 		emailHook: 'We built a Power App that mapped and standardized 40,000 job titles in a couple hours, plus an automated goal-tracking system for another client’s workforce.',
 		emailReason: 'help PE firms standardize HR data and automate people-ops across their portfolio companies',
@@ -226,7 +226,7 @@ export const CLUSTERS: Cluster[] = [
 		priorities:
 			'tightening reporting and automating back-office work across their portfolio companies — things like invoice processing, month-end close, and getting leadership real-time numbers',
 		how: "We just automated a client's invoice processing and built Power BI dashboards that give their leadership real-time numbers — usually by taking the manual close and reporting work off the team so they're not waiting on month-end.",
-		screenReason: 'the finance-automation work across the portfolio companies',
+		screenReason: 'finance automation and reporting',
 		emailSubject: 'Real-time numbers without waiting on month-end',
 		emailHook: 'We just automated invoice processing and built Power BI dashboards that give leadership real-time numbers.',
 		emailReason: 'help PE firms automate financial reporting and back-office work across their portfolio companies',
@@ -267,7 +267,7 @@ export const CLUSTERS: Cluster[] = [
 		priorities:
 			'taking the manual grind out of LP reporting and fundraising operations — things like automating data entry, standardizing reporting, and pulling fund and deal data together in one place',
 		how: "We built automated lead-capture and reporting workflows that pulled hours of manual data entry off a client's team — usually by getting fund and LP data into one place so reporting stops being a quarterly fire drill.",
-		screenReason: 'the reporting and automation work on the investor-relations side',
+		screenReason: 'LP reporting and investor-ops',
 		emailSubject: 'Automating the manual work in LP reporting',
 		emailHook: 'We built automated lead-capture and reporting workflows that pulled hours of manual data entry off a client’s team.',
 		emailReason: 'help PE firms streamline LP reporting and automate their fundraising operations',
@@ -308,7 +308,7 @@ export const CLUSTERS: Cluster[] = [
 		priorities:
 			'automating the manual intake, filing, and tracking work across their portfolio companies — things like document handling, status tracking, and the repetitive admin that eats up the day',
 		how: 'We replace manual intake and filing with AI agents that cut the errors and delays out of admin work — usually by automating the repetitive tracking so the team can focus on the work that matters.',
-		screenReason: 'the automation work across the portfolio companies',
+		screenReason: 'intake and automation',
 		emailSubject: 'Replacing manual intake and filing with AI agents',
 		emailHook: 'We replace manual intake and filing with AI agents that cut the errors and delays out of admin work.',
 		emailReason: 'help PE firms automate the manual intake, filing, and tracking work across their portfolio companies',
@@ -344,7 +344,7 @@ export const CLUSTERS: Cluster[] = [
 		priorities:
 			'standardizing systems and data across their portfolio companies right after close — things like consolidating tooling, cleaning up operational and workforce data, and cutting the manual work out of integration',
 		how: "We just built a Power App that mapped and standardized 40,000 job titles in a couple hours — a fraction of the time and cost other vendors quoted — usually by getting systems and data lined up across the portfolio right after a deal closes.",
-		screenReason: 'the systems and data work across the portfolio companies',
+		screenReason: 'systems and data standardization',
 		emailSubject: 'Standardizing portfolio systems right after close',
 		emailHook: 'We just built a Power App that mapped and standardized 40,000 job titles in a fraction of the time and cost other vendors quoted.',
 		emailReason: 'help PE firms standardize systems and data across their portfolio companies after an acquisition',
@@ -385,7 +385,7 @@ export const CLUSTERS: Cluster[] = [
 		priorities:
 			'getting real, measurable value out of AI across their portfolio — things like getting the portfolio companies’ data and systems clean enough that Copilot actually works on real work',
 		how: "We took a financial firm from AI-curious to fully Copilot-ready, and we're the shop Gryphon Investors and Potomac Equity Partners already use for this — usually by getting the portfolio's data and systems clean enough that AI actually pays off.",
-		screenReason: 'the AI and Microsoft work across the portfolio',
+		screenReason: 'AI and value-creation',
 		emailSubject: 'Getting your portfolio AI-ready (Gryphon, Potomac)',
 		emailHook: "We took a financial firm from AI-curious to fully Copilot-ready, and we've done Microsoft work for PE firms like Gryphon Investors and Potomac Equity Partners.",
 		emailReason: 'help PE firms get their portfolio capturing real, measurable value from AI',
@@ -428,7 +428,7 @@ export const DEFAULT_CLUSTER: Cluster = {
 	priorities:
 		'erasing the manual grunt work and standardizing the systems their portfolio companies still run by hand',
 	how: "We just standardized 40,000 job titles for one client in a couple hours, and pulled three hundred and fifty thousand dollars out of another client's run-rate on a systems consolidation — usually the kind of grunt work AI just erases.",
-	screenReason: 'the AI and Microsoft automation work across the portfolio',
+	screenReason: 'systems and data',
 	emailSubject: 'Erasing the grunt work across your portfolio',
 	emailHook: 'We recently built a Power App that standardized 40,000 job titles in a couple hours, and consolidated another client’s SQL environment to save $350,000 a year.',
 	emailReason: 'help PE firms erase the grunt work and standardize the systems across their portfolio companies',
@@ -517,11 +517,13 @@ Good — yeah, the reason I'm calling is I help PE firms ${c.hook}. ${c.how} So 
 I caught you a bit out of the blue, so I'm not looking to get into all of it right now. I was more looking to grab fifteen minutes next week with you and our president Jonathan, just to introduce the team and get priorities aligned going forward. Do you have time Monday or Tuesday for a fifteen minute sync?`;
 }
 
-// GATEKEEPER — one standardized, generic ask for every contact. Stay broad with
-// the gatekeeper: you belong, you're the point of contact, you're not pitching.
+// GATEKEEPER — assumptive ask, with the focus area matched to the contact's
+// priorities so it sounds like you belong (e.g. "diligence and contract review"
+// for Legal). You're the point of contact, not pitching.
 export function buildScreen(rep: Rep, contact: ScriptContact): string {
+	const c = clusterFor(contact);
 	const fn = firstName(contact);
-	return `Hey, it's ${rep} with IncWorx. I'm the PoC on our side for the systems and data work across the portco, and I just need to introduce myself and get a quick fifteen minutes set up. Put me through to ${fn}?`;
+	return `Hey, it's ${rep} with IncWorx. I'm the PoC on our side for the ${c.screenReason} work across the portco, and I just need to introduce myself and get a quick fifteen minutes set up. Put me through to ${fn}?`;
 }
 
 export function buildEmail(contact: ScriptContact, rep: Rep): { subject: string; body: string } {

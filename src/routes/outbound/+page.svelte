@@ -355,7 +355,10 @@
 					<div class="cc-priority priority-{currentContact.priority}">{currentContact.priority}</div>
 					<div class="cc-name-row">
 						<div class="cc-name">{currentContact.name}</div>
-						<button class="cc-next" onclick={nextContact} disabled={queueIndex >= queue.length - 1}>Next →</button>
+						<div class="cc-nav">
+							<button class="cc-prev" onclick={prevContact} disabled={queueIndex === 0}>← Prev</button>
+							<button class="cc-next" onclick={nextContact} disabled={queueIndex >= queue.length - 1}>Next →</button>
+						</div>
 					</div>
 					<div class="cc-position">{currentContact.position}</div>
 					<div class="cc-firm">{currentContact.firm}</div>
@@ -442,10 +445,6 @@
 						bind:value={dispositionNotes}
 						rows="2"
 					></textarea>
-
-					<div class="nav-btns">
-						<button onclick={prevContact} disabled={queueIndex === 0}>← Prev</button>
-					</div>
 				</div>
 			{:else}
 				<div class="empty-queue">No contacts in queue. Adjust your filter.</div>
@@ -617,7 +616,11 @@
 	.cc-priority.priority-low { color: #6b7280; }
 	.cc-name-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 2px; }
 	.cc-name { font-size: 22px; font-weight: 700; color: #fff; }
-	.cc-next { flex-shrink: 0; background: linear-gradient(135deg, #6366f1, #4f46e5); border: none; color: #fff; padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
+	.cc-nav { display: flex; gap: 6px; flex-shrink: 0; }
+	.cc-prev { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); color: #ccc; padding: 7px 14px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
+	.cc-prev:hover:not(:disabled) { background: rgba(255,255,255,0.08); }
+	.cc-prev:disabled { opacity: 0.3; cursor: not-allowed; }
+	.cc-next { background: linear-gradient(135deg, #6366f1, #4f46e5); border: none; color: #fff; padding: 7px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; }
 	.cc-next:hover:not(:disabled) { opacity: 0.9; }
 	.cc-next:disabled { opacity: 0.3; cursor: not-allowed; }
 	.cc-position { font-size: 14px; color: #aaa; margin-bottom: 2px; }
@@ -647,10 +650,6 @@
 	.disp-label { font-size: 10px; font-weight: 600; }
 	.notes-input { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 8px 10px; color: #e0e0e0; font-size: 12px; resize: none; box-sizing: border-box; margin-bottom: 12px; font-family: inherit; }
 	.notes-input:focus { outline: none; border-color: rgba(99,102,241,0.5); }
-	.nav-btns { display: flex; gap: 8px; }
-	.nav-btns button { flex: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: #ccc; padding: 8px; border-radius: 6px; cursor: pointer; font-size: 12px; }
-	.nav-btns button:hover:not(:disabled) { background: rgba(255,255,255,0.08); }
-	.nav-btns button:disabled { opacity: 0.3; cursor: not-allowed; }
 	.empty-queue { text-align: center; padding: 40px; color: #666; }
 
 	/* All-Time tracking panel */

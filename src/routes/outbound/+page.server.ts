@@ -7,7 +7,7 @@ export const load: PageServerLoad = async () => {
 	const supabase = getSupabase();
 
 	const [contactsResult, activityResult, statsResult] = await Promise.all([
-		supabase.from('call_contacts').select('*').order('priority').order('confidence', { ascending: false }),
+		supabase.from('call_contacts').select('*').order('sort_order', { ascending: true, nullsFirst: false }),
 		supabase.from('call_activities').select('*').order('created_at', { ascending: false }).limit(50),
 		supabase.from('call_activity_stats').select('*')
 	]);
